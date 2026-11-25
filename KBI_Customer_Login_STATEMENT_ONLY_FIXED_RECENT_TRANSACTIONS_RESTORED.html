@@ -1,0 +1,5412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>K.B.I. | Customer Login</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f3f7fc;
+    color:#17324d;
+}
+
+/* TOP BAR */
+.topbar{
+    background:#062b59;
+    color:white;
+    padding:9px 5%;
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+}
+
+.topbar span:last-child{
+    color:#ffd45a;
+}
+
+/* HEADER */
+header{
+    background:#073d7a;
+    color:white;
+    padding:16px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-box{
+    width:48px;
+    height:48px;
+    background:#f4b400;
+    color:#073d7a;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:17px;
+}
+
+.logo h1{
+    font-size:21px;
+}
+
+.logo small{
+    display:block;
+    color:#ffd85c;
+    margin-top:3px;
+}
+
+nav{
+    display:flex;
+    gap:22px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+}
+
+nav a:hover{
+    color:#ffd45a;
+}
+
+/* CUSTOMER HEADER ACTIONS */
+.header-actions{
+    display:none;
+    position:relative;
+    z-index:1001;
+    align-items:center;
+    gap:8px;
+    margin-left:auto;
+}
+.header-profile-btn,
+.header-logout-btn{
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:6px;
+    padding:9px 14px;
+    font-size:14px;
+    white-space:nowrap;
+}
+.header-profile-btn{
+    background:#f4b400;
+    color:#073d7a;
+}
+.header-profile-btn:hover{background:#ffd45a;}
+.header-logout-btn{
+    background:#d93025;
+    color:#fff;
+}
+.header-logout-btn:hover{background:#b71c1c;}
+
+/* MOBILE MENU */
+.menu-btn{
+    display:none;
+    font-size:27px;
+    cursor:pointer;
+}
+
+/* HERO */
+.hero{
+    background:linear-gradient(135deg,#073d7a,#005bb5);
+    color:white;
+    padding:65px 20px;
+    text-align:center;
+}
+
+.hero h2{
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.hero p{
+    font-size:17px;
+    opacity:.95;
+}
+
+/* LOGIN */
+.login-section{
+    max-width:500px;
+    margin:45px auto;
+    padding:0 20px;
+}
+
+.login-card{
+    background:white;
+    border-radius:15px;
+    padding:32px;
+    box-shadow:0 8px 30px rgba(0,0,0,.12);
+    border-top:5px solid #f4b400;
+}
+
+.login-card h3{
+    color:#073d7a;
+    text-align:center;
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.login-sub{
+    text-align:center;
+    color:#777;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+    color:#17324d;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccd7e5;
+    border-radius:7px;
+    font-size:15px;
+    outline:none;
+}
+
+.form-group textarea{
+    resize:vertical;
+    min-height:80px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#007bff;
+    box-shadow:0 0 0 3px rgba(0,123,255,.08);
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:7px;
+    background:#f4b400;
+    color:#073d7a;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-btn:hover{
+    background:#ffc928;
+}
+
+.forgot-btn{
+    width:100%;
+    margin-top:12px;
+    padding:11px;
+    border:1px solid #cbd8e8;
+    border-radius:7px;
+    background:#f5f8fc;
+    color:#073d7a;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.forgot-btn:hover{
+    background:#e8f0fa;
+}
+
+.info-note{
+    background:#eef6ff;
+    border-left:4px solid #007bff;
+    padding:12px;
+    margin-top:20px;
+    font-size:13px;
+    color:#31506d;
+}
+
+.error{
+    display:none;
+    background:#ffe8e8;
+    color:#b00020;
+    border-left:4px solid #d00000;
+    padding:12px;
+    margin-bottom:18px;
+    border-radius:5px;
+}
+
+.success{
+    display:none;
+    background:#e9f9ee;
+    color:#08752d;
+    border-left:4px solid #159447;
+    padding:12px;
+    margin-bottom:18px;
+    border-radius:5px;
+}
+
+/* DASHBOARD */
+.dashboard{
+    display:none;
+    max-width:1200px;
+    margin:35px auto;
+    padding:0 20px;
+}
+
+/* WELCOME BANNER WITH RIGHT SIDE PROFILE PHOTO */
+.welcome{
+    background:linear-gradient(135deg,#073d7a,#006bc7);
+    color:white;
+    padding:20px 25px;
+    border-radius:14px;
+    margin-bottom:25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.welcome-text h2{
+    margin-bottom:7px;
+}
+
+.welcome-text p{
+    opacity:.9;
+}
+
+.dash-profile-photo{
+    width:65px;
+    height:65px;
+    min-width:65px;
+    border-radius:50%;
+    background:#f4b400;
+    color:#073d7a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    font-weight:bold;
+    border:3px solid #ffffff;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    cursor:pointer;
+}
+
+.dash-profile-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* ACTIONS */
+.actions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.action-btn{
+    background:white;
+    border:none;
+    padding:18px 10px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    cursor:pointer;
+    font-weight:bold;
+    color:#073d7a;
+}
+
+.action-btn:hover{
+    background:#f4b400;
+}
+
+.logout{
+    background:#d62828;
+    color:white;
+}
+
+.logout:hover{
+    background:#b71c1c;
+}
+
+/* BALANCE CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.balance-card{
+    background:white;
+    border-radius:12px;
+    padding:22px;
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
+    border-top:4px solid #f4b400;
+}
+
+.balance-card h4{
+    color:#777;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.balance-card .value{
+    color:#008a35;
+    font-size:24px;
+    font-weight:bold;
+}
+
+/* INFORMATION */
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.panel{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
+
+.panel h3{
+    color:#073d7a;
+    border-bottom:2px solid #eee;
+    padding-bottom:12px;
+    margin-bottom:17px;
+}
+
+.detail-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    padding:11px 0;
+    border-bottom:1px solid #eee;
+}
+
+.detail-row span:first-child{
+    color:#777;
+}
+
+.detail-row span:last-child{
+    font-weight:bold;
+    text-align:right;
+}
+
+/* TRANSACTIONS */
+.transaction-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.transaction-table th,
+.transaction-table td{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
+
+.transaction-table th{
+    background:#073d7a;
+    color:white;
+}
+
+.credit{
+    color:#008a35;
+    font-weight:bold;
+}
+
+.debit{
+    color:#d00000;
+    font-weight:bold;
+}
+
+.history-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.small-btn{
+    border:0;
+    padding:9px 15px;
+    border-radius:6px;
+    background:#073d7a;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.small-btn:hover{
+    background:#005bb5;
+}
+
+/* STATUS */
+.status-badge{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.status-active{
+    background:#e8f8ed;
+    color:#08752d;
+}
+
+.status-blocked{
+    background:#ffe8e8;
+    color:#b00020;
+}
+
+.kyc-verified{
+    background:#e8f8ed;
+    color:#08752d;
+}
+
+.kyc-pending{
+    background:#fff5d9;
+    color:#8a6500;
+}
+
+.kyc-rejected{
+    background:#ffe8e8;
+    color:#b00020;
+}
+
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:500;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+/* Keep system notices (including Insufficient Balance) above every open popup. */
+#messageModal{
+    z-index:100010 !important;
+}
+
+.modal-box{
+    background:white;
+    max-width:500px;
+    width:100%;
+    padding:28px;
+    border-radius:12px;
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+.modal-box.large{
+    max-width:1100px;
+}
+
+.modal-box h3{
+    color:#073d7a;
+    margin-bottom:20px;
+}
+
+.close-btn{
+    margin-top:20px;
+    width:100%;
+    padding:12px;
+    border:0;
+    background:#073d7a;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.close-btn:hover{
+    background:#052e5c;
+}
+
+/* FORM GRID */
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-grid .full{
+    grid-column:1 / -1;
+}
+
+.primary-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:7px;
+    background:#073d7a;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.primary-btn:hover{
+    background:#005bb5;
+}
+
+.transfer-note{
+    background:#eef6ff;
+    padding:12px;
+    border-left:4px solid #007bff;
+    font-size:13px;
+    margin-bottom:18px;
+    color:#31506d;
+}
+
+/* RECEIVER PREVIEW */
+.receiver-preview{
+    display:none;
+    background:#f2fff5;
+    border:1px solid #bde6c9;
+    border-left:5px solid #159447;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:18px;
+}
+
+.receiver-preview h4{
+    color:#08752d;
+    margin-bottom:10px;
+}
+
+.receiver-row{
+    display:flex;
+    justify-content:space-between;
+    padding:6px 0;
+    border-bottom:1px solid #dcefe1;
+}
+
+.receiver-row:last-child{
+    border-bottom:0;
+}
+
+.receiver-row span:first-child{
+    color:#777;
+}
+
+.receiver-row span:last-child{
+    font-weight:bold;
+}
+
+/* STATEMENT */
+.statement-head{
+    background:#073d7a;
+    color:white;
+    padding:18px;
+    border-radius:8px 8px 0 0;
+}
+
+.statement-head h4{
+    margin-bottom:5px;
+}
+
+.statement-filter{
+    background:#f1f5fa;
+    padding:15px;
+    display:grid;
+    grid-template-columns:1fr 1fr auto auto;
+    gap:12px;
+    align-items:end;
+    border:1px solid #ddd;
+    border-top:0;
+}
+
+.statement-filter label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:6px;
+    color:#17324d;
+}
+
+.statement-filter input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccd7e5;
+    border-radius:6px;
+}
+
+.statement-table-wrap{
+    overflow-x:auto;
+    border:1px solid #ddd;
+}
+
+.statement-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:800px;
+}
+
+.statement-table th,
+.statement-table td{
+    padding:11px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
+
+.statement-table th{
+    background:#f1f5fa;
+    color:#17324d;
+}
+
+.statement-summary{
+    padding:15px;
+    background:#f8fbff;
+    border:1px solid #ddd;
+    border-top:0;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.statement-summary strong{
+    color:#008a35;
+}
+
+/* PRINT - ACCOUNT STATEMENT LAYOUT */
+.print-only{
+    display:none;
+}
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 5mm;
+    }
+
+    html, body {
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        background: #fff !important;
+    }
+
+    body > *:not(#customerReceiptPrint) {
+        display: none !important;
+    }
+
+    #customerReceiptPrint {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        max-width: 400px !important;
+        margin: 10px auto !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        background: #fff !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    #customerReceiptPrint * {
+        visibility: visible !important;
+    }
+
+    .receipt-action {
+        display: none !important;
+    }
+}
+
+    body.kbi-print-statement > *:not(#statementModal){
+        display:none !important;
+    }
+
+    body.kbi-print-statement #statementModal{
+        display:block !important;
+        position:static !important;
+        inset:auto !important;
+        width:100% !important;
+        height:auto !important;
+        min-height:0 !important;
+        padding:0 !important;
+        margin:0 !important;
+        overflow:visible !important;
+        background:#fff !important;
+        z-index:auto !important;
+    }
+
+    body.kbi-print-statement #statementModal .modal-box,
+    body.kbi-print-statement #statementModal .modal-box.large{
+        display:block !important;
+        position:static !important;
+        width:100% !important;
+        max-width:none !important;
+        height:auto !important;
+        max-height:none !important;
+        min-height:0 !important;
+        margin:0 !important;
+        padding:0 !important;
+        overflow:visible !important;
+        border:0 !important;
+        border-radius:0 !important;
+        box-shadow:none !important;
+        background:#fff !important;
+    }
+
+    body.kbi-print-statement #statementPrintArea{
+        display:block !important;
+        position:static !important;
+        width:100% !important;
+        max-width:none !important;
+        height:auto !important;
+        max-height:none !important;
+        margin:0 !important;
+        padding:0 !important;
+        overflow:visible !important;
+        background:#fff !important;
+        color:#111 !important;
+        transform:none !important;
+    }
+
+    body.kbi-print-statement #statementModal *{
+        visibility:visible !important;
+    }
+
+    body.kbi-print-statement .no-print{
+        display:none !important;
+    }
+
+    body.kbi-print-statement .print-only{
+        display:block !important;
+    }
+
+    body.kbi-print-statement .statement-head{
+        display:block !important;
+        width:100% !important;
+        box-sizing:border-box !important;
+        padding:12px 16px !important;
+        margin:0 !important;
+        color:#fff !important;
+        background:#073d7a !important;
+        border-radius:0 !important;
+        break-inside:avoid !important;
+        page-break-inside:avoid !important;
+    }
+
+    body.kbi-print-statement .statement-head h4{
+        margin:0 0 6px !important;
+        color:#fff !important;
+        font-size:15px !important;
+    }
+
+    body.kbi-print-statement #statementPrintPeriod{
+        color:#111 !important;
+    }
+
+    body.kbi-print-statement #statementPrintArea > .print-only{
+        display:block !important;
+        padding:8px 0 !important;
+        margin:0 !important;
+        color:#111 !important;
+        background:#fff !important;
+        border-bottom:1px solid #ddd !important;
+        break-after:avoid !important;
+        page-break-after:avoid !important;
+    }
+
+    body.kbi-print-statement #statementContent{
+        display:block !important;
+        width:100% !important;
+        height:auto !important;
+        max-height:none !important;
+        overflow:visible !important;
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    body.kbi-print-statement .statement-table-wrap{
+        display:block !important;
+        width:100% !important;
+        height:auto !important;
+        max-height:none !important;
+        overflow:visible !important;
+        margin:0 !important;
+        padding:0 !important;
+        border:1px solid #ddd !important;
+        break-inside:auto !important;
+        page-break-inside:auto !important;
+    }
+
+    body.kbi-print-statement .statement-table{
+        display:table !important;
+        width:100% !important;
+        min-width:0 !important;
+        table-layout:fixed !important;
+        border-collapse:collapse !important;
+        margin:0 !important;
+        font-size:9px !important;
+    }
+
+    body.kbi-print-statement .statement-table thead{
+        display:table-header-group !important;
+    }
+
+    body.kbi-print-statement .statement-table tbody{
+        display:table-row-group !important;
+    }
+
+    body.kbi-print-statement .statement-table tr{
+        break-inside:avoid !important;
+        page-break-inside:avoid !important;
+    }
+
+    body.kbi-print-statement .statement-table th,
+    body.kbi-print-statement .statement-table td{
+        box-sizing:border-box !important;
+        padding:6px 7px !important;
+        border:1px solid #e2e6eb !important;
+        font-size:9px !important;
+        line-height:1.25 !important;
+        text-align:left !important;
+        vertical-align:top !important;
+        white-space:normal !important;
+        overflow:visible !important;
+        overflow-wrap:anywhere !important;
+        word-break:normal !important;
+    }
+
+    body.kbi-print-statement .statement-table th{
+        color:#17324d !important;
+        background:#f1f5fa !important;
+        font-weight:700 !important;
+    }
+
+    body.kbi-print-statement .statement-table th:nth-child(1),
+    body.kbi-print-statement .statement-table td:nth-child(1){width:13% !important;}
+    body.kbi-print-statement .statement-table th:nth-child(2),
+    body.kbi-print-statement .statement-table td:nth-child(2){width:19% !important;}
+    body.kbi-print-statement .statement-table th:nth-child(3),
+    body.kbi-print-statement .statement-table td:nth-child(3){width:29% !important;}
+    body.kbi-print-statement .statement-table th:nth-child(4),
+    body.kbi-print-statement .statement-table td:nth-child(4){width:12% !important;}
+    body.kbi-print-statement .statement-table th:nth-child(5),
+    body.kbi-print-statement .statement-table td:nth-child(5){width:13% !important;}
+    body.kbi-print-statement .statement-table th:nth-child(6),
+    body.kbi-print-statement .statement-table td:nth-child(6){width:14% !important;}
+
+    body.kbi-print-statement .statement-summary{
+        display:flex !important;
+        flex-wrap:wrap !important;
+        justify-content:space-between !important;
+        gap:8px 16px !important;
+        width:100% !important;
+        box-sizing:border-box !important;
+        padding:10px !important;
+        margin:0 !important;
+        background:#f8fbff !important;
+        border:1px solid #ddd !important;
+        border-top:0 !important;
+        break-inside:avoid !important;
+        page-break-inside:avoid !important;
+        font-size:10px !important;
+    }
+
+    body.kbi-print-statement .statement-summary strong{
+        color:#008a35 !important;
+    }
+
+    body.kbi-print-statement .statement-summary strong[style*="d00000"]{
+        color:#d00000 !important;
+    }
+
+    @page kbiHistoryPage{
+        size:A4 portrait;
+        margin:8mm;
+    }
+
+    body.kbi-print-history{
+        page:kbiHistoryPage !important;
+        display:block !important;
+        width:auto !important;
+        height:auto !important;
+        min-height:0 !important;
+        margin:0 !important;
+        padding:0 !important;
+        overflow:visible !important;
+        background:#fff !important;
+    }
+
+    body.kbi-print-history > *:not(.print-area){
+        display:none !important;
+    }
+
+    body.kbi-print-history > .print-area{
+        display:block !important;
+        position:static !important;
+        inset:auto !important;
+        float:none !important;
+        width:100% !important;
+        max-width:100% !important;
+        height:auto !important;
+        min-height:0 !important;
+        margin:0 !important;
+        padding:0 !important;
+        overflow:visible !important;
+        transform:none !important;
+        box-shadow:none !important;
+        border:0 !important;
+        background:#fff !important;
+        page-break-before:avoid !important;
+        break-before:avoid-page !important;
+    }
+
+    body.kbi-print-history .print-area *{
+        visibility:visible !important;
+        box-sizing:border-box !important;
+    }
+
+    body.kbi-print-history .print-area .no-print{
+        display:none !important;
+    }
+
+    body.kbi-print-history .print-area .print-only{
+        display:block !important;
+    }
+
+    body.kbi-print-history .print-area .transaction-table{
+        width:100% !important;
+        min-width:0 !important;
+        table-layout:auto !important;
+        border-collapse:collapse !important;
+        font-size:9px !important;
+        page-break-inside:auto !important;
+    }
+
+    body.kbi-print-history .print-area .transaction-table thead{
+        display:table-header-group !important;
+    }
+
+    body.kbi-print-history .print-area .transaction-table tr{
+        break-inside:avoid !important;
+        page-break-inside:avoid !important;
+    }
+
+    body.kbi-print-history .print-area .transaction-table th,
+    body.kbi-print-history .print-area .transaction-table td{
+        font-size:9px !important;
+        line-height:1.15 !important;
+        padding:4px 5px !important;
+        overflow-wrap:anywhere !important;
+    }
+
+    body.kbi-print-history .print-area .history-header{
+        margin:0 0 8px !important;
+    }
+
+    body.kbi-print-history .print-area .panel{
+        box-shadow:none !important;
+    }
+
+/* PROFILE */
+.profile-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:25px;
+}
+.profile-btn{
+    background:#073d7a;
+    color:white;
+    border:none;
+    padding:13px 35px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.profile-btn:hover{background:#005bb5;}
+.profile-card{
+    text-align:center;
+}
+.profile-avatar{
+    width:82px;
+    height:82px;
+    border-radius:50%;
+    overflow:hidden;
+    background:#f4b400;
+    color:#073d7a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 15px;
+    font-size:30px;
+    font-weight:bold;
+}
+.profile-avatar img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;}
+.profile-name{
+    color:#073d7a;
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+.profile-details{
+    text-align:left;
+    border:1px solid #e2e8f0;
+    border-radius:9px;
+    overflow:hidden;
+}
+.profile-details .detail-row{padding:11px 14px;}
+@media(max-width:500px){
+    .header-actions{
+        gap:5px;
+    }
+    .header-profile-btn,
+    .header-logout-btn{
+        padding:8px 9px;
+        font-size:12px;
+    }
+}
+
+/* FOOTER */
+footer{
+    margin-top:50px;
+    background:#062b59;
+    color:white;
+    padding:30px 5%;
+    text-align:center;
+}
+
+footer span{
+    color:#ffd45a;
+}
+
+/* RESPONSIVE */
+@media(max-width:850px){
+
+    nav{
+        display:none;
+        position:absolute;
+        top:75px;
+        left:0;
+        right:0;
+        background:#073d7a;
+        flex-direction:column;
+        padding:20px;
+        gap:16px;
+    }
+
+    nav.mobile-open{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .actions{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .statement-filter{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid .full{
+        grid-column:auto;
+    }
+
+    .statement-filter{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .topbar{
+        font-size:11px;
+    }
+
+    .logo h1{
+        font-size:16px;
+    }
+
+    .hero h2{
+        font-size:29px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .actions{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .login-card{
+        padding:22px;
+    }
+
+    .detail-row{
+        flex-direction:column;
+        gap:4px;
+    }
+
+    .detail-row span:last-child{
+        text-align:left;
+    }
+
+    .history-header{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .receiver-row{
+        flex-direction:column;
+        gap:3px;
+    }
+
+}
+
+/* Two-mode transfer and QR scanner */
+.kbi-transfer-tabs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:18px 0}
+.kbi-transfer-tab{border:1px solid #cbd8e8;background:#f5f8fc;color:#17416f;padding:13px 8px;border-radius:9px;font-weight:700;cursor:pointer}
+.kbi-transfer-tab.active{background:#073d7a;color:#fff;border-color:#073d7a;box-shadow:0 4px 12px #073d7a25}
+.kbi-qr-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.kbi-qr-action{display:flex;justify-content:center;align-items:center;text-align:center;min-height:52px;border:0;border-radius:9px;background:#073d7a;color:#fff;font-weight:700;cursor:pointer;padding:12px}
+.kbi-qr-action.upload{background:#f4b400;color:#073d7a}
+.kbi-my-qr-btn{display:block;margin:12px auto 0;padding:11px 24px;border:1px solid rgba(255,255,255,.8);border-radius:24px;background:rgba(255,255,255,.14);color:#fff;font-weight:700;font-size:15px;cursor:pointer}
+.kbi-qr-scanner{position:fixed;inset:0;z-index:99999;display:none;overflow:hidden;background:#101820;color:#fff;text-align:center;margin:0;padding:0;border-radius:0}
+.kbi-qr-scanner video{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:cover;border-radius:0}
+.kbi-qr-scanner:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.48),transparent 24%,transparent 65%,rgba(0,0,0,.62));pointer-events:none}
+.kbi-qr-top{position:absolute;z-index:2;top:0;left:0;right:0;padding:calc(env(safe-area-inset-top,0px) + 18px) 22px 12px;display:flex;align-items:center;justify-content:space-between}
+.kbi-qr-top button{border:0;background:transparent;color:white;font-size:27px;padding:8px 12px;cursor:pointer}
+.kbi-qr-frame{position:absolute;z-index:2;width:min(78vw,430px);height:min(78vw,430px);max-height:42vh;left:50%;top:39%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.24);border-radius:30px;box-shadow:0 0 0 999px rgba(0,0,0,.12)}
+.kbi-qr-frame:before{content:"";position:absolute;inset:-7px;border-radius:34px;background:linear-gradient(90deg,#ea6262 0 17%,transparent 17% 83%,#f4a900 83%),linear-gradient(180deg,transparent 0 83%,#16a05a 83%);mask:linear-gradient(#000 0 0) top left/24% 7px no-repeat,linear-gradient(#000 0 0) top left/7px 24% no-repeat,linear-gradient(#000 0 0) top right/24% 7px no-repeat,linear-gradient(#000 0 0) top right/7px 24% no-repeat,linear-gradient(#000 0 0) bottom left/24% 7px no-repeat,linear-gradient(#000 0 0) bottom left/7px 24% no-repeat,linear-gradient(#000 0 0) bottom right/24% 7px no-repeat,linear-gradient(#000 0 0) bottom right/7px 24% no-repeat}
+.kbi-qr-bottom{position:absolute;z-index:3;bottom:0;left:0;right:0;background:#292929;border-radius:28px 28px 0 0;padding:25px 18px calc(env(safe-area-inset-bottom,0px) + 26px);box-shadow:0 -8px 28px #0003}
+.kbi-qr-bottom strong{display:block;font-size:19px;margin-bottom:8px}
+.kbi-qr-bottom p{font-size:14px;color:#ddd;margin:0 0 17px}
+.kbi-qr-upload{display:inline-flex;align-items:center;gap:10px;background:#f3f3f3;color:#222;border-radius:40px;padding:13px 22px;font-weight:700;cursor:pointer}
+.kbi-qr-scan-status{position:absolute;z-index:3;top:calc(39% + min(39vw,210px));left:12px;right:12px;font-size:13px;color:#fff;text-shadow:0 1px 4px #000}
+@media(max-width:500px){.kbi-qr-frame{top:38%;width:76vw;height:76vw}.kbi-qr-bottom strong{font-size:18px}}
+.kbi-qr-result{background:#f2fff5;border:1px solid #bde6c9;border-radius:10px;padding:15px;margin:15px 0}
+.kbi-qr-result h4{color:#08752d;margin-bottom:10px}
+.kbi-qr-result .receiver-row{gap:10px;align-items:flex-start}
+.kbi-qr-result .receiver-row b{text-align:right;overflow-wrap:anywhere}
+.kbi-qr-disclaimer{font-size:12px;color:#8a4b00;background:#fff7e6;padding:10px;border-radius:7px;margin-top:12px;line-height:1.5}
+@media(max-width:500px){.kbi-transfer-tab{font-size:13px}.kbi-qr-actions{grid-template-columns:1fr}}
+
+
+/* Password visibility toggle */
+.kbi-password-wrap{position:relative;display:block;width:100%;}
+.kbi-password-wrap>input{width:100%;box-sizing:border-box;padding-right:48px!important;}
+.kbi-password-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);z-index:2;border:0;background:transparent;color:#24527a;cursor:pointer;width:36px;height:36px;padding:0;border-radius:8px;font-size:19px;line-height:1;display:inline-flex;align-items:center;justify-content:center;}
+.kbi-password-toggle:focus-visible{outline:2px solid #005bea;outline-offset:2px;}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+
+    <div class="logo">
+
+        <div class="logo-box">
+            KBI
+        </div>
+
+        <div>
+            <h1>KAIMUR BANK OF INDIA</h1>
+            <small>K.B.I.</small>
+        </div>
+
+    </div>
+
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+    <nav id="nav">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#accounts">Accounts</a>
+        <a href="index.html#loans">Loans</a>
+        <a href="index.html#digital">Digital Banking</a>
+        <a href="index.html#contact">Contact</a>
+    </nav>
+
+    <!-- PROFILE + LOGOUT: TOP MENUBAR -->
+    <div class="header-actions" id="headerActions">
+        <button type="button" class="header-profile-btn" id="headerProfileBtn" onclick="openProfile()">👤 Profile</button>
+        <button type="button" class="header-logout-btn" id="headerLogoutBtn" onclick="logout()">Logout</button>
+    </div>
+
+</header>
+
+
+<!-- LOGIN -->
+<section class="login-section" id="loginSection">
+
+    <div class="login-card">
+
+        <h3>Customer Login</h3>
+
+        <p class="login-sub">
+            Login using your Customer ID or Account Number
+        </p>
+
+        <div class="error" id="errorBox"></div>
+
+        <div class="success" id="successBox"></div>
+
+        <form onsubmit="customerLogin(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Customer ID / Account Number
+                </label>
+
+                <input
+                    type="text"
+                    id="loginId"
+                    placeholder="Enter Customer ID or Account Number"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="loginMobile"
+                    maxlength="10"
+                    placeholder="Enter registered mobile number"
+                    inputmode="numeric"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Login Password</label>
+
+                <span class="kbi-password-wrap"><input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter login password"
+                    autocomplete="current-password"
+                    required
+                ><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span>
+
+            </div>
+
+            <button class="login-btn" type="submit">
+                Login to Dashboard
+            </button>
+
+        </form>
+
+        <button type="button" class="forgot-btn" onclick="openForgotPassword()">
+            🔑 Forgot Password?
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+<section class="dashboard" id="dashboard">
+
+    <!-- WELCOME BANNER WITH RIGHT SIDE PROFILE PHOTO -->
+    <div class="welcome">
+
+        <div class="welcome-text">
+            <h2>
+               <span id="customerName">Customer</span>
+            </h2>
+
+            <p>
+                Your Dashboard
+            </p>
+        </div>
+
+        <div class="dash-profile-photo" id="dashProfilePhoto" onclick="openProfile()" title="Click to view Profile">
+            C
+        </div>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+    <div class="actions">
+
+        <button type="button"
+            class="action-btn"
+            id="dashboardTransferButton"
+            onclick="return window.kbiDashboardOpenTransfer(event);">
+
+            🔄 Transfer
+
+        </button>
+
+        <button type="button"
+            class="action-btn"
+            id="dashboardQRButton"
+            onclick="return window.kbiDashboardOpenScanner(event);">
+
+            ▦ Scan any QR Code
+
+        </button>
+
+
+        <button
+            class="action-btn"
+            onclick="showStatement()">
+
+            📄 Statement
+
+        </button>
+
+        <button
+            class="action-btn"
+            onclick="printHistory()">
+
+            🖨️ Print
+
+        </button>
+
+    </div>
+
+
+    <!-- BALANCE CARDS -->
+    <div class="cards">
+
+        <div class="balance-card">
+
+            <h4>Available Balance</h4>
+
+            <div class="value" id="balance">
+                ₹0.00
+            </div>
+
+        </div>
+
+
+        <div class="balance-card">
+
+            <h4>Account Number</h4>
+
+            <div
+                class="value"
+                style="font-size:18px"
+                id="accountNumber">
+
+                —
+
+            </div>
+
+        </div>
+
+
+        <div class="balance-card">
+
+            <h4>Account Status</h4>
+
+            <div
+                class="value"
+                style="font-size:18px"
+                id="accountStatus">
+
+                Active
+
+            </div>
+
+        </div>
+
+
+        <div class="balance-card">
+
+            <h4>Account Type</h4>
+
+            <div
+                class="value"
+                style="font-size:17px"
+                id="accountType">
+
+                Savings
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFORMATION -->
+    <div class="info-grid">
+
+        <div class="panel">
+
+            <h3>Customer Information</h3>
+
+            <div class="detail-row">
+                <span>Customer ID</span>
+                <span id="customerId">—</span>
+            </div>
+
+            <div class="detail-row">
+                <span>Full Name</span>
+                <span id="fullName">—</span>
+            </div>
+
+            <div class="detail-row">
+                <span>Mobile</span>
+                <span id="mobile">—</span>
+            </div>
+
+            <div class="detail-row">
+                <span>Email</span>
+                <span id="email">—</span>
+            </div>
+
+            <div class="detail-row">
+                <span>Application No.</span>
+                <span id="applicationNo">—</span>
+            </div>
+
+            <div class="detail-row">
+                <span>KYC Status</span>
+                <span id="kycStatus">—</span>
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h3>Account Information</h3>
+
+            <div class="detail-row">
+                <span>Account Number</span>
+                <span id="accountNumber2">—</span>
+            </div>
+
+            <div class="detail-row">
+                <span>Account Type</span>
+                <span id="accountType2">—</span>
+            </div>
+
+            <div class="detail-row">
+                <span>Opening Date</span>
+                <span id="openingDate">—</span>
+            </div>
+
+            <div class="detail-row">
+                <span>Status</span>
+                <span id="status2">Active</span>
+            </div>
+
+            <div class="detail-row">
+                <span>Last Updated</span>
+                <span id="lastUpdated">—</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRANSACTIONS -->
+    <div class="panel" style="margin-top:22px" id="historyPrintArea">
+
+        <div class="history-header">
+
+            <h3 style="margin:0;border:0;padding:0">
+                Recent Transactions
+            </h3>
+
+        </div>
+
+        <div class="print-only" style="margin-bottom:15px">
+
+            <h2>K.B.I. - Customer Transaction History</h2>
+
+            <p id="historyPrintCustomer"></p>
+
+        </div>
+
+        <div style="overflow-x:auto">
+
+            <table class="transaction-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Transaction Number</th>
+                        <th>Transaction ID</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="transactionBody">
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            style="text-align:center;color:#777">
+
+                            No transactions available
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- PROFILE MODAL -->
+<div class="modal" id="profileModal">
+    <div class="modal-box">
+        <div class="profile-card">
+            <div class="profile-avatar" id="profileAvatar">C</div>
+            <div class="profile-name" id="profileName">Customer</div>
+        </div>
+
+        <div class="profile-details">
+            <div class="detail-row"><span>Customer ID</span><span id="profileCustomerId">—</span></div>
+            <div class="detail-row"><span>Account Number</span><span id="profileAccountNumber">—</span></div>
+            <div class="detail-row"><span>Mobile</span><span id="profileMobile">—</span></div>
+            <div class="detail-row"><span>Email</span><span id="profileEmail">—</span></div>
+            <div class="detail-row"><span>Application No.</span><span id="profileApplicationNo">—</span></div>
+            <div class="detail-row"><span>Account Type</span><span id="profileAccountType">—</span></div>
+            <div class="detail-row"><span>Opening Date</span><span id="profileOpeningDate">—</span></div>
+            <div class="detail-row"><span>Account Status</span><span id="profileStatus">—</span></div>
+            <div class="detail-row"><span>KYC Status</span><span id="profileKycStatus">—</span></div>
+        </div>
+
+        <hr style="margin:18px 0;border:0;border-top:1px solid #e5e7eb;">
+
+        <h3 style="margin-bottom:12px;">🔐 Account Security</h3>
+        <p style="color:#666;font-size:14px;margin-bottom:14px;">User ID और Password बदलने के लिए नीचे दिए गए option पर click करें।</p>
+
+        <button class="login-btn" type="button" onclick="openSecuritySettings()">🔐 Change User ID & Password</button>
+        <button class="close-btn" onclick="closeProfile()">Close</button>
+    </div>
+</div>
+
+<!-- CHANGE USER ID & PASSWORD MODAL -->
+<div class="modal" id="securitySettingsModal">
+    <div class="modal-box">
+        <h3>🔐 Change User ID & Password</h3>
+        <p style="color:#666;margin:8px 0 18px;">नीचे से जिस सुविधा को बदलना है, उसे अलग से चुनें।</p>
+
+        <button class="login-btn" type="button" onclick="openUserIdChange()">👤 Change Internet Banking User ID</button>
+        <button class="login-btn" type="button" style="margin-top:10px;" onclick="openLoginPasswordChange()">🔑 Change Login Password</button>
+        <button class="login-btn" type="button" style="margin-top:10px;" onclick="openTransactionPasswordChange()">🔒 Change Transaction Password</button>
+        <button class="close-btn" type="button" onclick="closeSecuritySettings()">Close</button>
+    </div>
+</div>
+
+<!-- CHANGE USER ID MODAL -->
+<div class="modal" id="userIdChangeModal">
+    <div class="modal-box">
+        <h3>👤 Change Internet Banking User ID</h3>
+        <div class="form-group">
+            <label>Current Login Password</label>
+            <span class="kbi-password-wrap"><input type="password" id="changeUserIdCurrentPassword" placeholder="Current login password" autocomplete="current-password"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span>
+        </div>
+        <div class="form-group">
+            <label>New Internet Banking User ID</label>
+            <input type="text" id="changeUserIdNew" placeholder="Enter new User ID" autocomplete="username">
+        </div>
+        <div class="success" id="userIdChangeSuccess" style="display:none;"></div>
+        <div class="error" id="userIdChangeError" style="display:none;"></div>
+        <button class="login-btn" type="button" onclick="saveUserIdChange()">💾 Update User ID</button>
+        <button class="close-btn" type="button" onclick="closeUserIdChange()">Cancel</button>
+    </div>
+</div>
+
+<!-- CHANGE LOGIN PASSWORD MODAL -->
+<div class="modal" id="loginPasswordChangeModal">
+    <div class="modal-box">
+        <h3>🔑 Change Login Password</h3>
+        <div class="form-group">
+            <label>Current Login Password</label>
+            <span class="kbi-password-wrap"><input type="password" id="changeLoginCurrentPassword" placeholder="Current login password" autocomplete="current-password"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span>
+        </div>
+        <div class="form-group">
+            <label>New Login Password</label>
+            <span class="kbi-password-wrap"><input type="password" id="changeLoginNewPassword" placeholder="New login password" autocomplete="new-password"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span>
+        </div>
+        <div class="form-group">
+            <label>Confirm New Login Password</label>
+            <span class="kbi-password-wrap"><input type="password" id="changeLoginConfirmPassword" placeholder="Confirm new password" autocomplete="new-password"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span>
+        </div>
+        <div class="success" id="loginPasswordChangeSuccess" style="display:none;"></div>
+        <div class="error" id="loginPasswordChangeError" style="display:none;"></div>
+        <button class="login-btn" type="button" onclick="saveLoginPasswordChange()">💾 Update Login Password</button>
+        <button class="close-btn" type="button" onclick="closeLoginPasswordChange()">Cancel</button>
+    </div>
+</div>
+
+<!-- CHANGE TRANSACTION PASSWORD MODAL -->
+<div class="modal" id="transactionPasswordChangeModal">
+    <div class="modal-box">
+        <h3>🔒 Change Transaction Password</h3>
+        <div class="form-group">
+            <label>Current Transaction Password</label>
+            <span class="kbi-password-wrap"><input type="password" id="changeTxCurrentPassword" placeholder="Current transaction password" autocomplete="current-password"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span>
+        </div>
+        <div class="form-group">
+            <label>New Transaction Password</label>
+            <span class="kbi-password-wrap"><input type="password" id="changeTxNewPassword" placeholder="New transaction password" autocomplete="new-password"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span>
+        </div>
+        <div class="form-group">
+            <label>Confirm New Transaction Password</label>
+            <span class="kbi-password-wrap"><input type="password" id="changeTxConfirmPassword" placeholder="Confirm new transaction password" autocomplete="new-password"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span>
+        </div>
+        <div class="success" id="txPasswordChangeSuccess" style="display:none;"></div>
+        <div class="error" id="txPasswordChangeError" style="display:none;"></div>
+        <button class="login-btn" type="button" onclick="saveTransactionPasswordChange()">💾 Update Transaction Password</button>
+        <button type="button" class="close-btn" style="background:#fff7e6;color:#8a4b00;border:1px solid #f3c46b" onclick="openForgotTransactionPassword()">🔑 Forgot Transaction Password?</button>
+        <button class="close-btn" type="button" onclick="closeTransactionPasswordChange()">Cancel</button>
+    </div>
+</div>
+
+<!-- FORGOT PASSWORD MODAL -->
+<div class="modal" id="forgotPasswordModal">
+    <div class="modal-box">
+        <h3>🔑 Forgot Customer Password</h3>
+        <p style="color:#666;margin:8px 0 16px;">Registered Customer ID / Account Number और mobile number डालें। password default पर reset होगा।</p>
+        <div class="form-group">
+            <label>Customer ID / Account Number</label>
+            <input type="text" id="forgotLoginId" placeholder="Enter ID or Account Number">
+        </div>
+        <div class="form-group">
+            <label>Registered Mobile</label>
+            <input type="tel" id="forgotMobile" maxlength="10" placeholder="10 digit mobile" inputmode="numeric">
+        </div>
+        <div class="error" id="forgotError" style="display:none;"></div>
+        <div class="success" id="forgotSuccess" style="display:none;"></div>
+        <button class="login-btn" type="button" onclick="resetCustomerPassword()">♻️ Reset Password</button>
+        <button class="close-btn" type="button" onclick="closeForgotPassword()">Close</button>
+    </div>
+</div>
+
+<!-- FORGOT TRANSACTION PASSWORD MODAL -->
+<div class="modal" id="forgotTransactionPasswordModal">
+    <div class="modal-box">
+        <h3>🔑 Forgot Transaction Password</h3>
+        <p style="color:#666;margin:8px 0 16px;line-height:1.5">Registered Customer ID / Account Number और registered mobile verify करके नया transaction password सेट करें।</p>
+        <div class="form-group"><label>Customer ID / Account Number</label><input type="text" id="forgotTxCustomerId" placeholder="Customer ID or Account Number"></div>
+        <div class="form-group"><label>Registered Mobile</label><input type="tel" id="forgotTxMobile" maxlength="10" inputmode="numeric" placeholder="10 digit registered mobile"></div>
+        <div class="form-group"><label>New Transaction Password</label><span class="kbi-password-wrap"><input type="password" id="forgotTxNewPassword" autocomplete="new-password" placeholder="At least 4 characters"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span></div>
+        <div class="form-group"><label>Confirm New Transaction Password</label><span class="kbi-password-wrap"><input type="password" id="forgotTxConfirmPassword" autocomplete="new-password" placeholder="Enter again"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span></div>
+        <div class="error" id="forgotTxError" style="display:none"></div><div class="success" id="forgotTxSuccess" style="display:none"></div>
+        <button class="login-btn" type="button" onclick="resetForgotTransactionPassword()">♻️ Verify & Set New Password</button>
+        <button class="close-btn" type="button" onclick="closeForgotTransactionPassword()">Cancel</button>
+    </div>
+</div>
+
+<!-- TRANSACTION PROGRESS OVERLAY -->
+<div id="customerProcessingOverlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,25,60,.72);align-items:center;justify-content:center;padding:20px;font-family:Arial,sans-serif;">
+  <div style="background:#fff;border-radius:16px;padding:28px 24px;text-align:center;width:min(340px,100%);box-shadow:0 20px 60px #001b3d55">
+    <div style="width:46px;height:46px;border:5px solid #dbeafe;border-top-color:#0755b5;border-radius:50%;margin:0 auto 16px;animation:kbiCustomerSpin .8s linear infinite"></div>
+    <h3 style="margin:0 0 8px;color:#06458f">Processing...</h3>
+    <p id="customerProcessingText" style="margin:0;color:#52657b;font-size:13px;line-height:1.5">Please wait while your transaction is saved.</p>
+    <small style="display:block;margin-top:12px;color:#7c8b9d">Please do not close this page.</small>
+  </div>
+</div>
+<style>@keyframes kbiCustomerSpin{to{transform:rotate(360deg)}}
+@media print{body.kbi-printing *{visibility:hidden!important}body.kbi-printing #customerReceiptPrint,body.kbi-printing #customerReceiptPrint *{visibility:visible!important}body.kbi-printing #customerReceiptPrint{display:block!important;position:absolute;left:0;top:0;width:80mm;padding:5mm;font-family:Arial,sans-serif;color:#111}body.kbi-printing #customerReceiptPrint .receipt-action{display:none!important}}</style>
+<div id="customerReceiptPrint" style="display:none"></div>
+
+<!-- TRANSACTION PASSWORD MODAL -->
+<div class="modal" id="customerTransactionPasswordModal">
+    <div class="modal-box">
+        <h3>🔐 Transaction Password</h3>
+        <p id="customerTransactionAction" style="color:#666;margin:8px 0 16px;">Transfer authorize करने के लिए password डालें। Default security password: <b>KBI@123</b> (यदि आपने इसे बदला नहीं है)।</p>
+        <div class="form-group">
+            <label>Transaction Password</label>
+            <span class="kbi-password-wrap"><input type="password" id="customerTransactionPassword" placeholder="Enter transaction password" autocomplete="current-password"><button type="button" class="kbi-password-toggle" aria-label="Show password" aria-pressed="false" title="Show password">👁</button></span>
+        </div>
+        <div class="error" id="customerTransactionPasswordError" style="display:none;">गलत Transaction Password.</div>
+        <button class="login-btn" type="button" onclick="confirmCustomerTransactionPassword()">Confirm Transaction</button>
+        <button class="close-btn" type="button" style="background:#fff7e6;color:#8a4b00;border:1px solid #f3c46b" onclick="cancelCustomerTransactionPassword();openForgotTransactionPassword()">🔑 Forgot Transaction Password?</button>
+        <button class="close-btn" type="button" onclick="cancelCustomerTransactionPassword()">Cancel</button>
+    </div>
+</div>
+
+<!-- GENERAL MESSAGE MODAL -->
+<div class="modal" id="messageModal">
+
+    <div class="modal-box">
+
+        <h3>K.B.I. Customer Banking</h3>
+
+        <p id="modalText"></p>
+
+        <button
+            class="close-btn"
+            onclick="closeModal()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- PROFESSIONAL CUSTOMER RECEIVE QR MODAL -->
+<div class="modal" id="myKBIQRModal" style="z-index:100000">
+  <div class="modal-box" style="max-width:440px;width:calc(100% - 20px);padding:24px 20px;text-align:center;border-radius:32px;background:#ffffff;box-shadow:0 12px 40px rgba(0,0,0,0.18)">
+    
+    <div style="display:flex;justify-content:flex-end;align-items:center;margin-bottom:2px">
+      <button type="button" onclick="closeMyKBIQR()" aria-label="Close" style="border:0;background:#f1f3f4;border-radius:50%;width:34px;height:34px;font-size:18px;cursor:pointer;color:#5f6368;display:flex;align-items:center;justify-content:center">✕</button>
+    </div>
+
+    <div id="kbiMyQrCard" style="background:#ffffff;border:1px solid #e0e0e0;border-radius:24px;padding:24px 16px 20px;box-shadow:0 2px 12px rgba(0,0,0,0.04)">
+      
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px">
+        <img id="myKBIQRPhoto" alt="Customer Photo" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #e2e8f0;background:#f1f5f9;display:none">
+        <div id="myKBIQRAvatar" style="width:48px;height:48px;border-radius:50%;background:#e8f0fe;color:#1a73e8;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold">C</div>
+        <div style="text-align:left;min-width:0">
+          <div id="myKBIQRName" style="font-size:18px;font-weight:700;color:#202124;overflow-wrap:anywhere">Customer Name</div>
+          <div style="font-size:13px;color:#5f6368;margin-top:2px">Kaimur Bank of India</div>
+        </div>
+      </div>
+
+      <div style="position:relative;width:236px;height:236px;margin:0 auto 14px;background:#fff;padding:6px;box-sizing:border-box">
+        <div id="myKBIQRCode" style="width:224px;height:224px;display:flex;justify-content:center;align-items:center"></div>
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46px;height:46px;border:3px solid white;border-radius:12px;background:#0d3b66;box-shadow:0 2px 8px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;color:#ffd45a;font-size:14px;font-weight:bold">KBI</div>
+      </div>
+
+      <div style="font-size:15px;color:#5f6368;margin-bottom:16px;font-weight:400">Scan to pay with any UPI app</div>
+
+      <div style="display:inline-flex;align-items:center;gap:6px;background:#f1f3f4;padding:8px 16px;border-radius:20px;margin-bottom:14px;font-size:13px;font-weight:600;color:#3c4043">
+        <span style="color:#0d3b66;font-weight:bold">K.B.I. Account</span> <span style="font-weight:normal;color:#5f6368">•••• <span id="myKBIQRLast4">----</span></span>
+      </div>
+
+      <div style="font-size:13px;color:#3c4043;display:flex;align-items:center;justify-content:center;gap:6px;background:#f8f9fa;padding:8px 12px;border-radius:8px">
+        <span>UPI ID:</span> <strong id="myKBIQRVPA" style="color:#202124">---</strong> 
+        <button type="button" onclick="copyKBIUPIID()" style="border:0;background:#e8f0fe;color:#1a73e8;padding:3px 8px;border-radius:4px;font-size:12px;cursor:pointer;font-weight:bold">copy</button>
+      </div>
+
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <button type="button" onclick="downloadMyKBIQR()" style="width:100%;border:0;background:#1a73e8;color:#fff;border-radius:28px;padding:14px;font-weight:bold;font-size:15px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.2)">Download QR Code</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- TRANSFER MODAL -->
+<div class="modal" id="transferModal">
+
+    <div class="modal-box">
+
+        <h3>🔄 Transfer Money</h3>
+
+        <div id="accountTransferPane">
+
+        <div class="balance-highlight"
+             style="
+             background:#f2fff5;
+             border:1px solid #bde6c9;
+             padding:16px;
+             border-radius:8px;
+             margin-bottom:20px;
+             text-align:center">
+
+            <small>Available Balance</small>
+
+            <strong
+                id="transferCurrentBalance"
+                style="
+                display:block;
+                color:#008a35;
+                font-size:28px;
+                margin-top:5px">
+
+                ₹0.00
+
+            </strong>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Receiver Customer ID / Account Number
+            </label>
+
+            <input
+                type="text"
+                id="transferReceiver"
+                placeholder="Enter receiver ID or account number"
+                oninput="findTransferReceiver()"
+            >
+
+        </div>
+
+
+        <!-- RECEIVER PREVIEW -->
+        <div
+            class="receiver-preview"
+            id="receiverPreview">
+
+            <h4>✓ Receiver Details</h4>
+
+            <div class="receiver-row">
+
+                <span>Name</span>
+
+                <span id="receiverNamePreview">
+                    —
+                </span>
+
+            </div>
+
+            <div class="receiver-row">
+
+                <span>Customer ID</span>
+
+                <span id="receiverIdPreview">
+                    —
+                </span>
+
+            </div>
+
+            <div class="receiver-row">
+
+                <span>Account Number</span>
+
+                <span id="receiverAccountPreview">
+                    —
+                </span>
+
+            </div>
+
+            <div class="receiver-row">
+
+                <span>Account Status</span>
+
+                <span id="receiverStatusPreview">
+                    —
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="error"
+            id="receiverError">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Transfer Amount
+            </label>
+
+            <input
+                type="number"
+                id="transferAmount"
+                min="1"
+                step="0.01"
+                placeholder="Enter amount"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Transfer Remarks
+            </label>
+
+            <input
+                type="text"
+                id="transferRemarks"
+                placeholder="e.g. Family transfer"
+            >
+
+        </div>
+
+        <button
+            class="primary-btn"
+            onclick="processTransfer()">
+
+            Confirm Transfer
+
+        </button>
+        </div>
+
+        <div id="qrTransferPane" style="display:none">
+          <div class="transfer-note" id="kbiUPIInfoNote">
+            Google Pay / PhonePe / Paytm जैसे UPI QR को scan करें। Payment आपके मोबाइल में उपलब्ध UPI app के जरिए होगा; यह KBI balance से debit नहीं होगा।
+          </div>
+          <div id="kbiQrScanner" class="kbi-qr-scanner" style="display:none">
+            <video id="kbiQrVideo" playsinline autoplay muted></video>
+            <div class="kbi-qr-top">
+              <button type="button" aria-label="Close scanner" onclick="closeDashboardQRScanner()">✕</button>
+              <div><button type="button" aria-label="Flashlight" onclick="toggleKBIQRFlash()">▤</button></div>
+            </div>
+            <div class="kbi-qr-frame" aria-hidden="true"></div>
+            <p id="kbiQrScanStatus" class="kbi-qr-scan-status">QR code को frame के अंदर रखें…</p>
+            <div class="kbi-qr-bottom">
+              <strong>Scan any QR code to pay</strong>
+              <p>Google Pay • PhonePe • PayTM • UPI</p>
+              <label class="kbi-qr-upload">▧ &nbsp; Upload from gallery
+                <input type="file" id="kbiQrImageInput" accept="image/*" onchange="readKBIQRImage(event)" hidden>
+              </label>
+              <button type="button" class="kbi-my-qr-btn" onclick="openMyKBIQR(); return false;">▦ My QR Code</button>
+            </div>
+          </div>
+          <div id="kbiQrResult" class="kbi-qr-result" style="display:none">
+            <h3 style="margin:4px 0 16px">Receiver Details</h3>
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding:12px;background:#f4f8ff;border-radius:12px">
+              <img id="kbiQrReceiverPhoto" alt="Photo" src="" style="width:58px;height:58px;border-radius:50%;object-fit:cover;background:#e5eaf2;display:none">
+              <div id="kbiQrReceiverAvatar" style="width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#dceaff;color:#0755b5;font-size:25px;font-weight:700">👤</div>
+              <div style="text-align:left"><div style="font-size:12px;color:#64748b">Receiver</div><b id="kbiQrPayee" style="font-size:17px">—</b></div>
+            </div>
+            <div class="receiver-row"><span>UPI ID</span><b id="kbiQrVpa">—</b></div>
+            <div class="form-group" style="margin-top:16px">
+              <label>Enter amount (₹)</label>
+              <input type="number" id="kbiQrPayAmount" min="1" step="0.01" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+              <label>Remarks</label>
+              <input type="text" id="kbiQrPayRemarks" maxlength="100" placeholder="Enter remarks">
+            </div>
+            <button type="button" class="primary-btn" id="kbiOpenUPIButton" onclick="payFromScannedQR()">Pay</button>
+            <p class="kbi-qr-disclaimer" id="kbiQrPayDisclaimer">Receiver details जाँचकर ही Pay करें।</p>
+          </div>
+          <p id="kbiQrError" class="error" style="display:none"></p>
+        </div>
+
+        <button
+            class="close-btn"
+            onclick="closeTransferModal()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- STATEMENT MODAL -->
+<div class="modal" id="statementModal">
+
+    <div class="modal-box large">
+
+        <div
+            id="statementPrintArea"
+            class="print-area">
+
+            <h3 class="no-print">
+                📄 Account Statement
+            </h3>
+
+            <div class="statement-head">
+
+                <h4 id="statementCustomerName">
+                    Customer
+                </h4>
+
+                <div>
+                    Customer ID:
+                    <span id="statementCustomerId">—</span>
+                </div>
+
+                <div>
+                    Account Number:
+                    <span id="statementAccountNumber">—</span>
+                </div>
+
+                <div>
+                    Current Balance:
+                    <span id="statementCurrentBalance">₹0.00</span>
+                </div>
+
+            </div>
+
+
+            <!-- DATE FILTER -->
+            <div class="statement-filter no-print">
+
+                <div>
+
+                    <label>
+                        From Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="statementFromDate"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        To Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="statementToDate"
+                    >
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="applyStatementFilter()">
+
+                    🔎 Search
+
+                </button>
+
+
+                <button
+                    class="small-btn"
+                    onclick="clearStatementFilter()">
+
+                    Clear
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="print-only"
+                style="
+                padding:12px 0;
+                border-bottom:1px solid #ddd">
+
+                <strong>
+                    Statement Period:
+                </strong>
+
+                <span id="statementPrintPeriod">
+                    All Transactions
+                </span>
+
+            </div>
+
+            <div
+            class="no-print"
+            style="
+            display:flex;
+            gap:10px;
+            margin-top:15px">
+
+            <button
+                class="primary-btn"
+                onclick="printStatement()">
+
+                🖨️ Print Statement / Save PDF
+
+            </button>
+
+            <button
+                class="close-btn"
+                style="margin-top:0"
+                onclick="closeStatementModal()">
+
+                Close
+
+            </button>
+
+        </div>
+
+
+            <div id="statementContent">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026
+        <span>Kaimur Bank of India</span>.
+        All Rights Reserved.
+    </p>
+
+    <p
+        style="margin-top:8px;font-size:13px;color:#b9c8d8">
+
+        K.B.I. Customer Internet Banking
+
+    </p>
+
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+<script>
+
+const CUSTOMER_KEY = "KBI_CUSTOMER_DATABASE_V1";
+const SESSION_KEY = "KBI_LOGGED_IN_CUSTOMER";
+const DEFAULT_CUSTOMER_LOGIN_PASSWORD = "KBI@123";
+const DEFAULT_CUSTOMER_TRANSACTION_PASSWORD = "KBI@123";
+
+const FIREBASE_DATABASE_URL = "https://kaimur-bank-default-rtdb.firebaseio.com";
+const FIREBASE_CUSTOMER_PATH = "customers";
+let firebaseCustomersCache = [];
+let firebaseReady = false;
+// Performance: share simultaneous reads and reuse a very recent customer snapshot.
+// Financial operations explicitly request a fresh snapshot before committing.
+let firebaseCustomersLoadPromise = null;
+let firebaseCustomersCacheTime = 0;
+const KBI_CUSTOMER_CACHE_TTL = 2500;
+
+async function firebaseRequest(path, options){
+    const cleanPath = String(path || "").replace(/^\/+|\/+$/g, "");
+    const encodedPath = cleanPath
+        .split("/")
+        .filter(Boolean)
+        .map(seg => encodeURIComponent(decodeURIComponent(seg)))
+        .join("/");
+    const url = FIREBASE_DATABASE_URL + "/" + encodedPath + ".json";
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 60000);
+    try{
+        const response = await fetch(url, Object.assign({cache:"no-store"}, options || {}, {signal:controller.signal}));
+        const raw = await response.text();
+        let data = null;
+        try{ data = raw ? JSON.parse(raw) : null; }catch(e){ data = raw; }
+        if(!response.ok){
+            throw new Error("Firebase HTTP " + response.status + ": " + (data && data.error ? data.error : (raw || response.statusText)));
+        }
+        const requestMethod = String((options && options.method) || "GET").toUpperCase();
+        if(cleanPath === FIREBASE_CUSTOMER_PATH && requestMethod !== "GET"){
+            firebaseCustomersCacheTime = 0;
+        }
+        return data;
+    }catch(error){
+        if(error && error.name === "AbortError") throw new Error("Firebase request timed out. Internet connection check करें।");
+        throw error;
+    }finally{ clearTimeout(timer); }
+}
+
+async function firebaseGet(path){
+    return await firebaseRequest(path,{method:"GET"});
+}
+
+async function firebasePut(path,data){
+    return await firebaseRequest(path,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+}
+
+function rawCustomerFirebaseKey(customer){
+    if(!customer || typeof customer !== "object") return "";
+    if(customer.__firebaseKey && String(customer.__firebaseKey).trim() !== ""){
+        return String(customer.__firebaseKey).trim();
+    }
+    return String(
+        customer.accountNumber || customer.accountNo || customer.customerId || customer.customerID || customer.applicationNumber || ""
+    ).trim();
+}
+
+function customerFirebaseKey(customer){
+    return encodeURIComponent(rawCustomerFirebaseKey(customer));
+}
+
+function normalizeCustomer(customer, dbKey){
+    if(!customer || typeof customer !== "object") return customer;
+    if(dbKey && !customer.__firebaseKey){
+        customer.__firebaseKey = String(dbKey).trim();
+    }
+    const rawBalance = customer.balance !== undefined ? customer.balance : (customer.currentBalance !== undefined ? customer.currentBalance : 0);
+    const parsedBalance = Number(String(rawBalance ?? 0).replace(/[^0-9.-]/g, ""));
+    customer.balance = Number.isFinite(parsedBalance) ? parsedBalance : 0;
+
+    if(!Array.isArray(customer.transactions)){
+        if(customer.transactions && typeof customer.transactions === "object"){
+            customer.transactions = Object.values(customer.transactions).filter(Boolean);
+        }else{
+            customer.transactions = [];
+        }
+    }
+    if(!customer.kycStatus) customer.kycStatus = "Pending";
+    if(customer.kycVerifiedDate === undefined) customer.kycVerifiedDate = "";
+    if(customer.kycRemarks === undefined) customer.kycRemarks = "";
+    if(customer.lastUpdated === undefined) customer.lastUpdated = "";
+    if(!customer.internetUserId){
+        customer.internetUserId = cleanNumber(customer.customerId || customer.customerID || "");
+    }
+    if(!customer.loginPassword){
+        customer.loginPassword = DEFAULT_CUSTOMER_LOGIN_PASSWORD;
+    }
+    const savedTxPassword = customer.transactionPassword ?? customer.txnPassword ?? customer.transactionPin ?? customer.transactionPIN ?? customer.txPassword ?? customer.transaction_password ?? customer.txn_password ?? customer.transactionPass;
+    if(savedTxPassword !== undefined && savedTxPassword !== null && String(savedTxPassword).trim() !== ""){
+        customer.transactionPassword = String(savedTxPassword).trim();
+    } else {
+        customer.transactionPassword = DEFAULT_CUSTOMER_TRANSACTION_PASSWORD;
+    }
+    return customer;
+}
+
+function sanitizeCustomerForFirebase(customer){
+    const copy = normalizeCustomer({...customer});
+    delete copy.__firebaseKey;
+    return copy;
+}
+
+async function loadCustomersFromFirebase(forceRefresh){
+    const force = forceRefresh === true;
+    const now = Date.now();
+
+    // Avoid repeated full-database downloads from login, focus/pageshow and modal opening.
+    if(!force && firebaseReady && (now - firebaseCustomersCacheTime) < KBI_CUSTOMER_CACHE_TTL){
+        return firebaseCustomersCache;
+    }
+
+    // If another part of the page is already downloading the same data, reuse it.
+    if(firebaseCustomersLoadPromise){
+        if(!force) return await firebaseCustomersLoadPromise;
+        try{ await firebaseCustomersLoadPromise; }catch(_e){}
+    }
+
+    firebaseCustomersLoadPromise = (async function(){
+        const data = await firebaseGet(FIREBASE_CUSTOMER_PATH);
+        const list = [];
+        if(data && typeof data === "object"){
+            for(const [dbKey, val] of Object.entries(data)){
+                if(val && typeof val === "object"){
+                    list.push(normalizeCustomer({...val}, dbKey));
+                }
+            }
+        }
+        firebaseCustomersCache = list;
+        firebaseReady = true;
+        firebaseCustomersCacheTime = Date.now();
+        return firebaseCustomersCache;
+    })();
+
+    try{
+        return await firebaseCustomersLoadPromise;
+    }finally{
+        firebaseCustomersLoadPromise = null;
+    }
+}
+
+async function saveCustomersToFirebase(customers){
+    const list = (Array.isArray(customers) ? customers : []).map(c => normalizeCustomer({...c}));
+    const patchPayload = {};
+    for(const customer of list){
+        const key = rawCustomerFirebaseKey(customer);
+        if(!key) continue;
+        patchPayload[key] = sanitizeCustomerForFirebase(customer);
+    }
+    if(Object.keys(patchPayload).length){
+        await firebaseRequest(FIREBASE_CUSTOMER_PATH, {
+            method:"PATCH",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(patchPayload)
+        });
+    }
+    firebaseCustomersCache = list;
+    firebaseReady = true;
+}
+
+function getCustomers(){
+    return firebaseCustomersCache;
+}
+
+async function saveCustomers(customers){
+    await saveCustomersToFirebase(customers);
+}
+
+async function resolveCustomerNodeKey(customer){
+    const existingKey = rawCustomerFirebaseKey(customer);
+    const targetCid = cleanNumber(customer?.customerId || customer?.customerID || "");
+    const targetAcc = cleanNumber(customer?.accountNumber || customer?.accountNo || "");
+    const targetApp = cleanNumber(customer?.applicationNumber || customer?.applicationNo || "");
+
+    const data = await firebaseGet(FIREBASE_CUSTOMER_PATH);
+    if(data && typeof data === "object"){
+        for(const [dbKey, val] of Object.entries(data)){
+            if(!val || typeof val !== "object") continue;
+            if(existingKey && dbKey === existingKey) return dbKey;
+            const cid = cleanNumber(val.customerId || val.customerID || "");
+            const acc = cleanNumber(val.accountNumber || val.accountNo || "");
+            const app = cleanNumber(val.applicationNumber || val.applicationNo || "");
+            if((targetAcc && acc === targetAcc) || (targetCid && cid === targetCid) || (targetApp && app === targetApp)){
+                return dbKey;
+            }
+        }
+    }
+    return existingKey;
+}
+
+
+function toggleMenu(){
+    const nav = document.getElementById("nav");
+    if (nav && nav.classList) nav.classList.toggle("mobile-open");
+}
+
+
+function cleanNumber(value){
+
+    if(value === null || value === undefined){
+        return "";
+    }
+
+    return String(value)
+        .replace(/^KBI-CUST-/i,"")
+        .replace(/^KBI-ACC-/i,"")
+        .replace(/^KBI-/i,"")
+        .trim();
+
+}
+
+
+function findCustomerByIdOrAccount(value){
+
+    const rawTrimmed = String(value || "").trim();
+    const search = cleanNumber(rawTrimmed).toLowerCase();
+
+    if(!search && !rawTrimmed){
+        return null;
+    }
+
+    const customers = getCustomers();
+
+    return customers.find(c => {
+
+        const rawCid = String(c.customerId || c.customerID || "").trim().toLowerCase();
+        const rawAcc = String(c.accountNumber || c.accountNo || "").trim().toLowerCase();
+        const rawKey = String(c.__firebaseKey || "").trim().toLowerCase();
+
+        const cid = cleanNumber(c.customerId || c.customerID || "").toLowerCase();
+        const acc = cleanNumber(c.accountNumber || c.accountNo || "").toLowerCase();
+        const key = cleanNumber(c.__firebaseKey || "").toLowerCase();
+
+        return (
+            (search && (cid === search || acc === search || key === search)) ||
+            (rawTrimmed.toLowerCase() && (rawCid === rawTrimmed.toLowerCase() || rawAcc === rawTrimmed.toLowerCase() || rawKey === rawTrimmed.toLowerCase()))
+        );
+
+    }) || null;
+
+}
+
+
+function getLoggedInCustomer(){
+
+    const saved =
+        localStorage.getItem(SESSION_KEY);
+
+    if(!saved){
+        return null;
+    }
+
+    try{
+
+        const session =
+            JSON.parse(saved);
+
+        const customers =
+            getCustomers();
+
+        const sessionCid =
+            cleanNumber(
+                session.customerId ||
+                session.customerID ||
+                ""
+            ).toLowerCase();
+
+        const sessionAcc =
+            cleanNumber(
+                session.accountNumber ||
+                session.accountNo ||
+                ""
+            ).toLowerCase();
+
+        const sessionKey =
+            String(session.__firebaseKey || "").trim().toLowerCase();
+
+        const liveCustomer =
+            customers.find(c => {
+
+                const cid =
+                    cleanNumber(
+                        c.customerId ||
+                        c.customerID ||
+                        ""
+                    ).toLowerCase();
+
+                const acc =
+                    cleanNumber(
+                        c.accountNumber ||
+                        c.accountNo ||
+                        ""
+                    ).toLowerCase();
+
+                const key =
+                    String(c.__firebaseKey || "").trim().toLowerCase();
+
+                return (
+                    (sessionKey && key === sessionKey) ||
+                    (sessionCid && cid === sessionCid) ||
+                    (sessionAcc && acc === sessionAcc)
+                );
+
+            });
+
+        if(liveCustomer){
+
+            return liveCustomer;
+
+        }
+
+        return session;
+
+    }catch(e){
+
+        return null;
+
+    }
+
+}
+
+
+function saveSession(customer){
+
+    if(!customer){
+        return;
+    }
+
+    const sessionCustomer = {
+        __firebaseKey: rawCustomerFirebaseKey(customer),
+        customerId: cleanNumber(customer.customerId || customer.customerID || ""),
+        accountNumber: cleanNumber(customer.accountNumber || customer.accountNo || ""),
+        mobile: customer.mobile || customer.phone || "",
+        fullName: customer.fullName || customer.name || ""
+    };
+
+    try {
+        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionCustomer));
+    } catch (e) {
+        console.warn("LocalStorage quota exceeded, clearing key and retrying", e);
+        localStorage.removeItem(SESSION_KEY);
+        localStorage.setItem(SESSION_KEY, JSON.stringify(sessionCustomer));
+    }
+
+}
+
+
+function showCustomerLoginProgress(){
+    const overlay = document.getElementById("customerProcessingOverlay");
+    const title = overlay ? overlay.querySelector("h3") : null;
+    const message = document.getElementById("customerProcessingText");
+    const button = document.querySelector("#loginSection .login-btn");
+    if(title) title.innerText = "Login Processing";
+    if(message) message.innerText = "कृपया प्रतीक्षा करें।";
+    if(overlay) overlay.style.display = "flex";
+    if(button){ button.disabled = true; button.dataset.loginBusy = "1"; button.innerText = "Please Wait..."; }
+}
+function hideCustomerLoginProgress(){
+    const overlay = document.getElementById("customerProcessingOverlay");
+    const button = document.querySelector("#loginSection .login-btn");
+    if(overlay) overlay.style.display = "none";
+    if(button && button.dataset.loginBusy === "1"){
+        button.disabled = false;
+        button.innerText = "Login to Dashboard";
+        delete button.dataset.loginBusy;
+    }
+}
+
+async function customerLogin(event){
+
+    event.preventDefault();
+
+    const rawLoginInput = document.getElementById("loginId").value.trim();
+    const loginId = cleanNumber(rawLoginInput).toLowerCase();
+
+    const mobile =
+        document.getElementById("loginMobile")
+        .value.replace(/\D/g, "").trim();
+
+    const loginPassword =
+        document.getElementById("loginPassword")
+        .value;
+
+    const errorBox =
+        document.getElementById("errorBox");
+
+    const successBox =
+        document.getElementById("successBox");
+
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+
+
+    if(!/^\d{10}$/.test(mobile)){
+
+        errorBox.innerText =
+            "कृपया सही 10 अंकों का Mobile Number डालें।";
+
+        errorBox.style.display = "block";
+
+        return;
+
+    }
+
+
+    if(!rawLoginInput){
+        errorBox.innerText = "कृपया Customer ID, Account Number या User ID डालें।";
+        errorBox.style.display = "block";
+        return;
+    }
+
+    if(!loginPassword){
+        errorBox.innerText = "कृपया Login Password डालें।";
+        errorBox.style.display = "block";
+        return;
+    }
+
+
+    showCustomerLoginProgress();
+
+    let customers;
+    try{
+        await loadCustomersFromFirebase();
+        customers = getCustomers();
+    }catch(error){
+        hideCustomerLoginProgress();
+        errorBox.innerHTML = "<b>Please check internet</b><br>" + escapeHTML(error.message);
+        errorBox.style.display = "block";
+        return;
+    }
+
+
+    const customer =
+        customers.find(c => {
+
+            const customerId =
+                cleanNumber(
+                    c.customerId ||
+                    c.customerID ||
+                    ""
+                ).toLowerCase();
+
+            const accountNumber =
+                cleanNumber(
+                    c.accountNumber ||
+                    c.accountNo ||
+                    ""
+                ).toLowerCase();
+
+            const dbKey =
+                cleanNumber(c.__firebaseKey || "").toLowerCase();
+
+            const userId = String(
+                c.internetUserId ||
+                c.userId ||
+                c.username ||
+                c.customerId ||
+                c.customerID ||
+                ""
+            ).trim().toLowerCase();
+
+            const enteredLower = rawLoginInput.toLowerCase();
+
+            const storedPassword = String(
+                c.loginPassword ||
+                DEFAULT_CUSTOMER_LOGIN_PASSWORD
+            );
+
+            const customerMobile =
+                String(
+                    c.mobile ||
+                    c.phone ||
+                    ""
+                ).replace(/\D/g,"");
+
+            return (
+
+                (
+                    (loginId && (customerId === loginId || accountNumber === loginId || dbKey === loginId)) ||
+                    (userId && userId === enteredLower) ||
+                    (String(c.customerId || c.customerID || "").trim().toLowerCase() === enteredLower) ||
+                    (String(c.accountNumber || c.accountNo || "").trim().toLowerCase() === enteredLower)
+                )
+
+                &&
+
+                customerMobile === mobile
+
+                &&
+
+                storedPassword === loginPassword
+
+            );
+
+        });
+
+
+    if(!customer){
+        hideCustomerLoginProgress();
+
+        errorBox.innerHTML =
+            "<b>Login Failed</b><br>" +
+            "Customer ID/Account Number और registered mobile number check करें।";
+
+        errorBox.style.display = "block";
+
+        return;
+
+    }
+
+
+    const status =
+        String(
+            customer.status ||
+            "Active"
+        ).toLowerCase();
+
+
+    if(
+        status !== "active" &&
+        status !== "approved"
+    ){
+        hideCustomerLoginProgress();
+
+        errorBox.innerHTML =
+            "<b>Account अभी Active नहीं है.</b><br>" +
+            "आपका account Admin Approval के बाद ही login किया जा सकता है।";
+
+        errorBox.style.display = "block";
+
+        return;
+
+    }
+
+
+    saveSession(customer);
+
+
+    successBox.innerText =
+        "Login Successful. Dashboard खुल रहा है...";
+
+    successBox.style.display = "block";
+
+
+    openDashboard(customer);
+
+}
+
+
+function openDashboard(customer){
+
+    hideCustomerLoginProgress();
+
+    const headerActions = document.getElementById("headerActions");
+    if(headerActions) headerActions.style.display = "flex";
+
+    if(!customer){
+        return;
+    }
+
+    document.getElementById("loginSection")
+        .style.display = "none";
+
+    const heroEl = document.querySelector(".hero");
+    if(heroEl) heroEl.style.display = "none";
+
+    document.getElementById("dashboard")
+        .style.display = "block";
+
+
+    renderDashboard(customer);
+
+}
+
+
+function renderDashboard(customer){
+
+    if(!customer){
+        return;
+    }
+
+    const name =
+        customer.fullName ||
+        customer.name ||
+        "Customer";
+
+
+    const customerId =
+        cleanNumber(
+            customer.customerId ||
+            customer.customerID ||
+            "—"
+        );
+
+
+    const accountNumber =
+        cleanNumber(
+            customer.accountNumber ||
+            customer.accountNo ||
+            "—"
+        );
+
+
+    const accountType =
+        customer.accountType ||
+        "Savings Account";
+
+
+    const mobile =
+        customer.mobile ||
+        customer.phone ||
+        "—";
+
+
+    const email =
+        customer.email ||
+        "—";
+
+
+    const applicationNo =
+        cleanNumber(
+            customer.applicationNo ||
+            customer.applicationNumber ||
+            customer.applicationId ||
+            "—"
+        );
+
+
+    const balance =
+        Number(
+            customer.balance ??
+            customer.currentBalance ??
+            0
+        ) || 0;
+
+
+    const openingDate =
+        customer.openingDate ||
+        customer.approvedDate ||
+        customer.date ||
+        "—";
+
+
+    document.getElementById("customerName")
+        .innerText = name;
+
+    const dashPhotoContainer = document.getElementById("dashProfilePhoto");
+    if(dashPhotoContainer){
+        dashPhotoContainer.innerHTML = "";
+        const photo = customer.photoUrl || customer.photoURL || customer.photo || customer.customerPhoto || customer.photoData || customer.profilePhoto || customer.passportPhoto || customer.image || customer.applicationData?.photo || "";
+        if(typeof photo === "string" && /^(https?:|data:image\/)/i.test(photo.trim())){
+            const img = document.createElement("img");
+            img.alt = name;
+            img.src = photo.trim();
+            img.onerror = function(){
+                dashPhotoContainer.innerHTML = "";
+                dashPhotoContainer.textContent = name.trim().charAt(0).toUpperCase() || "C";
+            };
+            dashPhotoContainer.appendChild(img);
+        } else {
+            dashPhotoContainer.textContent = name.trim().charAt(0).toUpperCase() || "C";
+        }
+    }
+
+
+    document.getElementById("customerId")
+        .innerText = customerId;
+
+
+    document.getElementById("fullName")
+        .innerText = name;
+
+
+    document.getElementById("mobile")
+        .innerText = mobile;
+
+
+    document.getElementById("email")
+        .innerText = email;
+
+
+    document.getElementById("applicationNo")
+        .innerText = applicationNo;
+
+
+    document.getElementById("accountNumber")
+        .innerText = accountNumber;
+
+
+    document.getElementById("accountNumber2")
+        .innerText = accountNumber;
+
+
+    document.getElementById("accountType")
+        .innerText = accountType;
+
+
+    document.getElementById("accountType2")
+        .innerText = accountType;
+
+
+    document.getElementById("openingDate")
+        .innerText = openingDate;
+
+
+    document.getElementById("balance")
+        .innerText =
+        formatMoney(balance);
+
+
+    const status =
+        customer.status ||
+        "Active";
+
+
+    document.getElementById("accountStatus")
+        .innerText = status;
+
+
+    document.getElementById("status2")
+        .innerText = status;
+
+
+    document.getElementById("lastUpdated")
+        .innerText =
+        customer.lastUpdated ||
+        "—";
+
+
+    renderKycStatus(customer);
+
+    loadTransactions(customer);
+
+}
+
+
+function formatMoney(amount){
+
+    return "₹" +
+        Number(amount || 0)
+        .toLocaleString("en-IN",{
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        });
+
+}
+
+
+function renderKycStatus(customer){
+
+    const element =
+        document.getElementById("kycStatus");
+
+    const status =
+        customer.kycStatus ||
+        "Pending";
+
+    let cls =
+        "kyc-pending";
+
+    if(
+        status.toLowerCase() ===
+        "verified"
+    ){
+        cls = "kyc-verified";
+    }
+
+    if(
+        status.toLowerCase() ===
+        "rejected"
+    ){
+        cls = "kyc-rejected";
+    }
+
+    element.innerHTML =
+        `<span class="status-badge ${cls}">
+            ${escapeHTML(status)}
+        </span>`;
+
+}
+
+
+function customerTransactionId(tx, customer){
+    if(!tx || typeof tx !== "object") return "—";
+    let id=tx.id || tx.transactionId || tx.txnId || tx.transferId || "";
+    if(!id){
+        const stamp=String(tx.dateISO||tx.date||tx.timestamp||"LEGACY").replace(/[^0-9]/g,"").slice(0,14)||"LEGACY";
+        const account=String(customer?.accountNumber||customer?.accountNo||customer?.customerId||"KBI").replace(/\W/g,"").slice(-6)||"KBI";
+        id="KBI-TXN-"+account+"-"+stamp;
+        tx.id=id;
+    }
+    return String(id);
+}
+function customerTransactionNumber(tx, customer){
+    if(!tx || typeof tx !== "object") return "—";
+    let no=tx.transactionNumber||tx.transactionNo||tx.txnNumber||"";
+    if(!no){
+        const stamp=String(tx.dateISO||tx.date||tx.timestamp||"LEGACY").replace(/[^0-9]/g,"").slice(0,14)||"LEGACY";
+        no="KBI-"+stamp+"-"+String(Math.abs(Number(tx.amount||0)*100)).padStart(6,"0").slice(-6);
+        tx.transactionNumber=no;
+    }
+    return String(no);
+}
+
+function loadTransactions(customer){
+
+    const body =
+        document.getElementById("transactionBody");
+
+
+    const transactions =
+        Array.isArray(customer.transactions)
+        ? customer.transactions
+        : [];
+
+
+    if(!transactions.length){
+
+        body.innerHTML = `
+        <tr>
+            <td colspan="7"
+                style="text-align:center;color:#777">
+
+                No transactions available
+
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+
+    body.innerHTML = "";
+
+
+    transactions
+        .slice()
+        .reverse()
+        .slice(0,10)
+        .forEach(tx => {
+
+            const tr =
+                document.createElement("tr");
+
+
+            const amount =
+                Number(tx.amount || 0);
+
+
+            const type =
+                String(
+                    tx.type ||
+                    tx.transactionType ||
+                    "Credit"
+                );
+
+
+            const isCredit =
+                isCreditTransaction(tx);
+
+
+            const balance =
+                Number(
+                    tx.balanceAfter !== undefined
+                    ? tx.balanceAfter
+                    : (
+                        tx.balance !== undefined
+                        ? tx.balance
+                        : 0
+                    )
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${escapeHTML(tx.date || "—")}
+                </td>
+                <td>${escapeHTML(customerTransactionNumber(tx, customer))}</td>
+                <td>${escapeHTML(customerTransactionId(tx, customer))}</td>
+
+                <td>
+                    ${escapeHTML(
+                        tx.description ||
+                        tx.remarks ||
+                        "Transaction"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(type)}
+                </td>
+
+                <td class="${isCredit ? "credit":"debit"}">
+
+                    ${isCredit ? "+" : "-"}
+
+                    ${formatMoney(amount)}
+
+                </td>
+
+                <td>
+
+                    ${formatMoney(balance)}
+
+                </td>
+
+            `;
+
+
+            body.appendChild(tr);
+
+        });
+
+
+    const name =
+        customer.fullName ||
+        customer.name ||
+        "Customer";
+
+    const acc =
+        cleanNumber(
+            customer.accountNumber ||
+            customer.accountNo ||
+            ""
+        );
+
+    document.getElementById("historyPrintCustomer")
+        .innerText =
+        "Customer: " +
+        name +
+        " | Account Number: " +
+        acc;
+
+}
+
+
+function isCreditTransaction(tx){
+
+    const type =
+        String(
+            tx.type ||
+            tx.transactionType ||
+            ""
+        ).toLowerCase();
+
+    const description =
+        String(
+            tx.description ||
+            tx.remarks ||
+            ""
+        ).toLowerCase();
+
+
+    if(
+        type.includes("deposit") ||
+        type.includes("credit") ||
+        type.includes("received") ||
+        type.includes("receive")
+    ){
+        return true;
+    }
+
+
+    if(
+        type.includes("withdraw") ||
+        type.includes("debit") ||
+        (
+            type.includes("transfer") &&
+            !description.includes("received")
+        )
+    ){
+        return false;
+    }
+
+
+    return true;
+
+}
+
+
+function refreshLiveCustomer(){
+
+    const customer =
+        getLoggedInCustomer();
+
+    if(!customer){
+        return null;
+    }
+
+    saveSession(customer);
+
+    renderDashboard(customer);
+
+    return customer;
+
+}
+
+
+async function openTransferModal(){
+
+    const customer =
+        getLoggedInCustomer();
+
+    if(!customer){
+
+        showMessage(
+            "Customer session नहीं मिली।"
+        );
+
+        return;
+
+    }
+
+
+    if(isBlocked(customer)){
+
+        showMessage(
+            "आपका account Blocked है। Transfer नहीं किया जा सकता।"
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById("transferCurrentBalance")
+        .innerText =
+        formatMoney(customer.balance);
+
+
+    document.getElementById("transferReceiver")
+        .value = "";
+
+    document.getElementById("transferAmount")
+        .value = "";
+
+    document.getElementById("transferRemarks")
+        .value = "";
+
+
+    document.getElementById("receiverPreview")
+        .style.display = "none";
+
+
+    document.getElementById("receiverError")
+        .style.display = "none";
+
+
+    switchTransferMode("account");
+    const qrResult = document.getElementById("kbiQrResult");
+    if (qrResult) qrResult.style.display="none";
+    if (typeof kbiScannedUPI !== "undefined") kbiScannedUPI=null;
+    if (typeof kbiQrClearError === "function") kbiQrClearError();
+
+    document.getElementById("transferModal")
+        .style.display = "flex";
+
+}
+
+
+async function openDashboardQRScanner(){
+    await openTransferModal();
+    const modal=document.getElementById("transferModal");
+    if(!modal || getComputedStyle(modal).display === "none") return false;
+    modal.style.display="flex";
+    switchTransferMode("qr");
+    const title=modal.querySelector(".modal-box h3");
+    if(title) title.style.display="none";
+    const accountPane=document.getElementById("accountTransferPane");
+    const note=document.getElementById("kbiUPIInfoNote");
+    const qrPane=document.getElementById("qrTransferPane");
+    if(accountPane) accountPane.style.display="none";
+    if(note) note.style.display="none";
+    if(qrPane) qrPane.style.display="block";
+    if(typeof startKBIQRScanner === "function") startKBIQRScanner();
+    return false;
+}
+function closeDashboardQRScanner(){
+    stopKBIQRScanner();
+    const modal=document.getElementById("transferModal");
+    if(modal){const title=modal.querySelector(".modal-box h3");if(title)title.style.display="";}
+    const note=document.getElementById("kbiUPIInfoNote");
+    if(note) note.style.display="";
+    closeTransferModal();
+}
+
+
+function closeTransferModal(){
+
+    stopKBIQRScanner();
+    document.getElementById("transferModal")
+        .style.display = "none";
+
+}
+
+
+function findTransferReceiver(){
+
+    const input =
+        document.getElementById("transferReceiver")
+        .value.trim();
+
+
+    const preview =
+        document.getElementById("receiverPreview");
+
+
+    const error =
+        document.getElementById("receiverError");
+
+
+    preview.style.display = "none";
+    error.style.display = "none";
+
+
+    if(!input){
+        return;
+    }
+
+
+    const receiver =
+        findCustomerByIdOrAccount(input);
+
+
+    if(!receiver){
+
+        error.innerText =
+            "Receiver Customer ID या Account Number नहीं मिला।";
+
+        error.style.display = "block";
+
+        return;
+
+    }
+
+
+    const sender =
+        getLoggedInCustomer();
+
+
+    if(
+        sender &&
+        findCustomerIndex(
+            getCustomers(),
+            sender
+        ) ===
+        findCustomerIndex(
+            getCustomers(),
+            receiver
+        )
+    ){
+
+        error.innerText =
+            "अपने ही account में transfer नहीं किया जा सकता।";
+
+        error.style.display = "block";
+
+        return;
+
+    }
+
+
+    const receiverName =
+        receiver.fullName ||
+        receiver.name ||
+        "Customer";
+
+
+    const receiverId =
+        cleanNumber(
+            receiver.customerId ||
+            receiver.customerID ||
+            ""
+        );
+
+
+    const receiverAccount =
+        cleanNumber(
+            receiver.accountNumber ||
+            receiver.accountNo ||
+            ""
+        );
+
+
+    const receiverStatus =
+        receiver.status ||
+        "Active";
+
+
+    document.getElementById("receiverNamePreview")
+        .innerText = receiverName;
+
+
+    document.getElementById("receiverIdPreview")
+        .innerText = receiverId || "—";
+
+
+    document.getElementById("receiverAccountPreview")
+        .innerText = receiverAccount || "—";
+
+
+    document.getElementById("receiverStatusPreview")
+        .innerText = receiverStatus;
+
+
+    preview.style.display = "block";
+
+}
+
+
+function showCustomerProcessing(message){
+    const overlay=document.getElementById("customerProcessingOverlay");
+    const text=document.getElementById("customerProcessingText");
+    if(text)text.textContent=message||"Please wait while your transaction is saved.";
+    if(overlay)overlay.style.display="flex";
+}
+function hideCustomerProcessing(){const overlay=document.getElementById("customerProcessingOverlay");if(overlay)overlay.style.display="none";}
+
+function showCustomerTransferReceipt(tx, sender, receiver){
+    const area=document.getElementById("customerReceiptPrint");
+    if(!area)return;
+    const dt=new Date(tx.dateISO||Date.now());
+    const fmtDate=isNaN(dt.getTime())?(tx.date||"—"):dt.toLocaleDateString("en-IN");
+    const fmtTime=isNaN(dt.getTime())?(tx.time||"—"):dt.toLocaleTimeString("en-IN");
+    const safe=(v)=>escapeHTML(v==null?"—":String(v));
+    area.innerHTML=`<div style="border:1px dashed #777;padding:5mm;width:80mm;max-width:100%;background:white"><div style="text-align:center"><div style="font-size:24px;font-weight:800;color:#0755b5">KBI</div><b>Kaimur Bank of India</b><div style="font-size:11px">OFFICIAL TRANSACTION RECEIPT</div><hr></div><p><b>Status:</b> Successful </p><p><b>Customer:</b> ${safe(sender.fullName||sender.name||"Customer")}</p><p><b>From A/C:</b> ****${safe(String(sender.accountNumber||sender.accountNo||"").slice(-4))}</p><p><b>Beneficiary:</b> ${safe(receiver.fullName||receiver.name||"Customer")}</p><p><b>To A/C:</b> ****${safe(String(receiver.accountNumber||receiver.accountNo||"").slice(-4))}</p><p><b>Transaction Number:</b> ${safe(tx.transactionNumber||tx.transferId||tx.id)}</p><p><b>Transaction ID:</b> ${safe(customerTransactionId(tx, sender))}</p><p><b>Date:</b> ${safe(fmtDate)}</p><p><b>Time:</b> ${safe(fmtTime)}</p><p><b>Amount:</b> ₹${Number(tx.amount||0).toFixed(2)}</p><p><b>Balance After:</b> ₹${Number(tx.balanceAfter||0).toFixed(2)}</p><p><b>Remarks:</b> ${safe(tx.remarks||tx.description||"Fund Transfer")}</p><p style="text-align:center;font-size:11px">Official electronic transaction receipt.</p><div class="receipt-action" style="text-align:center;margin-top:12px"><button onclick="printCustomerReceipt()" style="padding:10px 18px;border:0;border-radius:7px;background:#0755b5;color:#fff">🖨️ Print Receipt</button> <button onclick="closeCustomerReceipt()" style="padding:10px 18px;border:0;border-radius:7px;background:#edf2f7">Close</button></div></div>`;
+    area.style.display="block";
+    area.style.position="fixed";area.style.zIndex="100000";area.style.inset="0";area.style.overflow="auto";area.style.background="#10253cbb";area.style.padding="20px";area.style.display="flex";area.style.alignItems="flex-start";area.style.justifyContent="center";
+}
+function printCustomerReceipt(){document.body.classList.add("kbi-printing");window.print();setTimeout(()=>document.body.classList.remove("kbi-printing"),500);}
+function closeCustomerReceipt(){const area=document.getElementById("customerReceiptPrint");if(area){area.style.display="none";area.style.position="static";area.innerHTML="";}}
+
+
+async function processTransfer(){
+    try{
+        await loadCustomersFromFirebase(true);
+    }catch(_e){}
+
+    const sender = getLoggedInCustomer();
+    if(!sender){ showMessage("Customer session नहीं मिली।"); return; }
+
+    const receiverInput = document.getElementById("transferReceiver").value.trim();
+    const amount = Number(document.getElementById("transferAmount").value);
+
+    if(!receiverInput){
+        showMessage("Receiver Customer ID या Account Number डालें।");
+        return;
+    }
+    const receiver = findCustomerByIdOrAccount(receiverInput);
+    if(!receiver){
+        showMessage("Receiver Customer ID या Account Number नहीं मिला।");
+        return;
+    }
+    if(!Number.isFinite(amount) || amount <= 0){
+        showMessage("कृपया सही Transfer Amount डालें।");
+        return;
+    }
+    if(amount > Number(sender.balance || 0)){
+        showMessage("Insufficient Balance. Transfer amount आपके available balance से अधिक है।");
+        return;
+    }
+
+    closeTransferModal();
+
+    requestCustomerTransactionPassword();
+}
+
+async function processTransferCore(){
+
+    const sessionSender =
+        getLoggedInCustomer();
+
+
+    if(!sessionSender){
+
+        showMessage(
+            "Customer session नहीं मिली।"
+        );
+
+        return;
+
+    }
+
+
+    if(isBlocked(sessionSender)){
+
+        showMessage(
+            "आपका account Blocked है। Transfer नहीं किया जा सकता।"
+        );
+
+        return;
+
+    }
+
+
+    const receiverInput =
+        document.getElementById("transferReceiver")
+        .value.trim();
+
+
+    const amount =
+        Number(
+            document.getElementById("transferAmount")
+            .value
+        );
+
+
+    const remarks =
+        document.getElementById("transferRemarks")
+        .value.trim();
+
+
+    if(!Number.isFinite(amount) || amount <= 0){
+        showMessage("कृपया सही Transfer Amount डालें।");
+        return;
+    }
+
+
+    try{
+        showCustomerProcessing("Transfer process कृपया प्रतीक्षा करें…");
+
+        await loadCustomersFromFirebase(true);
+        const customers = getCustomers();
+
+        const senderIndex =
+            findCustomerIndex(
+                customers,
+                sessionSender
+            );
+
+        const receiverCandidate =
+            findCustomerByIdOrAccount(
+                receiverInput
+            );
+
+        const receiverIndex =
+            receiverCandidate
+            ? findCustomerIndex(
+                customers,
+                receiverCandidate
+            )
+            : -1;
+
+        if(senderIndex === -1 || receiverIndex === -1){
+            throw new Error("Sender या Receiver record Firebase database में नहीं मिला।");
+        }
+
+        if(senderIndex === receiverIndex){
+            throw new Error("अपने ही account में transfer नहीं किया जा सकता।");
+        }
+
+        const liveSender =
+            normalizeCustomer({...customers[senderIndex]});
+
+        const liveReceiver =
+            normalizeCustomer({...customers[receiverIndex]});
+
+        if(isBlocked(liveSender)){
+            throw new Error("आपका account Blocked है। Transfer नहीं किया जा सकता।");
+        }
+
+        if(isBlocked(liveReceiver)){
+            throw new Error("Receiver account Blocked है। Transfer नहीं किया जा सकता।");
+        }
+
+        const senderOldBalance =
+            Number(liveSender.balance || 0);
+
+        if(amount > senderOldBalance){
+            throw new Error("Insufficient Balance. Transfer amount available balance से अधिक है।");
+        }
+
+        const senderNewBalance =
+            Number((senderOldBalance - amount).toFixed(2));
+
+        const receiverOldBalance =
+            Number(liveReceiver.balance || 0);
+
+        const receiverNewBalance =
+            Number((receiverOldBalance + amount).toFixed(2));
+
+        const senderNodeKey =
+            await resolveCustomerNodeKey(liveSender);
+
+        const receiverNodeKey =
+            await resolveCustomerNodeKey(liveReceiver);
+
+        if(!senderNodeKey || !receiverNodeKey){
+            throw new Error("Sender या Receiver का Firebase node key नहीं मिला।");
+        }
+
+        if(senderNodeKey === receiverNodeKey){
+            throw new Error("Sender और Receiver का Firebase node key समान है। Transfer रोक दिया गया।");
+        }
+
+        const receiverName =
+            liveReceiver.fullName ||
+            liveReceiver.name ||
+            "Customer";
+
+        const receiverAccount =
+            cleanNumber(
+                liveReceiver.accountNumber ||
+                liveReceiver.accountNo ||
+                ""
+            );
+
+        const senderName =
+            liveSender.fullName ||
+            liveSender.name ||
+            "Customer";
+
+        const senderAccount =
+            cleanNumber(
+                liveSender.accountNumber ||
+                liveSender.accountNo ||
+                ""
+            );
+
+        const transactionDate =
+            currentDateTime();
+
+        const transferId = createTransactionId();
+        const transactionNumber = "KBI-TRF-" + new Date().getFullYear() + "-" + String(Date.now()).slice(-10);
+        const transactionDateISO = new Date().toISOString();
+        const transactionTime = new Date().toLocaleTimeString("en-IN",{hour12:true});
+
+        const senderTransactions =
+            Array.isArray(liveSender.transactions)
+            ? liveSender.transactions.slice()
+            : [];
+
+        senderTransactions.push({
+            id: transferId,
+            transactionId: transferId,
+            transactionNumber: transactionNumber,
+            type: "Transfer",
+            amount: Number(amount.toFixed(2)),
+            balanceAfter: senderNewBalance,
+            balance: senderNewBalance,
+            description:
+                "Transfer to " +
+                receiverName +
+                " (" +
+                receiverAccount +
+                ")" +
+                (remarks ? " - " + remarks : ""),
+            remarks: remarks,
+            date: transactionDate,
+            dateISO: transactionDateISO,
+            time: transactionTime,
+            transferId: transferId,
+            direction: "Debit"
+        });
+
+        const receiverTransactions =
+            Array.isArray(liveReceiver.transactions)
+            ? liveReceiver.transactions.slice()
+            : [];
+
+        receiverTransactions.push({
+            id: transferId,
+            transactionId: transferId,
+            transactionNumber: transactionNumber,
+            type: "Transfer Received",
+            amount: Number(amount.toFixed(2)),
+            balanceAfter: receiverNewBalance,
+            balance: receiverNewBalance,
+            description:
+                "Transfer received from " +
+                senderName +
+                " (" +
+                senderAccount +
+                ")" +
+                (remarks ? " - " + remarks : ""),
+            remarks: remarks,
+            date: transactionDate,
+            dateISO: transactionDateISO,
+            time: transactionTime,
+            transferId: transferId,
+            direction: "Credit"
+        });
+
+        const transferUpdates = {};
+        transferUpdates[senderNodeKey + "/balance"] = senderNewBalance;
+        transferUpdates[senderNodeKey + "/transactions"] = senderTransactions;
+        transferUpdates[senderNodeKey + "/lastUpdated"] = transactionDate;
+
+        transferUpdates[receiverNodeKey + "/balance"] = receiverNewBalance;
+        transferUpdates[receiverNodeKey + "/transactions"] = receiverTransactions;
+        transferUpdates[receiverNodeKey + "/lastUpdated"] = transactionDate;
+
+        await firebaseRequest(FIREBASE_CUSTOMER_PATH, {
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(transferUpdates)
+        });
+
+        await loadCustomersFromFirebase();
+        const refreshedCustomers = getCustomers();
+        const updatedSender =
+            refreshedCustomers.find(c => rawCustomerFirebaseKey(c) === senderNodeKey) ||
+            normalizeCustomer({...liveSender, balance: senderNewBalance, transactions: senderTransactions, lastUpdated: transactionDate});
+
+        saveSession(updatedSender);
+        renderDashboard(updatedSender);
+
+        showCustomerTransferReceipt({
+            id: transferId,
+            transactionId: transferId,
+            transactionNumber: transactionNumber,
+            type: "Transfer",
+            amount: Number(amount.toFixed(2)),
+            balanceAfter: senderNewBalance,
+            remarks: remarks,
+            description: "Transfer to " + receiverName,
+            date: transactionDate,
+            dateISO: transactionDateISO,
+            time: transactionTime
+        }, updatedSender, liveReceiver);
+
+    }catch(error){
+        hideCustomerProcessing();
+        showMessage("" + (error && error.message ? error.message : error));
+        return;
+    }finally{
+        hideCustomerProcessing();
+    }
+
+}
+
+
+function findCustomerIndex(
+    customers,
+    customer
+){
+
+    const customerId =
+        cleanNumber(
+            customer.customerId ||
+            customer.customerID ||
+            ""
+        ).toLowerCase();
+
+
+    const accountNumber =
+        cleanNumber(
+            customer.accountNumber ||
+            customer.accountNo ||
+            ""
+        ).toLowerCase();
+
+
+    const dbKey =
+        String(customer.__firebaseKey || "").trim().toLowerCase();
+
+
+    return customers.findIndex(c => {
+
+        const cid =
+            cleanNumber(
+                c.customerId ||
+                c.customerID ||
+                ""
+            ).toLowerCase();
+
+        const acc =
+            cleanNumber(
+                c.accountNumber ||
+                c.accountNo ||
+                ""
+            ).toLowerCase();
+
+        const key =
+            String(c.__firebaseKey || "").trim().toLowerCase();
+
+
+        return (
+            (dbKey && key === dbKey) ||
+            (customerId && cid === customerId) ||
+            (accountNumber && acc === accountNumber)
+        );
+
+    });
+
+}
+
+
+function showStatement(){
+
+    const customer =
+        getLoggedInCustomer();
+
+
+    if(!customer){
+
+        showMessage(
+            "Customer session नहीं मिली।"
+        );
+
+        return;
+
+    }
+
+
+    const customerName =
+        customer.fullName ||
+        customer.name ||
+        "Customer";
+
+
+    const customerId =
+        cleanNumber(
+            customer.customerId ||
+            customer.customerID ||
+            ""
+        );
+
+
+    const accountNumber =
+        cleanNumber(
+            customer.accountNumber ||
+            customer.accountNo ||
+            ""
+        );
+
+
+    document.getElementById("statementCustomerName")
+        .innerText = customerName;
+
+
+    document.getElementById("statementCustomerId")
+        .innerText = customerId || "—";
+
+
+    document.getElementById("statementAccountNumber")
+        .innerText = accountNumber || "—";
+
+
+    document.getElementById("statementCurrentBalance")
+        .innerText =
+        formatMoney(customer.balance);
+
+
+    document.getElementById("statementFromDate")
+        .value = "";
+
+
+    document.getElementById("statementToDate")
+        .value = "";
+
+
+    document.getElementById("statementPrintPeriod")
+        .innerText =
+        "All Transactions";
+
+
+    renderStatement(
+        customer,
+        "",
+        ""
+    );
+
+
+    document.getElementById("statementModal")
+        .style.display = "flex";
+
+}
+
+
+function applyStatementFilter(){
+
+    const customer =
+        getLoggedInCustomer();
+
+
+    if(!customer){
+        return;
+    }
+
+
+    const fromDate =
+        document.getElementById("statementFromDate")
+        .value;
+
+
+    const toDate =
+        document.getElementById("statementToDate")
+        .value;
+
+
+    if(fromDate && toDate && fromDate > toDate){
+
+        showMessage(
+            "From Date, To Date से बड़ी नहीं हो सकती।"
+        );
+
+        return;
+
+    }
+
+
+    let period =
+        "All Transactions";
+
+
+    if(fromDate && toDate){
+
+        period =
+            formatDateForDisplay(fromDate) +
+            " to " +
+            formatDateForDisplay(toDate);
+
+    }else if(fromDate){
+
+        period =
+            "From " +
+            formatDateForDisplay(fromDate);
+
+    }else if(toDate){
+
+        period =
+            "Up to " +
+            formatDateForDisplay(toDate);
+
+    }
+
+
+    document.getElementById("statementPrintPeriod")
+        .innerText = period;
+
+
+    renderStatement(
+        customer,
+        fromDate,
+        toDate
+    );
+
+}
+
+
+function clearStatementFilter(){
+
+    document.getElementById("statementFromDate")
+        .value = "";
+
+    document.getElementById("statementToDate")
+        .value = "";
+
+    document.getElementById("statementPrintPeriod")
+        .innerText =
+        "All Transactions";
+
+
+    const customer =
+        getLoggedInCustomer();
+
+
+    if(customer){
+
+        renderStatement(
+            customer,
+            "",
+            ""
+        );
+
+    }
+
+}
+
+
+function renderStatement(
+    customer,
+    fromDate,
+    toDate
+){
+
+    const allTransactions =
+        Array.isArray(customer.transactions)
+        ? customer.transactions
+        : [];
+
+
+    const filtered =
+        allTransactions.filter(tx => {
+
+            if(!fromDate && !toDate){
+                return true;
+            }
+
+
+            const dateValue =
+                getTransactionDateOnly(
+                    tx.date
+                );
+
+
+            if(!dateValue){
+                return false;
+            }
+
+
+            if(fromDate && dateValue < fromDate){
+                return false;
+            }
+
+
+            if(toDate && dateValue > toDate){
+                return false;
+            }
+
+
+            return true;
+
+        });
+
+
+    let html = "";
+
+
+    if(!filtered.length){
+
+        html = `
+
+            <div style="
+                padding:30px;
+                text-align:center;
+                color:#777;
+                border:1px solid #ddd">
+
+                इस date range में कोई transaction उपलब्ध नहीं है।
+
+            </div>
+
+        `;
+
+    }else{
+
+        html = `
+
+        <div class="statement-table-wrap">
+
+            <table class="statement-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+                        <th>Transaction ID</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+        `;
+
+
+        filtered
+            .slice()
+            .reverse()
+            .forEach(tx => {
+
+                const amount =
+                    Number(tx.amount || 0);
+
+
+                const credit =
+                    isCreditTransaction(tx);
+
+
+                const balance =
+                    Number(
+                        tx.balanceAfter !== undefined
+                        ? tx.balanceAfter
+                        : (
+                            tx.balance !== undefined
+                            ? tx.balance
+                            : 0
+                        )
+                    );
+
+
+                html += `
+
+                    <tr>
+
+                        <td>
+                            ${escapeHTML(
+                                tx.date || "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                tx.id || "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                tx.description ||
+                                tx.remarks ||
+                                "Transaction"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                tx.type ||
+                                tx.transactionType ||
+                                "Transaction"
+                            )}
+                        </td>
+
+                        <td class="${
+                            credit
+                            ? "credit"
+                            : "debit"
+                        }">
+
+                            ${credit ? "+" : "-"}
+
+                            ${formatMoney(amount)}
+
+                        </td>
+
+                        <td>
+                            ${formatMoney(balance)}
+                        </td>
+
+                    </tr>
+
+                `;
+
+            });
+
+
+        html += `
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        `;
+
+
+        let totalCredit = 0;
+        let totalDebit = 0;
+
+
+        filtered.forEach(tx => {
+
+            const amount =
+                Number(tx.amount || 0);
+
+
+            if(isCreditTransaction(tx)){
+                totalCredit += amount;
+            }else{
+                totalDebit += amount;
+            }
+
+        });
+
+
+        html += `
+
+            <div class="statement-summary">
+
+                <div>
+                    Total Credit:
+                    <strong>
+                        ${formatMoney(totalCredit)}
+                    </strong>
+                </div>
+
+                <div>
+                    Total Debit:
+                    <strong style="color:#d00000">
+                        ${formatMoney(totalDebit)}
+                    </strong>
+                </div>
+
+                <div>
+                    Current Balance:
+                    <strong>
+                        ${formatMoney(customer.balance)}
+                    </strong>
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    document.getElementById("statementContent")
+        .innerHTML = html;
+
+}
+
+
+function getTransactionDateOnly(value){
+
+    if(!value){
+        return "";
+    }
+
+
+    const text =
+        String(value);
+
+
+    const match =
+        text.match(
+            /^(\d{2})\/(\d{2})\/(\d{4})/
+        );
+
+
+    if(match){
+
+        return (
+            match[3] +
+            "-" +
+            match[2] +
+            "-" +
+            match[1]
+        );
+
+    }
+
+
+    const parsed =
+        new Date(value);
+
+
+    if(!isNaN(parsed.getTime())){
+
+        const y =
+            parsed.getFullYear();
+
+
+        const m =
+            String(
+                parsed.getMonth()+1
+            ).padStart(2,"0");
+
+
+        const d =
+            String(
+                parsed.getDate()
+            ).padStart(2,"0");
+
+
+        return y + "-" + m + "-" + d;
+
+    }
+
+
+    return "";
+
+}
+
+
+function formatDateForDisplay(value){
+
+    if(!value){
+        return "";
+    }
+
+
+    const parts =
+        value.split("-");
+
+
+    if(parts.length !== 3){
+        return value;
+    }
+
+
+    return (
+        parts[2] +
+        "/" +
+        parts[1] +
+        "/" +
+        parts[0]
+    );
+
+}
+
+
+function printStatement(){
+
+    const customer = getLoggedInCustomer();
+
+    if(!customer){
+        showMessage("Customer session नहीं मिली।");
+        return;
+    }
+
+    document.body.classList.remove("kbi-print-history", "kbi-print-statement");
+    document.body.classList.add("kbi-print-statement");
+
+    const cleanupStatementPrint = function(){
+        document.body.classList.remove("kbi-print-statement");
+        window.removeEventListener("afterprint", cleanupStatementPrint);
+    };
+
+    window.addEventListener("afterprint", cleanupStatementPrint);
+
+    window.print();
+
+    setTimeout(cleanupStatementPrint, 2000);
+}
+
+function printHistory(){
+
+    const customer = getLoggedInCustomer();
+
+    if(!customer){
+        showMessage("Customer session नहीं मिली।");
+        return;
+    }
+
+    const name = customer.fullName || customer.name || "Customer";
+    const account = cleanNumber(customer.accountNumber || customer.accountNo || "");
+
+    const customerLine = document.getElementById("historyPrintCustomer");
+    if(customerLine){
+        customerLine.innerText = "Customer: " + name + " | Account Number: " + account;
+    }
+
+    const historyArea = document.getElementById("historyPrintArea");
+    if(!historyArea){
+        showMessage("Recent Transactions History नहीं मिली।");
+        return;
+    }
+
+    const originalParent = historyArea.parentNode;
+    const originalNextSibling = historyArea.nextSibling;
+    const originalStyle = historyArea.getAttribute("style");
+
+    const cleanupHistoryPrint = function(){
+        document.body.classList.remove("kbi-print-history");
+        historyArea.classList.remove("print-area");
+
+        if(originalParent){
+            if(originalNextSibling && originalNextSibling.parentNode === originalParent){
+                originalParent.insertBefore(historyArea, originalNextSibling);
+            }else{
+                originalParent.appendChild(historyArea);
+            }
+        }
+
+        if(originalStyle === null){
+            historyArea.removeAttribute("style");
+        }else{
+            historyArea.setAttribute("style", originalStyle);
+        }
+
+        window.removeEventListener("afterprint", cleanupHistoryPrint);
+    };
+
+    historyArea.classList.add("print-area");
+    historyArea.style.width = "100%";
+    historyArea.style.maxWidth = "100%";
+    historyArea.style.margin = "0";
+    historyArea.style.padding = "0";
+    document.body.classList.remove("kbi-print-statement", "kbi-print-history");
+
+    document.body.appendChild(historyArea);
+    document.body.classList.add("kbi-print-history");
+
+    window.addEventListener("afterprint", cleanupHistoryPrint);
+    window.print();
+
+    setTimeout(cleanupHistoryPrint, 2500);
+}
+
+
+function closeStatementModal(){
+
+    document.getElementById("statementModal")
+        .style.display = "none";
+
+}
+
+
+function showMessage(message){
+
+    document.getElementById("modalText")
+        .innerText = message;
+
+    document.getElementById("messageModal")
+        .style.display = "flex";
+
+}
+
+
+function closeModal(){
+
+    document.getElementById("messageModal")
+        .style.display = "none";
+
+}
+
+
+function isBlocked(customer){
+
+    return String(
+        customer.status || ""
+    ).toLowerCase() === "blocked";
+
+}
+
+
+function createTransactionId(){
+
+    return "TXN-" +
+        Date.now() +
+        "-" +
+        Math.floor(
+            Math.random() * 100000
+        );
+
+}
+
+
+function currentDateTime(){
+
+    return new Date()
+        .toLocaleString(
+            "en-IN",
+            {
+                day:"2-digit",
+                month:"2-digit",
+                year:"numeric",
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit",
+                hour12:true
+            }
+        );
+
+}
+
+
+function escapeHTML(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+async function openProfile(){
+    try{
+        let customer = getLoggedInCustomer();
+        if(!customer){
+            const saved = localStorage.getItem(SESSION_KEY);
+            if(saved){
+                try{
+                    const session = JSON.parse(saved);
+                    await loadCustomersFromFirebase();
+                    const customers = getCustomers();
+                    const sessionCid = cleanNumber(session.customerId || session.customerID || "");
+                    const sessionAcc = cleanNumber(session.accountNumber || session.accountNo || "");
+                    customer = customers.find(c => {
+                        const cid = cleanNumber(c.customerId || c.customerID || "");
+                        const acc = cleanNumber(c.accountNumber || c.accountNo || "");
+                        return (sessionCid && cid === sessionCid) || (sessionAcc && acc === sessionAcc);
+                    }) || session;
+                }catch(_e){}
+            }
+        }
+        if(!customer){
+            showMessage("Customer session नहीं मिली। पहले Login करें।");
+            return;
+        }
+
+    const name = customer.fullName || customer.name || "Customer";
+    const customerId = cleanNumber(customer.customerId || customer.customerID || "—");
+    const accountNumber = cleanNumber(customer.accountNumber || customer.accountNo || "—");
+    const applicationNo = cleanNumber(customer.applicationNo || customer.applicationNumber || customer.applicationId || "—");
+    const mobile = customer.mobile || customer.phone || "—";
+    const email = customer.email || "—";
+    const accountType = customer.accountType || "Savings Account";
+    const openingDate = customer.openingDate || customer.approvedDate || customer.date || "—";
+    const status = customer.status || "Active";
+    const kycStatus = customer.kycStatus || "Pending";
+
+    const avatar = document.getElementById("profileAvatar");
+    const photo = customer.photoUrl || customer.photoURL || customer.photo || customer.customerPhoto || customer.photoData || customer.profilePhoto || customer.passportPhoto || customer.image || customer.applicationData?.photo || "";
+    if(avatar){
+        avatar.innerHTML = "";
+        if(typeof photo === "string" && /^(https?:|data:image\/)/i.test(photo.trim())){
+            const img=document.createElement("img");
+            img.alt="Customer Photo";
+            img.src=photo.trim();
+            img.onerror=function(){avatar.innerHTML="";avatar.textContent=name.trim().charAt(0).toUpperCase()||"C";};
+            avatar.appendChild(img);
+        }else{
+            avatar.textContent=name.trim().charAt(0).toUpperCase()||"C";
+        }
+    }
+    document.getElementById("profileName").innerText = name;
+    document.getElementById("profileCustomerId").innerText = customerId;
+    document.getElementById("profileAccountNumber").innerText = accountNumber;
+    document.getElementById("profileMobile").innerText = mobile;
+    document.getElementById("profileEmail").innerText = email;
+    document.getElementById("profileApplicationNo").innerText = applicationNo;
+    document.getElementById("profileAccountType").innerText = accountType;
+    document.getElementById("profileOpeningDate").innerText = openingDate;
+    document.getElementById("profileStatus").innerText = status;
+    document.getElementById("profileKycStatus").innerText = kycStatus;
+
+
+    const modal = document.getElementById("profileModal");
+    if(modal){
+        modal.style.display = "flex";
+        modal.style.zIndex = "2000";
+    }
+    }catch(error){
+        console.error("Profile open error:", error);
+        showMessage("Profile खोलने में समस्या हुई: " + (error.message || error));
+    }
+}
+
+window.openProfile = openProfile;
+
+function closeProfile(){
+    document.getElementById("profileModal").style.display = "none";
+}
+
+function openSecuritySettings(){
+    const customer = getLoggedInCustomer();
+    if(!customer){ showMessage("Customer session नहीं मिली।"); return; }
+    closeProfile();
+    document.getElementById("securitySettingsModal").style.display = "flex";
+}
+
+function closeSecuritySettings(){
+    document.getElementById("securitySettingsModal").style.display = "none";
+}
+
+function resetSecurityMessages(prefix){
+    const ok=document.getElementById(prefix+"Success");
+    const err=document.getElementById(prefix+"Error");
+    if(ok){ok.style.display="none";ok.innerText="";}
+    if(err){err.style.display="none";err.innerText="";}
+}
+
+function openUserIdChange(){
+    resetSecurityMessages("userIdChange");
+    document.getElementById("changeUserIdCurrentPassword").value="";
+    const customer=getLoggedInCustomer();
+    document.getElementById("changeUserIdNew").value=customer?.internetUserId || customer?.userId || customer?.username || customer?.customerId || "";
+    document.getElementById("securitySettingsModal").style.display="none";
+    document.getElementById("userIdChangeModal").style.display="flex";
+}
+function closeUserIdChange(){document.getElementById("userIdChangeModal").style.display="none";}
+
+function openLoginPasswordChange(){
+    resetSecurityMessages("loginPasswordChange");
+    document.getElementById("changeLoginCurrentPassword").value="";
+    document.getElementById("changeLoginNewPassword").value="";
+    document.getElementById("changeLoginConfirmPassword").value="";
+    document.getElementById("securitySettingsModal").style.display="none";
+    document.getElementById("loginPasswordChangeModal").style.display="flex";
+}
+function closeLoginPasswordChange(){document.getElementById("loginPasswordChangeModal").style.display="none";}
+
+function openTransactionPasswordChange(){
+    resetSecurityMessages("txPasswordChange");
+    document.getElementById("changeTxCurrentPassword").value="";
+    document.getElementById("changeTxNewPassword").value="";
+    document.getElementById("changeTxConfirmPassword").value="";
+    document.getElementById("securitySettingsModal").style.display="none";
+    document.getElementById("transactionPasswordChangeModal").style.display="flex";
+}
+function closeTransactionPasswordChange(){document.getElementById("transactionPasswordChangeModal").style.display="none";}
+
+async function updateCurrentCustomer(updated, successElement, errorElement, successText){
+    await loadCustomersFromFirebase();
+    const customers=getCustomers();
+    const sessionCustomer=getLoggedInCustomer();
+    const idx=findCustomerIndex(customers,sessionCustomer);
+    if(idx===-1){errorElement.innerText="Customer database में नहीं मिला।";errorElement.style.display="block";return false;}
+    const merged=normalizeCustomer({...customers[idx],...updated});
+    merged.lastUpdated=new Date().toISOString();
+    const nodeKey=await resolveCustomerNodeKey(merged);
+    if(!nodeKey){errorElement.innerText="Customer Firebase key नहीं मिला।";errorElement.style.display="block";return false;}
+    try{
+        const patchObj={};
+        for(const [k,v] of Object.entries(updated)){
+            patchObj[nodeKey + "/" + k] = v;
+        }
+        patchObj[nodeKey + "/lastUpdated"] = merged.lastUpdated;
+        await firebaseRequest(FIREBASE_CUSTOMER_PATH, {
+            method:"PATCH",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(patchObj)
+        });
+        customers[idx]=merged;
+        firebaseCustomersCache=customers;
+        saveSession(merged);
+        renderDashboard(merged);
+        successElement.innerText=successText;
+        successElement.style.display="block";
+        return true;
+    }catch(error){
+        errorElement.innerHTML="Firebase में update नहीं हुआ.<br>"+escapeHTML(error.message);
+        errorElement.style.display="block";
+        return false;
+    }
+}
+
+async function saveUserIdChange(){
+    const customer=getLoggedInCustomer();
+    const current=String(document.getElementById("changeUserIdCurrentPassword").value||"");
+    const newId=String(document.getElementById("changeUserIdNew").value||"").trim();
+    const ok=document.getElementById("userIdChangeSuccess"),err=document.getElementById("userIdChangeError");
+    resetSecurityMessages("userIdChange");
+    const expected=String(customer?.loginPassword||DEFAULT_CUSTOMER_LOGIN_PASSWORD);
+    if(current!==expected){err.innerText="Current Login Password गलत है।";err.style.display="block";return;}
+    if(newId.length<4){err.innerText="User ID कम से कम 4 characters का रखें।";err.style.display="block";return;}
+    await updateCurrentCustomer({internetUserId:newId},ok,err,"✓ Internet Banking User ID Successfully Updated.");
+}
+
+async function saveLoginPasswordChange(){
+    const customer=getLoggedInCustomer();
+    const current=String(document.getElementById("changeLoginCurrentPassword").value||"");
+    const next=String(document.getElementById("changeLoginNewPassword").value||"");
+    const confirm=String(document.getElementById("changeLoginConfirmPassword").value||"");
+    const ok=document.getElementById("loginPasswordChangeSuccess"),err=document.getElementById("loginPasswordChangeError");
+    resetSecurityMessages("loginPasswordChange");
+    const expected=String(customer?.loginPassword||DEFAULT_CUSTOMER_LOGIN_PASSWORD);
+    if(current!==expected){err.innerText="Current Login Password गलत है।";err.style.display="block";return;}
+    if(next.length<4){err.innerText="New Login Password कम से कम 4 characters का रखें।";err.style.display="block";return;}
+    if(next!==confirm){err.innerText="New Password और Confirm Password अलग हैं।";err.style.display="block";return;}
+    await updateCurrentCustomer({loginPassword:next},ok,err,"✓ Login Password Successfully Updated.");
+}
+
+async function saveTransactionPasswordChange(){
+    let customer=getLoggedInCustomer();
+    const current=String(document.getElementById("changeTxCurrentPassword").value||"").trim();
+    const next=String(document.getElementById("changeTxNewPassword").value||"").trim();
+    const confirm=String(document.getElementById("changeTxConfirmPassword").value||"").trim();
+    const ok=document.getElementById("txPasswordChangeSuccess"),err=document.getElementById("txPasswordChangeError");
+    resetSecurityMessages("txPasswordChange");
+    try { await loadCustomersFromFirebase(); const session=getLoggedInCustomer(); const sid=cleanNumber(session?.customerId||session?.customerID||""); const sac=cleanNumber(session?.accountNumber||session?.accountNo||""); customer=getCustomers().find(c=> (sid && cleanNumber(c.customerId||c.customerID||"")===sid) || (sac && cleanNumber(c.accountNumber||c.accountNo||"")===sac)) || customer; } catch(e) { }
+    const passwordFields=[customer?.transactionPassword,customer?.txnPassword,customer?.transactionPin,customer?.transactionPIN,customer?.txPassword,customer?.transaction_password,customer?.txn_password,customer?.transactionPass].filter(v=>v!==undefined&&v!==null&&String(v).trim()!=="").map(v=>String(v).trim());
+    const expected=passwordFields[0] || DEFAULT_CUSTOMER_TRANSACTION_PASSWORD;
+    if(!passwordFields.includes(current) && current!==expected){err.innerText="Current Transaction Password गलत है। यदि याद नहीं है तो नीचे Forgot Transaction Password इस्तेमाल करें।";err.style.display="block";return;}
+    if(next.length<4){err.innerText="New Transaction Password कम से कम 4 characters का रखें।";err.style.display="block";return;}
+    if(next!==confirm){err.innerText="New Transaction Password और Confirm Password अलग हैं।";err.style.display="block";return;}
+    await updateCurrentCustomer({transactionPassword:next},ok,err,"✓ Transaction Password Successfully Updated.");
+}
+
+function openForgotPassword(){
+    document.getElementById("forgotLoginId").value = document.getElementById("loginId")?.value || "";
+    document.getElementById("forgotMobile").value = document.getElementById("loginMobile")?.value || "";
+    document.getElementById("forgotError").style.display = "none";
+    document.getElementById("forgotSuccess").style.display = "none";
+    document.getElementById("forgotPasswordModal").style.display = "flex";
+}
+function closeForgotPassword(){ document.getElementById("forgotPasswordModal").style.display = "none"; }
+
+async function resetCustomerPassword(){
+    const loginId = cleanNumber(document.getElementById("forgotLoginId").value.trim()).toLowerCase();
+    const mobile = document.getElementById("forgotMobile").value.replace(/\D/g, "").trim();
+    const err = document.getElementById("forgotError");
+    const ok = document.getElementById("forgotSuccess");
+    err.style.display = "none"; ok.style.display = "none";
+    if(!loginId || !/^\d{10}$/.test(mobile)){ err.innerText = "Customer ID/Account Number और सही 10 digit mobile डालें।"; err.style.display = "block"; return; }
+    try{
+        await loadCustomersFromFirebase();
+        const customer = getCustomers().find(c=>{
+            const cid=cleanNumber(c.customerId||c.customerID||"").toLowerCase();
+            const acc=cleanNumber(c.accountNumber||c.accountNo||"").toLowerCase();
+            const uid=String(c.internetUserId||c.userId||c.username||"").trim().toLowerCase();
+            const mob=String(c.mobile||c.phone||"").replace(/\D/g,"");
+            return (cid===loginId || acc===loginId || uid===loginId) && mob===mobile;
+        });
+        if(!customer){ err.innerText="Customer record नहीं मिला।"; err.style.display = "block"; return; }
+        customer.loginPassword = DEFAULT_CUSTOMER_LOGIN_PASSWORD;
+        const nodeKey = await resolveCustomerNodeKey(customer);
+        await firebaseRequest(FIREBASE_CUSTOMER_PATH, {
+            method:"PATCH",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({[nodeKey + "/loginPassword"]: DEFAULT_CUSTOMER_LOGIN_PASSWORD})
+        });
+        ok.innerHTML = "✓ Password reset हो गया।<br>Default Login Password: <b>"+escapeHTML(DEFAULT_CUSTOMER_LOGIN_PASSWORD)+"</b>";
+        ok.style.display="block";
+        document.getElementById("loginPassword").value="";
+    }catch(error){ err.innerHTML="Firebase update नहीं हुआ.<br>"+escapeHTML(error.message); err.style.display="block"; }
+}
+
+function openForgotTransactionPassword(){
+    const customer=getLoggedInCustomer();
+    document.getElementById("forgotTxCustomerId").value=customer?.customerId||customer?.customerID||customer?.accountNumber||customer?.accountNo||"";
+    document.getElementById("forgotTxMobile").value=customer?.mobile||customer?.phone||"";
+    document.getElementById("forgotTxNewPassword").value="";
+    document.getElementById("forgotTxConfirmPassword").value="";
+    document.getElementById("forgotTxError").style.display="none";
+    document.getElementById("forgotTxSuccess").style.display="none";
+    document.getElementById("forgotTransactionPasswordModal").style.display="flex";
+}
+function closeForgotTransactionPassword(){document.getElementById("forgotTransactionPasswordModal").style.display="none";}
+async function resetForgotTransactionPassword(){
+    const id=cleanNumber(document.getElementById("forgotTxCustomerId").value||"").toLowerCase();
+    const mobile=String(document.getElementById("forgotTxMobile").value||"").replace(/\D/g,"");
+    const next=String(document.getElementById("forgotTxNewPassword").value||"").trim();
+    const confirm=String(document.getElementById("forgotTxConfirmPassword").value||"").trim();
+    const err=document.getElementById("forgotTxError"),ok=document.getElementById("forgotTxSuccess");
+    err.style.display="none";ok.style.display="none";
+    if(!id || !/^\d{10}$/.test(mobile)){err.textContent="Customer ID / Account Number और सही 10 digit registered mobile डालें।";err.style.display="block";return;}
+    if(next.length<4){err.textContent="नया Transaction Password कम से कम 4 characters का रखें।";err.style.display="block";return;}
+    if(next!==confirm){err.textContent="New और Confirm Transaction Password अलग हैं।";err.style.display="block";return;}
+    try{
+        await loadCustomersFromFirebase();
+        const customer=getCustomers().find(c=>{
+            const cid=cleanNumber(c.customerId||c.customerID||"").toLowerCase();const acc=cleanNumber(c.accountNumber||c.accountNo||"").toLowerCase();
+            const mob=String(c.mobile||c.phone||"").replace(/\D/g,"");
+            return (cid===id||acc===id)&&mob===mobile;
+        });
+        if(!customer){err.textContent="Customer ID / Account Number और registered mobile match नहीं हुए।";err.style.display="block";return;}
+        const nodeKey=await resolveCustomerNodeKey(customer);
+        if(!nodeKey) throw new Error("Customer database key नहीं मिला।");
+        const patchObj={};
+        patchObj[nodeKey + "/transactionPassword"] = next;
+        patchObj[nodeKey + "/txnPassword"] = null;
+        patchObj[nodeKey + "/transactionPin"] = null;
+        patchObj[nodeKey + "/transactionPIN"] = null;
+        patchObj[nodeKey + "/txPassword"] = null;
+        patchObj[nodeKey + "/transaction_password"] = null;
+        patchObj[nodeKey + "/txn_password"] = null;
+        patchObj[nodeKey + "/transactionPass"] = null;
+        await firebaseRequest(FIREBASE_CUSTOMER_PATH, {
+            method:"PATCH",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(patchObj)
+        });
+        customer.transactionPassword=next;
+        saveSession(customer);
+        ok.textContent="✓ Transaction Password सफलतापूर्वक बदल गया। अब नए password से transfer करें।";ok.style.display="block";
+        document.getElementById("customerTransactionPassword").value="";
+        setTimeout(()=>closeForgotTransactionPassword(),1200);
+    }catch(e){err.textContent="Password update नहीं हुआ: "+(e.message||e);err.style.display="block";}
+}
+
+let pendingCustomerTransfer = false;
+function requestCustomerTransactionPassword(){
+    const modal=document.getElementById("customerTransactionPasswordModal");
+    const input=document.getElementById("customerTransactionPassword");
+    const error=document.getElementById("customerTransactionPasswordError");
+    const action=document.getElementById("customerTransactionAction");
+    if(action) action.innerText="Transfer authorize करने के लिए Transaction Password डालें।";
+    if(input) input.value="";
+    if(error) error.style.display="none";
+    pendingCustomerTransfer=true;
+    if(modal) modal.style.display="flex";
+    setTimeout(()=>{if(input)input.focus();},80);
+}
+async function confirmCustomerTransactionPassword(){
+    const input=document.getElementById("customerTransactionPassword");
+    const entered=String(input?.value||"").trim();
+    const error=document.getElementById("customerTransactionPasswordError");
+    const button=document.querySelector("#customerTransactionPasswordModal .login-btn");
+    if(!entered){if(error){error.textContent="Transaction Password डालें।";error.style.display="block";}return;}
+    if(button){button.disabled=true;button.textContent="Verifying…";}
+    try{
+        const session=getLoggedInCustomer();
+        if(!session) throw new Error("Customer session नहीं मिली। कृपया दोबारा Login करें।");
+
+        await loadCustomersFromFirebase(true);
+        const fresh=getCustomers().find(c=>findCustomerIndex([c], session) !== -1) || session;
+
+        const storedPasswords=[fresh?.transactionPassword,fresh?.txnPassword,fresh?.transactionPin,fresh?.transactionPIN,fresh?.txPassword,fresh?.transaction_password,fresh?.txn_password,fresh?.transactionPass].filter(v=>v!==undefined&&v!==null&&String(v).trim()!=="").map(v=>String(v).trim());
+        const expected=storedPasswords[0] || DEFAULT_CUSTOMER_TRANSACTION_PASSWORD;
+        if(!storedPasswords.includes(entered) && entered!==expected){
+            if(error){error.textContent="गलत Transaction Password. Customer Profile → Change Transaction Password में वर्तमान पासवर्ड जाँचें।";error.style.display="block";}
+            return;
+        }
+        if(fresh) saveSession(fresh);
+        document.getElementById("customerTransactionPasswordModal").style.display="none";
+        pendingCustomerTransfer=false;
+        await processTransferCore();
+    }catch(err){
+        if(error){error.textContent="Password verify नहीं हुआ: "+(err.message||err);error.style.display="block";}
+    }finally{
+        if(button){button.disabled=false;button.textContent="Confirm Transaction";}
+    }
+}
+function cancelCustomerTransactionPassword(){
+    pendingCustomerTransfer=false;
+    document.getElementById("customerTransactionPasswordModal").style.display="none";
+}
+
+
+let kbiQrStream = null;
+let kbiQrScanActive = false;
+let kbiQrAnimation = 0;
+let kbiScannedUPI = null;
+
+let currentKBIReceivePayload = "";
+let currentKBIReceiveUPI = "";
+function getKBIReceiveCustomer(){
+  return (typeof getLoggedInCustomer==="function"?getLoggedInCustomer():null)||window.currentCustomer||window.loggedInCustomer||{};
+}
+function makeKBIReceiveId(customer, account){
+  const raw=String(customer.customerId||customer.customerID||customer.customer_id||account||"").toLowerCase().replace(/[^a-z0-9]/g,"");
+  const suffix=raw.slice(-8)||String(account).slice(-4);
+  return "kbi"+suffix+"@kbi";
+}
+function openMyKBIQR(){
+  const c = getKBIReceiveCustomer();
+  const acc = String(c.accountNumber || c.accountNo || c.account_number || c.account || c.customerId || c.customerID || c.customer_id || "").trim();
+  if(!acc){
+    if(typeof showMessage === "function") showMessage("Customer account number नहीं मिला। कृपया दोबारा login करें।");
+    else alert("Customer account number नहीं मिला।");
+    return;
+  }
+  const name = String(c.fullName || c.customerName || c.name || "KBI Customer");
+  const vpa = makeKBIReceiveId(c, acc);
+  const last4 = acc.replace(/\D/g, "").slice(-4).padStart(4, "0");
+  
+  const nameEl = document.getElementById("myKBIQRName"); if(nameEl) nameEl.textContent = name;
+  const lastEl = document.getElementById("myKBIQRLast4"); if(lastEl) lastEl.textContent = last4;
+  const vpaEl = document.getElementById("myKBIQRVPA"); if(vpaEl) vpaEl.textContent = vpa;
+  
+  const photo = c.photoUrl || c.photoURL || c.photo || c.customerPhoto || c.photoData || c.profilePhoto || c.passportPhoto || c.image || c.applicationData?.photo || "";
+  const photoEl = document.getElementById("myKBIQRPhoto"), avatar = document.getElementById("myKBIQRAvatar");
+  if(photoEl){ photoEl.style.display = "none"; photoEl.removeAttribute("src"); }
+  if(photo && photoEl){
+    photoEl.onload = () => { photoEl.style.display = "block"; if(avatar) avatar.style.display = "none"; };
+    photoEl.onerror = () => { photoEl.style.display = "none"; if(avatar) avatar.style.display = "flex"; };
+    photoEl.src = photo;
+  }
+  if(avatar){ avatar.textContent = (name.trim().charAt(0) || "C").toUpperCase(); if(!photo) avatar.style.display = "flex"; }
+  
+  currentKBIReceiveUPI = vpa;
+  currentKBIReceivePayload = `upi://pay?pa=${encodeURIComponent(vpa)}&pn=${encodeURIComponent(name)}&cu=INR`;
+
+  const box = document.getElementById("myKBIQRCode"); 
+  if(box) box.innerHTML = "";
+  if(box && window.QRCode){
+    new QRCode(box, {
+      text: currentKBIReceivePayload,
+      width: 216,
+      height: 216,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  } else if(box){
+    box.innerHTML = '<div style="color:#b00020;font-size:12px;padding:16px">QR library लोड नहीं हुई। Internet चालू करके दोबारा खोलें।</div>';
+  }
+  
+  const modal = document.getElementById("myKBIQRModal");
+  if(modal) modal.style.display = "flex";
+}
+
+async function copyKBIUPIID(){
+  try {
+    await navigator.clipboard.writeText(currentKBIReceiveUPI);
+  } catch(e) {
+    const temp = document.createElement("textarea");
+    temp.value = currentKBIReceiveUPI;
+    temp.style.position = "fixed";
+    temp.style.opacity = "0";
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    temp.remove();
+  }
+}
+
+async function copyKBIUPICode(){
+  try {
+    await navigator.clipboard.writeText(currentKBIReceivePayload);
+  } catch(e) {
+    const temp = document.createElement("textarea");
+    temp.value = currentKBIReceivePayload;
+    temp.style.position = "fixed";
+    temp.style.opacity = "0";
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    temp.remove();
+  }
+}
+
+
+function downloadMyKBIQR(){
+  const qr=document.querySelector("#myKBIQRCode canvas, #myKBIQRCode img");
+  if(!qr){alert("QR Code अभी तैयार नहीं है।");return;}
+
+  const size=900, out=document.createElement("canvas");
+  out.width=size;
+  out.height=1120;
+
+  const ctx=out.getContext("2d");
+  ctx.fillStyle="#ffffff";
+  ctx.fillRect(0,0,size,1120);
+
+  ctx.fillStyle="#0755b5";
+  ctx.font="bold 38px Arial";
+  ctx.textAlign="center";
+  ctx.fillText("KAIMUR BANK OF INDIA",450,62);
+
+  const nm=document.getElementById("myKBIQRName")?.textContent||"KBI Customer";
+  ctx.fillStyle="#172b4d";
+  ctx.font="bold 34px Arial";
+  ctx.fillText(nm.slice(0,34),450,125);
+
+  const qx=190,qy=165,qw=520;
+  try{
+    ctx.drawImage(qr,qx,qy,qw,qw);
+  }catch(e){
+    alert("QR image तैयार नहीं हो सकी।");
+    return;
+  }
+
+  ctx.fillStyle="#ffffff";
+  ctx.fillRect(405,380,90,90);
+  ctx.fillStyle="#0755b5";
+  ctx.fillRect(413,388,74,74);
+  ctx.fillStyle="#fff";
+  ctx.font="bold 27px Arial";
+  ctx.textAlign="center";
+  ctx.fillText("KBI",450,433);
+
+  ctx.fillStyle="#172b4d";
+  ctx.font="bold 28px Arial";
+  ctx.fillText(
+    "ACCOUNT •••• "+(document.getElementById("myKBIQRLast4")?.textContent||"----"),
+    450,755
+  );
+
+  const upiLabel="UPI ID:";
+  const upiValue=currentKBIReceiveUPI;
+
+  ctx.textAlign="left";
+
+  ctx.font="22px Arial";
+  const labelWidth=ctx.measureText(upiLabel).width;
+
+  ctx.font="bold 25px Arial";
+  const upiWidth=ctx.measureText(upiValue).width;
+
+  const gap=12;
+  const totalWidth=labelWidth+gap+upiWidth;
+  const startX=(size-totalWidth)/2;
+
+  ctx.fillStyle="#8a9bb5";
+  ctx.font="22px Arial";
+  ctx.fillText(upiLabel,startX,815);
+
+  ctx.fillStyle="#0755b5";
+  ctx.font="bold 25px Arial";
+  ctx.fillText(upiValue,startX+labelWidth+gap,815);
+
+  ctx.fillStyle="#8a4b00";
+  ctx.font="18px Arial";
+  ctx.textAlign="center";
+  ctx.fillText("KBI OFFICIAL RECEIVE QR",450,875);
+
+  const a=document.createElement("a");
+  a.download="KBI_My_Receive_QR.png";
+  a.href=out.toDataURL("image/png");
+  a.click();
+}
+
+function closeMyKBIQR(){document.getElementById("myKBIQRModal").style.display="none";}
+
+function switchTransferMode(mode){
+  const account = mode === "account";
+  const accountPane = document.getElementById("accountTransferPane");
+  const qrPane = document.getElementById("qrTransferPane");
+  const accountTab = document.getElementById("accountTransferTab");
+  const qrTab = document.getElementById("qrTransferTab");
+  if (accountPane) accountPane.style.display = account ? "block" : "none";
+  if (qrPane) qrPane.style.display = account ? "none" : "block";
+  if (accountTab && accountTab.classList) accountTab.classList.toggle("active", account);
+  if (qrTab && qrTab.classList) qrTab.classList.toggle("active", !account);
+  if(account && typeof stopKBIQRScanner === "function") stopKBIQRScanner();
+}
+function kbiQrError(message){
+  const el=document.getElementById("kbiQrError");
+  if(!el){ console.error("KBI QR error container missing:", message); return; }
+  el.textContent=message;
+  el.style.display="block";
+}
+function kbiQrClearError(){
+  const el=document.getElementById("kbiQrError");
+  if(!el) return;
+  el.textContent="";
+  el.style.display="none";
+}
+function parseKBIQRCode(raw){
+  const text=String(raw||"").trim();
+  if(!text) throw new Error("QR code खाली है या पढ़ा नहीं जा सका।");
+
+  if(/^\d{8,20}$/.test(text)) return {kind:"kbi",account:text};
+  try{
+    const obj=JSON.parse(text);
+    const acc=obj.accountNumber||obj.accountNo||obj.customerId||obj.customerID||obj.account;
+    if(acc) return {kind:"kbi",account:String(acc),name:obj.name||obj.payeeName||""};
+  }catch(e){}
+
+  if(/^upi:\/\/pay\?/i.test(text) || /(^|[?&])pa=[^&]+/i.test(text)){
+    const query=text.includes("?")?text.split("?").slice(1).join("?"):text;
+    const params=new URLSearchParams(query);
+    const pa=params.get("pa");
+    if(!pa || !pa.includes("@")) throw new Error("इस QR में valid UPI ID नहीं मिली।");
+    if(/@kbi$/i.test(pa)){
+      const customers=typeof getCustomers==="function"?getCustomers():[];
+      const receiver=(customers||[]).find(c=>{
+        const account=c.accountNumber||c.accountNo||c.account_number||c.customerId||c.customerID||"";
+        return typeof makeKBIReceiveId==="function" && makeKBIReceiveId(c,account).toLowerCase()===pa.toLowerCase();
+      });
+      if(receiver){
+        return {kind:"kbi",account:String(receiver.accountNumber||receiver.accountNo||receiver.account_number||receiver.customerId||receiver.customerID||""),name:receiver.fullName||receiver.customerName||receiver.name||params.get("pn")||""};
+      }
+    }
+    return {
+      kind:"upi",vpa:pa,name:params.get("pn")||"UPI Merchant",
+      amount:params.get("am")||"",note:params.get("tn")||params.get("tr")||"",
+      currency:params.get("cu")||"INR"
+    };
+  }
+  throw new Error("यह QR format पहचाना नहीं गया। कृपया UPI payment QR या KBI account QR scan करें।");
+}
+function handleKBIQRPayload(raw){
+  kbiQrClearError();
+  let parsed;
+  try{parsed=parseKBIQRCode(raw);}catch(err){kbiQrError(err.message);return;}
+  const result=document.getElementById("kbiQrResult");
+  const scanner=document.getElementById("kbiQrScanner");
+  if(scanner) scanner.style.display="none";
+  if(result) result.style.display="block";
+  const photo=document.getElementById("kbiQrReceiverPhoto");
+  const avatar=document.getElementById("kbiQrReceiverAvatar");
+  const payee=document.getElementById("kbiQrPayee");
+  const vpa=document.getElementById("kbiQrVpa");
+  const amount=document.getElementById("kbiQrPayAmount");
+  const remarks=document.getElementById("kbiQrPayRemarks");
+  const payButton=document.getElementById("kbiOpenUPIButton");
+  if(remarks) remarks.value="";
+  if(photo){photo.style.display="none";photo.removeAttribute("src");}
+  if(avatar) avatar.style.display="flex";
+  if(parsed.kind==="kbi"){
+    kbiScannedUPI=null;
+    const receiver=typeof findCustomerByIdOrAccount==="function"?findCustomerByIdOrAccount(parsed.account):null;
+    if(!receiver){if(result)result.style.display="none";if(scanner)scanner.style.display="block";kbiQrError("इस KBI QR का Customer नहीं मिला। Receiver का KBI account सक्रिय होना चाहिए।");return;}
+    window.kbiScannedKBIReceiver=receiver;
+    const name=receiver.fullName||receiver.customerName||receiver.name||parsed.name||"KBI Customer";
+    const account=receiver.accountNumber||receiver.accountNo||parsed.account;
+    const customerId=receiver.customerId||receiver.customerID||"";
+    const upi=receiver.upiId||receiver.upiID||receiver.vpa||receiver.upi|| (customerId?customerId+"@kbi":"KBI-"+String(account));
+    if(payee)payee.textContent=name;
+    if(vpa)vpa.textContent=upi;
+    if(amount)amount.value="";
+    const image=receiver.photoUrl||receiver.photoURL||receiver.photo||receiver.customerPhoto||receiver.photoData||receiver.profilePhoto||receiver.passportPhoto||receiver.imageUrl||receiver.image||receiver.applicationData?.photo||"";
+    if(image && photo){
+      photo.onload=()=>{photo.style.display="block";if(avatar)avatar.style.display="none";};
+      photo.onerror=()=>{photo.style.display="none";if(avatar)avatar.style.display="flex";};
+      photo.src=image;
+    }else if(avatar){
+      avatar.textContent=(String(name).trim().charAt(0)||"K").toUpperCase();
+      avatar.style.display="flex";
+    }
+    if(payButton){payButton.textContent="Pay";payButton.onclick=payFromScannedQR;}
+    stopKBIQRScanner();
+    return;
+  }
+  kbiScannedUPI=parsed;
+  window.kbiScannedKBIReceiver=null;
+  if(payee)payee.textContent=parsed.name||"UPI Receiver";
+  if(vpa)vpa.textContent=parsed.vpa;
+  if(amount)amount.value=parsed.amount||"";
+  if(payButton){payButton.textContent="Pay";payButton.onclick=payFromScannedQR;}
+  if(remarks)remarks.value=parsed.note||"";
+  stopKBIQRScanner();
+}
+function payFromScannedQR(){
+  const amountEl=document.getElementById("kbiQrPayAmount");
+  const remarksEl=document.getElementById("kbiQrPayRemarks");
+  const amountText=amountEl?amountEl.value.trim():"";
+  const amount=Number(amountText);
+  if(!amountText||!Number.isFinite(amount)||amount<=0){kbiQrError("कृपया सही amount डालें।");return;}
+  if(window.kbiScannedKBIReceiver){
+    const receiver=window.kbiScannedKBIReceiver;
+    const account=receiver.accountNumber||receiver.accountNo||receiver.customerId||receiver.customerID;
+    const input=document.getElementById("transferReceiver");
+    const transferAmount=document.getElementById("transferAmount");
+    const transferRemarks=document.getElementById("transferRemarks");
+    if(input)input.value=String(account||"");
+    if(transferAmount)transferAmount.value=amount.toFixed(2);
+    if(transferRemarks)transferRemarks.value=remarksEl?remarksEl.value.trim():"";
+    if(typeof findTransferReceiver==="function")findTransferReceiver();
+    if(typeof processTransfer==="function")processTransfer();
+    else kbiQrError("KBI transfer function उपलब्ध नहीं है।");
+    return;
+  }
+  if(kbiScannedUPI){
+    if(kbiScannedUPI.amount && Math.abs(Number(kbiScannedUPI.amount)-amount)>0.009 && !confirm("QR में amount अलग है। क्या फिर भी आगे बढ़ना चाहते हैं?"))return;
+    const params=new URLSearchParams({pa:kbiScannedUPI.vpa,pn:kbiScannedUPI.name||"UPI Receiver",cu:"INR",am:amount.toFixed(2)});
+    const note=remarksEl?remarksEl.value.trim():"";if(note)params.set("tn",note);
+    window.location.href="upi://pay?"+params.toString();
+    return;
+  }
+  kbiQrError("पहले QR code scan करें।");
+}
+
+async function startKBIQRScanner(){
+  kbiQrClearError();
+  const scannerPanel=document.getElementById("kbiQrScanner");
+  if(scannerPanel) scannerPanel.style.display="block";
+  const status=document.getElementById("kbiQrScanStatus");
+  const video=document.getElementById("kbiQrVideo");
+  if(video) video.style.display="block";
+  if(status) status.textContent="Camera शुरू हो रहा है… या Gallery से QR चुनें।";
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    kbiQrError("Live camera के लिए HTTPS वेबसाइट या localhost जरूरी है। आप Upload from gallery से QR scan कर सकते हैं।");
+    return;
+  }
+  try{
+    kbiQrStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});
+    const video=document.getElementById("kbiQrVideo");
+    if(!video) throw new Error("Scanner video element नहीं मिला।");
+    video.srcObject=kbiQrStream;
+    await video.play();
+    kbiQrScanActive=true;
+    let detector=null;
+    if("BarcodeDetector" in window){
+      try{ detector=new BarcodeDetector({formats:["qr_code"]}); }catch(e){ detector=null; }
+    }
+    const canvas=document.createElement("canvas");
+    const ctx=canvas.getContext("2d",{willReadFrequently:true});
+    const scan=async()=>{
+      if(!kbiQrScanActive) return;
+      try{
+        if(video.readyState>=2 && video.videoWidth){
+          let raw="";
+          if(detector){
+            const codes=await detector.detect(video);
+            if(codes.length) raw=codes[0].rawValue||"";
+          }
+          if(!raw && typeof window.jsQR==="function"){
+            canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+            ctx.drawImage(video,0,0,canvas.width,canvas.height);
+            const frame=ctx.getImageData(0,0,canvas.width,canvas.height);
+            const code=window.jsQR(frame.data,frame.width,frame.height,{inversionAttempts:"attemptBoth"});
+            if(code) raw=code.data;
+          }
+          if(raw){handleKBIQRPayload(raw);return;}
+        }
+      }catch(e){}
+      if(kbiQrScanActive) kbiQrAnimation=requestAnimationFrame(scan);
+    };
+    if(status) status.textContent="QR code को frame के अंदर रखें…";
+    scan();
+  }catch(err){
+    stopKBIQRScanner();
+    const panel=document.getElementById("kbiQrScanner");
+    if(panel) panel.style.display="block";
+    const video=document.getElementById("kbiQrVideo");
+    if(video) video.style.display="none";
+    if(status) status.textContent="Camera उपलब्ध नहीं है — Gallery से QR चुनें या My QR Code खोलें।";
+    kbiQrError("Live Camera permission नहीं मिली या page HTTPS पर नहीं है। Gallery upload और My QR Code फिर भी इस्तेमाल कर सकते हैं। विवरण: "+(err.message||"Permission denied"));
+  }
+}
+
+function stopKBIQRScanner(){
+  kbiQrScanActive=false;
+  if(kbiQrAnimation)cancelAnimationFrame(kbiQrAnimation);
+  if(kbiQrStream){kbiQrStream.getTracks().forEach(t=>t.stop());kbiQrStream=null;}
+  const video=document.getElementById("kbiQrVideo");
+  if(video)video.srcObject=null;
+  const box=document.getElementById("kbiQrScanner");
+  if(box)box.style.display="none";
+  kbiQrTorchOn=false;
+}
+let kbiQrTorchOn=false;
+async function toggleKBIQRFlash(){
+  const track=kbiQrStream&&kbiQrStream.getVideoTracks()[0];
+  if(!track){kbiQrError("Flashlight उपलब्ध नहीं है।");return;}
+  try{
+    const caps=track.getCapabilities?track.getCapabilities():{};
+    if(!caps.torch){kbiQrError("इस camera में flashlight control supported नहीं है।");return;}
+    kbiQrTorchOn=!kbiQrTorchOn;
+    await track.applyConstraints({advanced:[{torch:kbiQrTorchOn}]});
+  }catch(e){kbiQrTorchOn=false;kbiQrError("Flashlight चालू नहीं हो सकी।");}
+}
+async function readKBIQRImage(event){
+  kbiQrClearError();
+  const file=event.target.files&&event.target.files[0];
+  if(!file)return;
+  try{
+    let raw="";
+    if("BarcodeDetector" in window){
+      try{
+        const detector=new BarcodeDetector({formats:["qr_code"]});
+        const bitmap=await createImageBitmap(file);
+        const codes=await detector.detect(bitmap);
+        bitmap.close&&bitmap.close();
+        if(codes.length) raw=codes[0].rawValue||"";
+      }catch(e){}
+    }
+    if(!raw && typeof window.jsQR==="function"){
+      const img=new Image();
+      const objectUrl=URL.createObjectURL(file);
+      try{
+        await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=objectUrl;});
+        const canvas=document.createElement("canvas");
+        const ctx=canvas.getContext("2d",{willReadFrequently:true});
+        canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
+        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        const frame=ctx.getImageData(0,0,canvas.width,canvas.height);
+        const code=window.jsQR(frame.data,frame.width,frame.height,{inversionAttempts:"attemptBoth"});
+        if(code) raw=code.data;
+      }finally{URL.revokeObjectURL(objectUrl);}
+    }
+    if(!raw) throw new Error("Image में QR code नहीं मिला। साफ और पूरा QR image चुनें।");
+    handleKBIQRPayload(raw);
+  }catch(err){kbiQrError(err.message||"QR image पढ़ी नहीं जा सकी।");}
+  finally{event.target.value="";}
+}
+
+function openScannedUPIPayment(){
+  if(!kbiScannedUPI){kbiQrError("पहले QR code scan करें।");return;}
+  const amountText=document.getElementById("kbiQrPayAmount").value.trim();
+  const amount=amountText?Number(amountText):0;
+  if(amountText && (!Number.isFinite(amount)||amount<=0)){kbiQrError("Valid payment amount डालें।");return;}
+  if(kbiScannedUPI.amount && amount && Math.abs(Number(kbiScannedUPI.amount)-amount)>0.009){
+    if(!confirm("QR में amount ₹"+Number(kbiScannedUPI.amount).toFixed(2)+" है, जबकि आपने ₹"+amount.toFixed(2)+" डाला है। क्या आप आगे बढ़ना चाहते हैं?"))return;
+  }
+  const params=new URLSearchParams({pa:kbiScannedUPI.vpa,pn:kbiScannedUPI.name,cu:"INR"});
+  if(amount)params.set("am",amount.toFixed(2));
+  if(kbiScannedUPI.note)params.set("tn",kbiScannedUPI.note);
+  window.location.href="upi://pay?"+params.toString();
+}
+
+
+function logout(){
+
+    const headerActions = document.getElementById("headerActions");
+    if(headerActions) headerActions.style.display = "none";
+
+    localStorage.removeItem(
+        SESSION_KEY
+    );
+
+
+    document.getElementById("dashboard")
+        .style.display = "none";
+
+
+    const heroEl = document.querySelector(".hero");
+    if(heroEl) heroEl.style.display = "block";
+
+
+    document.getElementById("loginSection")
+        .style.display = "block";
+
+
+    document.getElementById("loginId")
+        .value = "";
+
+
+    document.getElementById("loginMobile")
+        .value = "";
+
+    const loginPasswordField = document.getElementById("loginPassword");
+    if(loginPasswordField) loginPasswordField.value = "";
+
+
+    document.getElementById("errorBox")
+        .style.display = "none";
+
+
+    document.getElementById("successBox")
+        .style.display = "none";
+
+}
+
+
+let kbiLastWindowRefresh = 0;
+async function refreshKBIOnReturn(){
+    // focus and pageshow often fire together; refresh only once in a short interval.
+    if(Date.now() - kbiLastWindowRefresh < 1800) return;
+    kbiLastWindowRefresh = Date.now();
+    try{
+        await loadCustomersFromFirebase();
+        const customer = getLoggedInCustomer();
+        if(customer) renderDashboard(customer);
+    }catch(e){}
+}
+window.addEventListener("focus", refreshKBIOnReturn);
+window.addEventListener("pageshow", refreshKBIOnReturn);
+
+window.addEventListener("click", function(event){
+    ["messageModal","transferModal","statementModal","forgotPasswordModal","customerTransactionPasswordModal","securitySettingsModal","userIdChangeModal","loginPasswordChangeModal","transactionPasswordChangeModal","myKBIQRModal"].forEach(function(id){
+        const modal = document.getElementById(id);
+        if(event.target === modal) modal.style.display = "none";
+    });
+});
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+window.kbiDashboardOpenTransfer = function(ev){
+  if(ev){ev.preventDefault();ev.stopPropagation();}
+  try {
+    if(typeof openTransferModal !== 'function') throw new Error('Transfer function load नहीं हुआ।');
+    openTransferModal();
+  } catch(err) {
+    if(typeof showMessage === 'function' && document.getElementById('messageModal') && document.getElementById('modalText')) showMessage('Transfer नहीं खुला: ' + err.message);
+    else alert('Transfer नहीं खुला: ' + err.message);
+  }
+  return false;
+};
+window.kbiDashboardOpenScanner = function(ev){
+  if(ev){ev.preventDefault();ev.stopPropagation();}
+  try {
+    if(typeof openDashboardQRScanner !== 'function') throw new Error('QR Scanner function load नहीं हुआ।');
+    openDashboardQRScanner();
+  } catch(err) {
+    if(typeof showMessage === 'function' && document.getElementById('messageModal') && document.getElementById('modalText')) showMessage('QR Scanner नहीं खुला: ' + err.message);
+    else alert('QR Scanner नहीं खुला: ' + err.message);
+  }
+  return false;
+};
+</script>
+
+<script>
+(function(){function setup(){document.querySelectorAll(".kbi-password-toggle").forEach(function(button){if(button.dataset.kbiToggleReady==="1")return;button.dataset.kbiToggleReady="1";button.addEventListener("click",function(){var wrap=button.closest(".kbi-password-wrap");var input=wrap&&wrap.querySelector("input");if(!input)return;var show=input.type==="password";input.type=show?"text":"password";button.textContent=show?"🙈":"👁";button.setAttribute("aria-label",show?"Hide password":"Show password");button.setAttribute("title",show?"Hide password":"Show password");button.setAttribute("aria-pressed",show?"true":"false");});});}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",setup);else setup();})();
+</script>
+</body>
+</html>
