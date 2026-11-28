@@ -1,0 +1,3884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Open Account | Kaimur Bank of India</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f4f8fc;
+    color:#222;
+}
+
+.topbar{
+    background:linear-gradient(90deg,#005bea,#00aaff);
+    color:#fff;
+    padding:10px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:14px;
+}
+
+.header{
+    background:#fff;
+    padding:15px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:1200;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-circle{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#005bea,#00aaff);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    font-weight:bold;
+    border:3px solid #f2c94c;
+}
+
+.logo h1{
+    font-size:22px;
+    color:#005bea;
+}
+
+.logo small{
+    color:#666;
+}
+
+.nav{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.nav a{
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+    padding:6px 4px;
+    transition:color .2s ease;
+}
+
+.nav a:hover{
+    color:#005bea;
+}
+
+.menu-toggle-btn{
+    display:none;
+    background:#005bea;
+    color:#fff;
+    border:none;
+    border-radius:7px;
+    padding:9px 13px;
+    font-size:20px;
+    font-weight:bold;
+    line-height:1;
+    cursor:pointer;
+}
+
+.menu-toggle-btn:hover{
+    background:#0046b8;
+}
+
+.hero{
+    background:linear-gradient(135deg,#005bea,#00aaff);
+    color:#fff;
+    padding:45px 6%;
+    text-align:center;
+}
+
+.hero h2{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    font-size:17px;
+}
+
+.steps{
+    max-width:1100px;
+    margin:25px auto;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:0 15px;
+}
+
+.step{
+    flex:1;
+    background:#fff;
+    padding:14px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.step span{
+    width:32px;
+    height:32px;
+    background:#005bea;
+    color:#fff;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    margin-bottom:5px;
+}
+
+.container{
+    max-width:1100px;
+    margin:25px auto 50px;
+    padding:0 15px;
+}
+
+.form-card{
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 4px 18px rgba(0,0,0,.10);
+    padding:28px;
+}
+
+.section{
+    margin-bottom:28px;
+}
+
+.section-title{
+    background:#f1f7ff;
+    border-left:5px solid #005bea;
+    padding:13px 15px;
+    margin-bottom:18px;
+    font-size:19px;
+    font-weight:bold;
+    color:#005bea;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:17px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-weight:bold;
+    margin-bottom:7px;
+    color:#333;
+}
+
+.required{
+    color:red;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:12px 13px;
+    border:1px solid #cdd7e1;
+    border-radius:7px;
+    outline:none;
+    font-size:15px;
+    background:#fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#008cff;
+    box-shadow:0 0 0 2px rgba(0,140,255,.08);
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.account-types{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.account-option input{
+    display:none;
+}
+
+.account-option label{
+    border:2px solid #d8e0e8;
+    padding:18px;
+    text-align:center;
+    border-radius:10px;
+    cursor:pointer;
+    display:block;
+}
+
+.account-option input:checked + label{
+    border-color:#005bea;
+    background:#eef7ff;
+    color:#005bea;
+}
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.service{
+    border:1px solid #ddd;
+    border-radius:9px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.service input{
+    width:auto;
+}
+
+.service label{
+    margin:0;
+}
+
+.document-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.document-card{
+    border:1px solid #d9e0e8;
+    border-radius:10px;
+    padding:15px;
+    text-align:center;
+    background:#fafcff;
+}
+
+.document-card h4{
+    margin-bottom:12px;
+    color:#005bea;
+}
+
+.camera-btn{
+    border:none;
+    background:#005bea;
+    color:#fff;
+    padding:10px 13px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.preview{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:7px;
+    border:1px solid #ccc;
+    margin-top:10px;
+    display:none;
+}
+
+.remove-btn{
+    display:none;
+    margin-top:8px;
+    background:#dc3545;
+    color:#fff;
+    border:none;
+    padding:7px 10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.declaration{
+    background:#fff9e8;
+    border:1px solid #f1d77a;
+    padding:16px;
+    border-radius:9px;
+    line-height:1.6;
+}
+
+.declaration label{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+}
+
+.declaration input{
+    width:auto;
+    margin-top:4px;
+}
+
+.firebase-status{
+    display:none;
+    margin:18px 0 0;
+    padding:12px 14px;
+    border-radius:8px;
+    font-weight:bold;
+    text-align:center;
+    border:1px solid #cdd7e1;
+    background:#f7fbff;
+}
+
+.firebase-status.saving{
+    display:block;
+    color:#005bea;
+    background:#eef7ff;
+    border-color:#9dccff;
+}
+
+.firebase-status.success{
+    display:block;
+    color:#198754;
+    background:#e9fff0;
+    border-color:#65c982;
+}
+
+.firebase-status.error{
+    display:block;
+    color:#b02a37;
+    background:#fff0f1;
+    border-color:#f1aeb5;
+}
+
+.submit-area{
+    text-align:center;
+    margin-top:25px;
+}
+
+.submit-btn{
+    border:none;
+    background:#ff7a00;
+    color:#fff;
+    padding:15px 40px;
+    border-radius:8px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.submit-btn:disabled{
+    background:#999;
+    cursor:not-allowed;
+}
+
+.success{
+    display:none;
+    margin-top:25px;
+    background:#e9fff0;
+    border:1px solid #65c982;
+    border-radius:10px;
+    padding:20px;
+    text-align:center;
+}
+
+.success h3{
+    color:#198754;
+    margin-bottom:8px;
+}
+
+.application-number{
+    font-size:22px;
+    font-weight:bold;
+    color:#005bea;
+    margin:10px 0;
+}
+
+.print-btn{
+    display:inline-block;
+    border:none;
+    background:#198754;
+    color:#fff;
+    padding:12px 25px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.footer{
+    background:#073b73;
+    color:#fff;
+    text-align:center;
+    padding:25px;
+}
+
+/* CAMERA */
+
+.camera-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.camera-box{
+    background:#fff;
+    width:100%;
+    max-width:650px;
+    border-radius:14px;
+    padding:20px;
+}
+
+.camera-box h3{
+    color:#005bea;
+    margin-bottom:15px;
+}
+
+#cameraVideo{
+    width:100%;
+    max-height:450px;
+    background:#000;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.camera-controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:15px;
+    flex-wrap:wrap;
+}
+
+.camera-controls button{
+    border:none;
+    padding:11px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.capture{
+    background:#005bea;
+    color:#fff;
+}
+
+.switch{
+    background:#ff9800;
+    color:#fff;
+}
+
+.close{
+    background:#dc3545;
+    color:#fff;
+}
+
+#captureCanvas{
+    display:none;
+}
+
+
+/* =====================================================
+   PRINT APPLICATION
+===================================================== */
+
+#printApplication{
+    display:none;
+}
+
+.print-header{
+    border-bottom:2px solid #000;
+    padding-bottom:8px;
+    margin-bottom:12px;
+}
+
+.print-header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.print-header-info{
+    flex:1;
+}
+
+.print-photo-box{
+    width:95px;
+    min-width:95px;
+    text-align:center;
+}
+
+.print-photo-box img{
+    width:90px;
+    height:110px;
+    object-fit:cover;
+    border:1px solid #555;
+    display:block;
+    margin:auto;
+}
+
+.print-photo-label{
+    font-size:9px;
+    margin-top:3px;
+    font-weight:bold;
+}
+
+.print-title{
+    text-align:center;
+}
+
+.print-title h1{
+    font-size:23px;
+}
+
+.print-title h2{
+    font-size:15px;
+    margin-top:3px;
+}
+
+.print-meta{
+    font-size:11px;
+    line-height:1.7;
+    margin-top:8px;
+}
+
+.print-section{
+    margin-top:11px;
+}
+
+.print-section h3{
+    background:#e9eef5;
+    border:1px solid #777;
+    padding:5px 7px;
+    font-size:13px;
+}
+
+.print-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:10.5px;
+}
+
+.print-table td{
+    border:1px solid #777;
+    padding:4px 5px;
+    vertical-align:top;
+}
+
+.print-table td:first-child{
+    width:25%;
+    font-weight:bold;
+    background:#f7f7f7;
+}
+
+.print-declaration{
+    font-size:10px;
+    border:1px solid #777;
+    padding:8px;
+    margin-top:12px;
+    line-height:1.5;
+}
+
+.print-sign{
+    display:flex;
+    justify-content:space-between;
+    margin-top:28px;
+    font-size:11px;
+}
+
+
+/* =====================================================
+   PRINT MEDIA
+===================================================== */
+
+@media print{
+
+    @page{
+        size:A4 portrait;
+        margin:10mm;
+    }
+
+    html,
+    body{
+        margin:0 !important;
+        padding:0 !important;
+        background:#fff !important;
+    }
+
+    body > *{
+        display:none !important;
+    }
+
+    body #printApplication{
+        display:block !important;
+        visibility:visible !important;
+    }
+
+    #printApplication{
+        display:block !important;
+        width:100% !important;
+        color:#000 !important;
+        background:#fff !important;
+        visibility:visible !important;
+    }
+
+    #printApplication *{
+        visibility:visible !important;
+    }
+
+    .print-photo-box img{
+        display:block !important;
+        visibility:visible !important;
+    }
+}
+
+
+/* RESPONSIVE */
+
+
+/* =====================================================
+   BRANCH SELECTION
+   ===================================================== */
+.branch-selection-box{
+    background:#f8fbff;
+    border:1px solid #cfe0f5;
+    border-radius:10px;
+    padding:18px;
+}
+.branch-selection-note{
+    margin-top:10px;
+    font-size:13px;
+    color:#666;
+    line-height:1.5;
+}
+.branch-loading{
+    display:none;
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:7px;
+    background:#eef7ff;
+    color:#005bea;
+    border:1px solid #b9dcff;
+    font-size:13px;
+}
+.branch-error{
+    display:none;
+    margin-top:10px;
+    padding:10px 12px;
+    border-radius:7px;
+    background:#fff0f1;
+    color:#b02a37;
+    border:1px solid #f1aeb5;
+    font-size:13px;
+}
+
+@media(max-width:800px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .account-types,
+    .service-grid{
+        grid-template-columns:1fr;
+    }
+
+    .document-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .steps{
+        flex-direction:column;
+    }
+
+    .menu-toggle-btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .nav{
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        right:0;
+        background:#fff;
+        flex-direction:column;
+        align-items:stretch;
+        gap:0;
+        padding:10px 6% 16px;
+        box-shadow:0 12px 24px rgba(0,0,0,.14);
+        border-top:1px solid #e5edf5;
+        z-index:1300;
+    }
+
+    .nav.open{
+        display:flex;
+    }
+
+    .nav a{
+        padding:12px 10px;
+        border-bottom:1px solid #eef3f8;
+    }
+
+    .nav a:last-child{
+        border-bottom:none;
+    }
+
+    .hero h2{
+        font-size:26px;
+    }
+}
+
+@media(max-width:500px){
+
+    .document-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-card{
+        padding:16px;
+    }
+}
+.firebase-status{display:none !important;}\n</style>
+</head>
+
+<body>
+
+
+
+<!-- HEADER -->
+
+<header class="header" id="topHeader">
+
+    <div class="logo">
+
+        <div class="logo-circle">
+            KBI
+        </div>
+
+        <div>
+            <h1>Kaimur Bank of India</h1>
+           
+        </div>
+
+    </div>
+
+    <button
+        type="button"
+        class="menu-toggle-btn"
+        id="headerMenuBtn"
+        aria-label="Toggle Navigation Menu"
+        aria-expanded="false"
+        aria-controls="headerNav"
+    >
+        ☰
+    </button>
+
+    <nav class="nav" id="headerNav">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="#accountSection">Accounts</a>
+        <a href="index.html#contact">Contact</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h2>Open Your Bank Account</h2>
+
+    <p>
+        Apply online to open your account with Kaimur Bank of India
+    </p>
+
+</section>
+
+
+<!-- STEPS -->
+
+<div class="steps">
+
+    <div class="step">
+        <span>1</span>
+        <div>Application</div>
+    </div>
+
+    <div class="step">
+        <span>2</span>
+        <div>KYC</div>
+    </div>
+
+    <div class="step">
+        <span>3</span>
+        <div>Verification</div>
+    </div>
+
+    <div class="step">
+        <span>4</span>
+        <div>Account Open</div>
+    </div>
+
+</div>
+
+
+<div class="container">
+
+<div class="form-card">
+
+<form id="accountForm">
+
+
+<!-- 1 ACCOUNT INFORMATION -->
+
+<div class="section" id="accountSection">
+
+    <div class="section-title">
+        1. Account Information
+    </div>
+
+    <div class="account-types">
+
+        <div class="account-option">
+
+            <input
+                type="radio"
+                name="accountType"
+                id="savings"
+                value="Savings"
+                required
+            >
+
+            <label for="savings">
+                💰<br>
+                <strong>Savings Account</strong><br>
+                <small>Personal savings account</small>
+            </label>
+
+        </div>
+
+
+        <div class="account-option">
+
+            <input
+                type="radio"
+                name="accountType"
+                id="current"
+                value="Current"
+            >
+
+            <label for="current">
+                🏢<br>
+                <strong>Current Account</strong><br>
+                <small>Business current account</small>
+            </label>
+
+        </div>
+
+
+        <div class="account-option">
+
+            <input
+                type="radio"
+                name="accountType"
+                id="student"
+                value="Student"
+            >
+
+            <label for="student">
+                🎓<br>
+                <strong>Student Account</strong><br>
+                <small>Student banking account</small>
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 2 PERSONAL INFORMATION -->
+
+<div class="section">
+
+    <div class="section-title">
+        2. Personal Information
+    </div>
+
+    <div class="grid">
+
+        <div class="field">
+            <label>
+                Full Name <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="fullName"
+                required
+            >
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Father / Husband Name
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="fatherName"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Mother Name
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="motherName"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Date of Birth
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="date"
+                id="dob"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Gender
+                <span class="required">*</span>
+            </label>
+
+            <select id="gender" required>
+
+                <option value="">
+                    Select Gender
+                </option>
+
+                <option value="Male">
+                    Male
+                </option>
+
+                <option value="Female">
+                    Female
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Mobile Number
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="tel"
+                id="mobile"
+                maxlength="10"
+                pattern="[0-9]{10}"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                PAN Number
+                <span id="panRequiredMark" class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="pan"
+                maxlength="10"
+                style="text-transform:uppercase"
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Aadhaar Number
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="aadhaar"
+                maxlength="12"
+                pattern="[0-9]{12}"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Annual Income
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="number"
+                id="annualIncome"
+                min="0"
+                required
+            >
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- 3 BRANCH SELECTION -->
+<div class="section">
+    <div class="section-title">
+        3. Branch Selection
+    </div>
+
+    <div class="branch-selection-box">
+        <div class="grid">
+
+            <div class="field">
+                <label>
+                    Branch State <span class="required">*</span>
+                </label>
+                <select id="branchState" required>
+                    <option value="">Loading States...</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>
+                    Branch District <span class="required">*</span>
+                </label>
+                <select id="branchDistrict" required disabled>
+                    <option value="">First Select State</option>
+                </select>
+            </div>
+
+            <div class="field full">
+                <label>
+                    Select Branch <span class="required">*</span>
+                </label>
+                <select id="branchSelect" required disabled>
+                    <option value="">First Select District</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div id="branchLoading" class="branch-loading">
+            Branch list loading...
+        </div>
+
+        <div id="branchError" class="branch-error"></div>
+
+        <div class="branch-selection-note">
+            पहले State चुनें → फिर उस State का District चुनें → फिर उस District की सभी उपलब्ध Branch दिखाई देंगी।
+        </div>
+    </div>
+</div>
+
+
+<!-- 4 ADDRESS -->
+
+
+<div class="section">
+
+    <div class="section-title">
+        4. Address Information
+    </div>
+
+    <div class="grid">
+
+        <div class="field full">
+
+            <label>
+                Full Address
+                <span class="required">*</span>
+            </label>
+
+            <textarea
+                id="address"
+                required
+            ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Village / Town
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="village"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                District
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="district"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                State / Union Territory
+                <span class="required">*</span>
+            </label>
+
+            <select id="state" required>
+
+                <option value="">
+                    Select State / Union Territory
+                </option>
+
+                <optgroup label="States">
+
+                    <option>Andhra Pradesh</option>
+                    <option>Arunachal Pradesh</option>
+                    <option>Assam</option>
+                    <option>Bihar</option>
+                    <option>Chhattisgarh</option>
+                    <option>Goa</option>
+                    <option>Gujarat</option>
+                    <option>Haryana</option>
+                    <option>Himachal Pradesh</option>
+                    <option>Jharkhand</option>
+                    <option>Karnataka</option>
+                    <option>Kerala</option>
+                    <option>Madhya Pradesh</option>
+                    <option>Maharashtra</option>
+                    <option>Manipur</option>
+                    <option>Meghalaya</option>
+                    <option>Mizoram</option>
+                    <option>Nagaland</option>
+                    <option>Odisha</option>
+                    <option>Punjab</option>
+                    <option>Rajasthan</option>
+                    <option>Sikkim</option>
+                    <option>Tamil Nadu</option>
+                    <option>Telangana</option>
+                    <option>Tripura</option>
+                    <option>Uttar Pradesh</option>
+                    <option>Uttarakhand</option>
+                    <option>West Bengal</option>
+
+                </optgroup>
+
+
+                <optgroup label="Union Territories">
+
+                    <option>
+                        Andaman and Nicobar Islands
+                    </option>
+
+                    <option>
+                        Chandigarh
+                    </option>
+
+                    <option>
+                        Dadra and Nagar Haveli and Daman and Diu
+                    </option>
+
+                    <option>
+                        Delhi (NCT of Delhi)
+                    </option>
+
+                    <option>
+                        Jammu and Kashmir
+                    </option>
+
+                    <option>
+                        Ladakh
+                    </option>
+
+                    <option>
+                        Lakshadweep
+                    </option>
+
+                    <option>
+                        Puducherry
+                    </option>
+
+                </optgroup>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                PIN Code
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="pincode"
+                maxlength="6"
+                pattern="[0-9]{6}"
+                required
+            >
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 5 NOMINEE -->
+
+<div class="section">
+
+    <div class="section-title">
+        5. Nominee Information
+    </div>
+
+    <div class="grid">
+
+        <div class="field">
+
+            <label>
+                Nominee Name
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="nominee"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Nominee Relationship
+                <span class="required">*</span>
+            </label>
+
+            <select id="nomineeRelation" required>
+
+                <option value="">
+                    Select Relationship
+                </option>
+
+                <option>Father</option>
+                <option>Mother</option>
+                <option>Husband</option>
+                <option>Wife</option>
+                <option>Son</option>
+                <option>Daughter</option>
+                <option>Brother</option>
+                <option>Sister</option>
+                <option>Other</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 6 LIVE PHOTO AND KYC -->
+
+<div class="section">
+
+    <div class="section-title">
+        6. Live Photo & KYC Documents
+    </div>
+
+    <div class="document-grid">
+
+
+        <div class="document-card">
+
+            <h4>📷 Live Customer Photo</h4>
+
+            <button
+                type="button"
+                class="camera-btn"
+                onclick="openCamera('photo')"
+            >
+                Capture Live Photo
+            </button>
+
+            <img
+                id="previewPhoto"
+                class="preview"
+            >
+
+            <button
+                type="button"
+                id="removePhoto"
+                class="remove-btn"
+                onclick="removeCapture('photo')"
+            >
+                Remove
+            </button>
+
+        </div>
+
+
+        <div class="document-card">
+
+            <h4>🪪 PAN Card</h4>
+
+            <button
+                type="button"
+                class="camera-btn"
+                onclick="openCamera('pan')"
+            >
+                Capture PAN
+            </button>
+
+            <img
+                id="previewPan"
+                class="preview"
+            >
+
+            <button
+                type="button"
+                id="removePan"
+                class="remove-btn"
+                onclick="removeCapture('pan')"
+            >
+                Remove
+            </button>
+
+        </div>
+
+
+        <div class="document-card">
+
+            <h4>🪪 Aadhaar Front</h4>
+
+            <button
+                type="button"
+                class="camera-btn"
+                onclick="openCamera('aadhaarFront')"
+            >
+                Capture Front
+            </button>
+
+            <img
+                id="previewAadhaarFront"
+                class="preview"
+            >
+
+            <button
+                type="button"
+                id="removeAadhaarFront"
+                class="remove-btn"
+                onclick="removeCapture('aadhaarFront')"
+            >
+                Remove
+            </button>
+
+        </div>
+
+
+        <div class="document-card">
+
+            <h4>🪪 Aadhaar Back</h4>
+
+            <button
+                type="button"
+                class="camera-btn"
+                onclick="openCamera('aadhaarBack')"
+            >
+                Capture Back
+            </button>
+
+            <img
+                id="previewAadhaarBack"
+                class="preview"
+            >
+
+            <button
+                type="button"
+                id="removeAadhaarBack"
+                class="remove-btn"
+                onclick="removeCapture('aadhaarBack')"
+            >
+                Remove
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 7 SERVICES -->
+
+<div class="section" id="servicesSection">
+
+    <div class="section-title">
+        7. Additional Services
+    </div>
+
+    <div class="service-grid">
+
+        <div class="service">
+
+            <input
+                type="checkbox"
+                id="debitCard"
+            >
+
+            <label for="debitCard">
+                💳 Debit Card
+            </label>
+
+        </div>
+
+
+        <div class="service">
+
+            <input
+                type="checkbox"
+                id="internetBanking"
+            >
+
+            <label for="internetBanking">
+                🌐 Internet Banking
+            </label>
+
+        </div>
+
+
+        <div class="service">
+
+            <input
+                type="checkbox"
+                id="mobileBanking"
+            >
+
+            <label for="mobileBanking">
+                📱 Mobile Banking
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 8 DECLARATION -->
+
+<div class="section">
+
+    <div class="section-title">
+        8. Declaration
+    </div>
+
+    <div class="declaration">
+
+        <label>
+
+            <input
+                type="checkbox"
+                id="declaration"
+                required
+            >
+
+            <span>
+                I hereby declare that all the information provided
+                in this application is true and correct to the best
+                of my knowledge. I agree to the KYC verification
+                and other verification procedures required by the bank.
+            </span>
+
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- FIREBASE SAVE STATUS -->
+
+<div id="firebaseStatus" class="firebase-status" aria-hidden="true"></div>
+
+<!-- SUBMIT -->
+
+<div class="submit-area">
+
+    <button
+        type="submit"
+        class="submit-btn"
+        id="submitBtn"
+    >
+        Submit Account Application
+    </button>
+
+</div>
+
+</form>
+
+
+<!-- SUCCESS -->
+
+<div
+    class="success"
+    id="successBox"
+>
+
+    <h3>
+        ✅ Application Successfully Submitted
+    </h3>
+
+    <p>
+        Your Account Opening Application has been successfully submitted.
+    </p>
+
+    <div
+        class="application-number"
+        id="applicationNumber"
+    ></div>
+
+    <p>
+        Please keep this Application Number for future reference.
+    </p>
+
+    <button
+        type="button"
+        class="print-btn"
+        onclick="printApplication()"
+    >
+        🖨️ Print Application
+    </button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- FOOTER -->
+
+<footer class="footer" id="footerSection">
+
+    <p>
+        <strong>Kaimur Bank of India | K.B.I.</strong>
+    </p>
+
+    <p>
+        Secure Banking • Trusted Service
+    </p>
+
+</footer>
+
+
+<!-- CAMERA MODAL -->
+
+<div
+    class="camera-modal"
+    id="cameraModal"
+>
+
+    <div class="camera-box">
+
+        <h3 id="cameraTitle">
+            Capture Image
+        </h3>
+
+        <video
+            id="cameraVideo"
+            autoplay
+            playsinline
+        ></video>
+
+        <canvas
+            id="captureCanvas"
+        ></canvas>
+
+        <div class="camera-controls">
+
+            <button
+                type="button"
+                class="capture"
+                onclick="captureImage()"
+            >
+                📸 Capture
+            </button>
+
+            <button
+                type="button"
+                class="switch"
+                onclick="switchCamera()"
+            >
+                🔄 Switch Camera
+            </button>
+
+            <button
+                type="button"
+                class="close"
+                onclick="closeCamera()"
+            >
+                ✕ Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PRINT APPLICATION
+     ONLY CUSTOMER PHOTO IS PRINTED
+     PAN/AADHAAR DOCUMENT IMAGES ARE NOT PRINTED
+===================================================== -->
+
+<div id="printApplication">
+
+    <div class="print-header">
+
+        <div class="print-title">
+
+            <h1>K.B.I.</h1>
+
+            <h2>
+                Kaimur Bank of India
+            </h2>
+
+            <div>
+                Customer Account Opening Application
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="print-header-top">
+
+        <div class="print-header-info">
+
+            <div class="print-meta">
+
+                <strong>Application Number:</strong>
+                <span id="printApplicationNumber"></span>
+
+                <br>
+
+                <strong>Application Date & Time:</strong>
+                <span id="printApplicationDate"></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- CUSTOMER LIVE PHOTO ONLY -->
+
+        <div class="print-photo-box">
+
+            <img
+                id="printCustomerPhoto"
+                alt="Customer Photo"
+            >
+
+            <div class="print-photo-label">
+                Customer Photo
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACCOUNT INFORMATION -->
+
+    <div class="print-section">
+
+        <h3>
+            Account Information
+        </h3>
+
+        <table class="print-table">
+
+            <tr>
+                <td>Account Type</td>
+                <td id="pAccountType"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- PERSONAL INFORMATION -->
+
+    <div class="print-section">
+
+        <h3>
+            Personal Information
+        </h3>
+
+        <table class="print-table">
+
+            <tr>
+                <td>Full Name</td>
+                <td id="pFullName"></td>
+            </tr>
+
+            <tr>
+                <td>Father / Husband Name</td>
+                <td id="pFatherName"></td>
+            </tr>
+
+            <tr>
+                <td>Mother Name</td>
+                <td id="pMotherName"></td>
+            </tr>
+
+            <tr>
+                <td>Date of Birth</td>
+                <td id="pDob"></td>
+            </tr>
+
+            <tr>
+                <td>Gender</td>
+                <td id="pGender"></td>
+            </tr>
+
+            <tr>
+                <td>Mobile Number</td>
+                <td id="pMobile"></td>
+            </tr>
+
+            <tr>
+                <td>Email</td>
+                <td id="pEmail"></td>
+            </tr>
+
+            <tr>
+                <td>PAN Number</td>
+                <td id="pPan"></td>
+            </tr>
+
+            <tr>
+                <td>Aadhaar Number</td>
+                <td id="pAadhaar"></td>
+            </tr>
+
+            <tr>
+                <td>Annual Income</td>
+                <td id="pAnnualIncome"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+
+    <!-- BRANCH -->
+    <div class="print-section">
+        <h3>Branch Selection</h3>
+        <table class="print-table">
+            <tr>
+                <td>Branch Name</td>
+                <td id="pBranchName"></td>
+            </tr>
+            <tr>
+                <td>Branch Code</td>
+                <td id="pBranchCode"></td>
+            </tr>
+            <tr>
+                <td>Branch District</td>
+                <td id="pBranchDistrict"></td>
+            </tr>
+            <tr>
+                <td>Branch State</td>
+                <td id="pBranchState"></td>
+            </tr>
+        </table>
+    </div>
+
+
+    <!-- ADDRESS -->
+
+    <div class="print-section">
+
+        <h3>
+            Address Information
+        </h3>
+
+        <table class="print-table">
+
+            <tr>
+                <td>Full Address</td>
+                <td id="pAddress"></td>
+            </tr>
+
+            <tr>
+                <td>Village / Town</td>
+                <td id="pVillage"></td>
+            </tr>
+
+            <tr>
+                <td>District</td>
+                <td id="pDistrict"></td>
+            </tr>
+
+            <tr>
+                <td>State / Union Territory</td>
+                <td id="pState"></td>
+            </tr>
+
+            <tr>
+                <td>PIN Code</td>
+                <td id="pPincode"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- NOMINEE -->
+
+    <div class="print-section">
+
+        <h3>
+            Nominee Information
+        </h3>
+
+        <table class="print-table">
+
+            <tr>
+                <td>Nominee Name</td>
+                <td id="pNominee"></td>
+            </tr>
+
+            <tr>
+                <td>Nominee Relationship</td>
+                <td id="pNomineeRelation"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- SERVICES -->
+
+    <div class="print-section">
+
+        <h3>
+            Additional Services
+        </h3>
+
+        <table class="print-table">
+
+            <tr>
+                <td>Debit Card</td>
+                <td id="pDebitCard"></td>
+            </tr>
+
+            <tr>
+                <td>Internet Banking</td>
+                <td id="pInternetBanking"></td>
+            </tr>
+
+            <tr>
+                <td>Mobile Banking</td>
+                <td id="pMobileBanking"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- DECLARATION IN ENGLISH -->
+
+    <div class="print-declaration">
+
+        <strong>Declaration:</strong><br>
+
+        I hereby declare that all the information provided in this
+        application is true and correct to the best of my knowledge.
+        I agree to the KYC verification and other verification
+        procedures required by the bank.
+
+    </div>
+
+
+    <div class="print-sign">
+
+        <div>
+            Applicant Signature
+        </div>
+
+        <div>
+            Bank Official
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+// =====================================================
+// HEADER MENU BUTTON TOGGLE
+// =====================================================
+(function(){
+    const menuBtn = document.getElementById("headerMenuBtn");
+    const navMenu = document.getElementById("headerNav");
+
+    if(!menuBtn || !navMenu) return;
+
+    function setMenuOpen(isOpen){
+        navMenu.classList.toggle("open", isOpen);
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
+        menuBtn.textContent = isOpen ? "✕" : "☰";
+    }
+
+    menuBtn.addEventListener("click", function(e){
+        e.stopPropagation();
+        const currentlyOpen = navMenu.classList.contains("open");
+        setMenuOpen(!currentlyOpen);
+    });
+
+    navMenu.querySelectorAll("a").forEach(function(link){
+        link.addEventListener("click", function(){
+            setMenuOpen(false);
+        });
+    });
+
+    document.addEventListener("click", function(e){
+        if(!navMenu.contains(e.target) && !menuBtn.contains(e.target)){
+            setMenuOpen(false);
+        }
+    });
+
+    document.addEventListener("keydown", function(e){
+        if(e.key === "Escape"){
+            setMenuOpen(false);
+        }
+    });
+
+    window.addEventListener("resize", function(){
+        if(window.innerWidth > 800){
+            setMenuOpen(false);
+        }
+    });
+})();
+
+let capturedDocuments = {
+
+    photo:"",
+    pan:"",
+    aadhaarFront:"",
+    aadhaarBack:""
+
+};
+
+
+let currentCaptureType = "";
+
+let cameraStream = null;
+
+let currentFacingMode = "user";
+
+
+// =====================================================
+// CAMERA
+// =====================================================
+
+function openCamera(type){
+    currentCaptureType = type;
+
+    /* Mobile-safe camera: use the phone's native camera picker. */
+    const isMobile = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent || "");
+
+    if(isMobile){
+        openNativeCamera(type);
+        return;
+    }
+
+    if(type === "photo"){
+        currentFacingMode = "user";
+        document.getElementById("cameraTitle").textContent = "Capture Live Customer Photo";
+    }
+    if(type === "pan"){
+        currentFacingMode = "environment";
+        document.getElementById("cameraTitle").textContent = "Capture PAN Card";
+    }
+    if(type === "aadhaarFront"){
+        currentFacingMode = "environment";
+        document.getElementById("cameraTitle").textContent = "Capture Aadhaar Front";
+    }
+    if(type === "aadhaarBack"){
+        currentFacingMode = "environment";
+        document.getElementById("cameraTitle").textContent = "Capture Aadhaar Back";
+    }
+
+    document.getElementById("cameraModal").style.display = "flex";
+    startCamera();
+}
+
+/* =====================================================
+   MOBILE NATIVE CAMERA FALLBACK
+   ===================================================== */
+function openNativeCamera(type){
+    currentCaptureType = type;
+
+    let input = document.getElementById("nativeCameraInput");
+
+    if(!input){
+        input = document.createElement("input");
+        input.type = "file";
+        input.id = "nativeCameraInput";
+        input.accept = "image/*";
+        input.style.display = "none";
+        document.body.appendChild(input);
+        input.addEventListener("change", handleNativeCameraFile);
+    }
+
+    if(type === "photo"){
+        input.setAttribute("capture", "user");
+    }else{
+        input.setAttribute("capture", "environment");
+    }
+
+    input.value = "";
+
+    try{
+        input.click();
+    }catch(error){
+        console.error("Native camera open error:", error);
+        alert("Camera open नहीं हो सका. Browser में Camera permission Allow करें.");
+    }
+}
+
+function handleNativeCameraFile(event){
+    const file = event.target && event.target.files && event.target.files[0];
+    if(!file) return;
+
+    if(!file.type.startsWith("image/")){
+        alert("कृपया केवल image/photo चुनें.");
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+        const image = new Image();
+
+        image.onload = function(){
+            const maxWidth = 700;
+            const scale = Math.min(1, maxWidth / image.width);
+            const canvas = document.createElement("canvas");
+
+            canvas.width = Math.max(1, Math.round(image.width * scale));
+            canvas.height = Math.max(1, Math.round(image.height * scale));
+
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+            const imageData = canvas.toDataURL("image/jpeg", 0.55);
+
+            capturedDocuments[currentCaptureType] = imageData;
+            updateCapturePreview(currentCaptureType, imageData);
+        };
+
+        image.onerror = function(){
+            alert("Photo read नहीं हो सकी. कृपया दोबारा camera से photo लें.");
+        };
+
+        image.src = e.target.result;
+    };
+
+    reader.onerror = function(){
+        alert("Photo load नहीं हो सकी. कृपया दोबारा कोशिश करें.");
+    };
+
+    reader.readAsDataURL(file);
+}
+
+
+async function startCamera(){
+
+    try{
+
+        if(cameraStream){
+
+            cameraStream
+                .getTracks()
+                .forEach(track=>{
+                    track.stop();
+                });
+
+        }
+
+
+        if(
+            !navigator.mediaDevices ||
+            !navigator.mediaDevices.getUserMedia
+        ){
+
+            alert(
+                "Camera is not supported by this browser."
+            );
+
+            return;
+        }
+
+
+        cameraStream =
+            await navigator.mediaDevices.getUserMedia({
+
+                video:{
+                    facingMode:{
+                        ideal:currentFacingMode
+                    },
+                    width:{
+                        ideal:1280
+                    },
+                    height:{
+                        ideal:720
+                    }
+                },
+
+                audio:false
+
+            });
+
+
+        const video =
+            document.getElementById("cameraVideo");
+
+
+        video.srcObject =
+            cameraStream;
+
+
+        await video.play();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Camera access was not allowed. Please allow camera permission in your browser."
+        );
+
+    }
+
+}
+
+
+async function switchCamera(){
+
+    currentFacingMode =
+        currentFacingMode === "user"
+        ? "environment"
+        : "user";
+
+
+    await startCamera();
+
+}
+
+
+function captureImage(){
+
+    const video =
+        document.getElementById("cameraVideo");
+
+
+    const canvas =
+        document.getElementById("captureCanvas");
+
+
+    if(
+        !video.videoWidth ||
+        !video.videoHeight
+    ){
+
+        alert(
+            "Camera is not ready yet."
+        );
+
+        return;
+
+    }
+
+
+    const maxWidth = 700;
+
+
+    const scale =
+        Math.min(
+            1,
+            maxWidth / video.videoWidth
+        );
+
+
+    canvas.width =
+        Math.round(
+            video.videoWidth * scale
+        );
+
+
+    canvas.height =
+        Math.round(
+            video.videoHeight * scale
+        );
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    ctx.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    const imageData =
+        canvas.toDataURL(
+            "image/jpeg",
+            0.55
+        );
+
+
+    capturedDocuments[
+        currentCaptureType
+    ] = imageData;
+
+
+    updateCapturePreview(
+        currentCaptureType,
+        imageData
+    );
+
+
+    closeCamera();
+
+}
+
+
+function updateCapturePreview(
+    type,
+    imageData
+){
+
+    let previewId = "";
+
+    let removeId = "";
+
+
+    if(type === "photo"){
+
+        previewId = "previewPhoto";
+        removeId = "removePhoto";
+
+    }
+
+
+    if(type === "pan"){
+
+        previewId = "previewPan";
+        removeId = "removePan";
+
+    }
+
+
+    if(type === "aadhaarFront"){
+
+        previewId =
+            "previewAadhaarFront";
+
+        removeId =
+            "removeAadhaarFront";
+
+    }
+
+
+    if(type === "aadhaarBack"){
+
+        previewId =
+            "previewAadhaarBack";
+
+        removeId =
+            "removeAadhaarBack";
+
+    }
+
+
+    const preview =
+        document.getElementById(
+            previewId
+        );
+
+
+    const removeButton =
+        document.getElementById(
+            removeId
+        );
+
+
+    if(preview){
+
+        preview.src =
+            imageData;
+
+        preview.style.display =
+            "block";
+
+    }
+
+
+    if(removeButton){
+
+        removeButton.style.display =
+            "inline-block";
+
+    }
+
+}
+
+
+function removeCapture(type){
+
+    capturedDocuments[type] = "";
+
+
+    let previewId = "";
+
+    let removeId = "";
+
+
+    if(type === "photo"){
+
+        previewId = "previewPhoto";
+        removeId = "removePhoto";
+
+    }
+
+
+    if(type === "pan"){
+
+        previewId = "previewPan";
+        removeId = "removePan";
+
+    }
+
+
+    if(type === "aadhaarFront"){
+
+        previewId =
+            "previewAadhaarFront";
+
+        removeId =
+            "removeAadhaarFront";
+
+    }
+
+
+    if(type === "aadhaarBack"){
+
+        previewId =
+            "previewAadhaarBack";
+
+        removeId =
+            "removeAadhaarBack";
+
+    }
+
+
+    const preview =
+        document.getElementById(
+            previewId
+        );
+
+
+    const removeButton =
+        document.getElementById(
+            removeId
+        );
+
+
+    if(preview){
+
+        preview.removeAttribute("src");
+
+        preview.style.display =
+            "none";
+
+    }
+
+
+    if(removeButton){
+
+        removeButton.style.display =
+            "none";
+
+    }
+
+}
+
+
+function stopCamera(){
+
+    if(cameraStream){
+
+        cameraStream
+            .getTracks()
+            .forEach(track=>{
+                track.stop();
+            });
+
+        cameraStream = null;
+
+    }
+
+
+    const video =
+        document.getElementById(
+            "cameraVideo"
+        );
+
+
+    if(video){
+
+        video.srcObject = null;
+
+    }
+
+}
+
+
+function closeCamera(){
+
+    stopCamera();
+
+    document.getElementById(
+        "cameraModal"
+    ).style.display = "none";
+
+}
+
+
+
+// =====================================================
+// BRANCH SELECTION
+// =====================================================
+
+let branchDirectory = [];
+let selectedBranchData = null;
+let indiaStateDistrictDirectory = [];
+
+const INDIA_STATE_DISTRICT_API = "https://raw.githubusercontent.com/codingmation/indian-states-districts/main/data/india_states_districts.min.json";
+
+function normalizeBranchText(value){
+    return String(value ?? "")
+        .trim()
+        .replace(/\s+/g," ")
+        .toLowerCase();
+}
+
+function branchField(obj, keys){
+    for(const key of keys){
+        if(obj && obj[key] !== undefined && obj[key] !== null && String(obj[key]).trim() !== ""){
+            return String(obj[key]).trim();
+        }
+    }
+    return "";
+}
+
+function branchIsActive(branch){
+    const status = normalizeBranchText(
+        branchField(branch, ["status","branchStatus","activeStatus"])
+    );
+    const activeValue = branch.active;
+    if(activeValue === false) return false;
+    if(["inactive","disabled","closed","deactivated","blocked"].includes(status)) return false;
+    return true;
+}
+
+function extractBranchRows(data){
+    const rows = [];
+
+    if(!data) return rows;
+
+    if(typeof data === "object" && !Array.isArray(data)){
+        Object.keys(data).forEach(key=>{
+            const value = data[key];
+            if(value && typeof value === "object"){
+                rows.push({
+                    ...value,
+                    __firebaseKey:key
+                });
+            }
+        });
+        return rows;
+    }
+
+    if(Array.isArray(data)){
+        data.forEach((value,index)=>{
+            if(value && typeof value === "object"){
+                rows.push({
+                    ...value,
+                    __firebaseKey:String(index)
+                });
+            }
+        });
+    }
+
+    return rows;
+}
+
+function getBranchName(branch){
+    return branchField(branch,[
+        "branchName","name","BranchName","branch_name","title"
+    ]);
+}
+
+function getBranchCode(branch){
+    return branchField(branch,[
+        "branchCode","code","BranchCode","branch_code"
+    ]);
+}
+
+function getBranchId(branch){
+    return branchField(branch,[
+        "branchId","id","branchID","loginId","loginID"
+    ]);
+}
+
+function getBranchDistrict(branch){
+    return branchField(branch,[
+        "district","branchDistrict","BranchDistrict","branch_district"
+    ]);
+}
+
+function getBranchState(branch){
+    return branchField(branch,[
+        "state","branchState","BranchState","branch_state"
+    ]);
+}
+
+function clearSelect(selectId, placeholder){
+    const el = document.getElementById(selectId);
+    if(!el) return;
+    el.innerHTML = "";
+    const option = document.createElement("option");
+    option.value = "";
+    option.textContent = placeholder;
+    el.appendChild(option);
+}
+
+function fillBranchStates(){
+    const stateSelect = document.getElementById("branchState");
+    const districtSelect = document.getElementById("branchDistrict");
+    const branchSelect = document.getElementById("branchSelect");
+    if(!stateSelect || !districtSelect || !branchSelect) return;
+
+    clearSelect("branchState","Select State");
+    clearSelect("branchDistrict","First Select State");
+    clearSelect("branchSelect","First Select District");
+
+    districtSelect.disabled = true;
+    branchSelect.disabled = true;
+    selectedBranchData = null;
+
+    const states = indiaStateDistrictDirectory.length
+        ? indiaStateDistrictDirectory.map(x=>x.state).filter(Boolean)
+        : [...new Set(branchDirectory.map(getBranchState).filter(Boolean))];
+
+    [...new Set(states)].sort((a,b)=>a.localeCompare(b)).forEach(state=>{
+        const option = document.createElement("option");
+        option.value = state;
+        option.textContent = state;
+        stateSelect.appendChild(option);
+    });
+
+    if(!states.length){
+        clearSelect("branchState","No State Available");
+        showBranchError("State list load नहीं हो सकी। Internet connection check करें।");
+        return;
+    }
+    hideBranchError();
+}
+
+function fillBranchDistricts(){
+    const state = document.getElementById("branchState")?.value || "";
+    const districtSelect = document.getElementById("branchDistrict");
+    const branchSelect = document.getElementById("branchSelect");
+    if(!districtSelect || !branchSelect) return;
+
+    clearSelect("branchDistrict", state ? "Select District" : "First Select State");
+    clearSelect("branchSelect","First Select District");
+    branchSelect.disabled = true;
+    selectedBranchData = null;
+
+    if(!state){
+        districtSelect.disabled = true;
+        return;
+    }
+
+    let districts = [];
+    const master = indiaStateDistrictDirectory.find(x=>
+        normalizeBranchText(x.state) === normalizeBranchText(state)
+    );
+    if(master){
+        districts = master.districts || [];
+    }else{
+        districts = [...new Set(
+            branchDirectory
+                .filter(branch=>normalizeBranchText(getBranchState(branch)) === normalizeBranchText(state))
+                .map(getBranchDistrict).filter(Boolean)
+        )];
+    }
+
+    districts = [...new Set(districts)].sort((a,b)=>a.localeCompare(b));
+    districts.forEach(district=>{
+        const option = document.createElement("option");
+        option.value = district;
+        option.textContent = district;
+        districtSelect.appendChild(option);
+    });
+
+    districtSelect.disabled = !districts.length;
+    if(!districts.length) showBranchError("इस State में कोई District उपलब्ध नहीं है।");
+    else hideBranchError();
+}
+
+function fillBranches(){
+    const state = document.getElementById("branchState")?.value || "";
+    const district = document.getElementById("branchDistrict")?.value || "";
+    const branchSelect = document.getElementById("branchSelect");
+    if(!branchSelect) return;
+
+    clearSelect("branchSelect", district ? "Select Branch" : "First Select District");
+    selectedBranchData = null;
+
+    if(!state || !district){
+        branchSelect.disabled = true;
+        return;
+    }
+
+    const branches = branchDirectory
+        .filter(branch =>
+            normalizeBranchText(getBranchState(branch)) === normalizeBranchText(state) &&
+            normalizeBranchText(getBranchDistrict(branch)) === normalizeBranchText(district)
+        )
+        .sort((a,b)=>getBranchName(a).localeCompare(getBranchName(b)));
+
+    if(!branches.length){
+        branchSelect.disabled = true;
+        showBranchError("इस District में अभी कोई active KBI Branch उपलब्ध नहीं है। Head Branch में उस District की Branch add होने पर यहाँ दिखेगी।");
+        return;
+    }
+
+    branches.forEach(branch=>{
+        const key = branch.__firebaseKey || "";
+        const name = getBranchName(branch) || "Unnamed Branch";
+        const code = getBranchCode(branch);
+
+        const option = document.createElement("option");
+        option.value = key;
+        option.textContent = code ? `${name} — ${code}` : name;
+        branchSelect.appendChild(option);
+    });
+
+    branchSelect.disabled = false;
+    hideBranchError();
+}
+
+function onBranchSelected(){
+    const key = document.getElementById("branchSelect")?.value || "";
+    selectedBranchData =
+        branchDirectory.find(branch=>String(branch.__firebaseKey) === String(key)) || null;
+}
+
+function showBranchLoading(message){
+    const box = document.getElementById("branchLoading");
+    if(!box) return;
+    box.textContent = message || "Branch list loading...";
+    box.style.display = "block";
+}
+
+function hideBranchLoading(){
+    const box = document.getElementById("branchLoading");
+    if(box) box.style.display = "none";
+}
+
+function showBranchError(message){
+    const box = document.getElementById("branchError");
+    if(!box) return;
+    box.textContent = message || "Branch list load नहीं हो सकी.";
+    box.style.display = "block";
+}
+
+function hideBranchError(){
+    const box = document.getElementById("branchError");
+    if(box){
+        box.textContent = "";
+        box.style.display = "none";
+    }
+}
+
+async function fetchBranchDirectory(pathName){
+    const url = FIREBASE_DATABASE_URL + "/" + pathName + ".json";
+    const response = await fetch(url,{
+        method:"GET",
+        cache:"no-store"
+    });
+
+    if(!response.ok){
+        const text = await response.text().catch(()=> "");
+        const error = new Error(
+            "Firebase HTTP " + response.status + (text ? ": " + text : "")
+        );
+        error.status = response.status;
+        throw error;
+    }
+
+    return await response.json();
+}
+
+async function loadIndiaStateDistrictDirectory(){
+    try{
+        const response = await fetch(INDIA_STATE_DISTRICT_API,{cache:"no-store"});
+        if(!response.ok) throw new Error("HTTP " + response.status);
+        const data = await response.json();
+
+        const source = Array.isArray(data) ? data : (data.states || data.data || []);
+        const rows = [];
+
+        source.forEach(item=>{
+            const stateName = item?.name || item?.state || item?.stateName || item?.title || "";
+            let districts = item?.districts || item?.district || item?.children || [];
+            if(!Array.isArray(districts) && districts && typeof districts === "object") districts = Object.values(districts);
+
+            const cleanState = typeof stateName === "object"
+                ? (stateName.en || stateName.name || stateName.local || "")
+                : String(stateName).trim();
+
+            const cleanDistricts = (districts || []).map(d=>{
+                if(typeof d === "string") return d.trim();
+                return String(d?.name || d?.district || d?.districtName || d?.title || "").trim();
+            }).filter(Boolean);
+
+            if(cleanState && cleanDistricts.length){
+                rows.push({state:cleanState,districts:[...new Set(cleanDistricts)]});
+            }
+        });
+
+        indiaStateDistrictDirectory = rows.sort((a,b)=>a.state.localeCompare(b.state));
+        return indiaStateDistrictDirectory.length;
+    }catch(error){
+        console.warn("India State/District master load failed:",error);
+        indiaStateDistrictDirectory = [];
+        return 0;
+    }
+}
+
+async function loadBranchDirectory(){
+    const stateSelect = document.getElementById("branchState");
+    if(!stateSelect) return;
+
+    showBranchLoading("Firebase से Branch list loading...");
+    hideBranchError();
+
+    try{
+        let data = await fetchBranchDirectory("headBranches");
+        let rows = extractBranchRows(data).filter(branchIsActive);
+
+        if(!rows.length){
+            data = await fetchBranchDirectory("branches");
+            rows = extractBranchRows(data).filter(branchIsActive);
+        }
+
+        branchDirectory = rows;
+
+        if(!branchDirectory.length){
+            fillBranchStates();
+            showBranchError(
+                "कोई active branch नहीं मिली। Head Branch में Branch Name, Branch Code, State और District भरकर branch save करें।"
+            );
+        }else{
+            fillBranchStates();
+        }
+    }catch(error){
+        console.error("Branch directory error:",error);
+        branchDirectory = [];
+        clearSelect("branchState","Branch list load नहीं हुई");
+        clearSelect("branchDistrict","First Select State");
+        clearSelect("branchSelect","First Select District");
+
+        const message =
+            error && error.status === 401
+                ? "Firebase ने Branch directory read करने की अनुमति नहीं दी (HTTP 401)."
+                : error && error.status === 403
+                    ? "Firebase ने Branch directory read करने की अनुमति नहीं दी (HTTP 403). Rules में headBranches/branches read permission check करें."
+                    : "Branch list load नहीं हो सकी. Internet और Firebase Database connection check करें.";
+
+        showBranchError(message);
+    }finally{
+        hideBranchLoading();
+    }
+}
+
+function validateSelectedBranch(){
+    const branchSelect = document.getElementById("branchSelect");
+    if(!branchSelect || !branchSelect.value || !selectedBranchData){
+        alert("कृपया State → District → Branch चुनें.");
+        branchSelect?.focus();
+        return false;
+    }
+    return true;
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+    const state = document.getElementById("branchState");
+    const district = document.getElementById("branchDistrict");
+    const branch = document.getElementById("branchSelect");
+
+    if(state) state.addEventListener("change",fillBranchDistricts);
+    if(district) district.addEventListener("change",fillBranches);
+    if(branch) branch.addEventListener("change",onBranchSelected);
+
+    (async function(){
+        await Promise.all([
+            loadIndiaStateDistrictDirectory(),
+            loadBranchDirectory()
+        ]);
+        fillBranchStates();
+    })();
+});
+
+
+
+// =====================================================
+// FIREBASE REALTIME DATABASE
+// =====================================================
+
+const FIREBASE_DATABASE_URL = "https://kaimur-bank-default-rtdb.firebaseio.com";
+const FIREBASE_APPLICATION_PATH = "accountApplications";
+const APPLICATION_KEY = "KBI_ACCOUNT_APPLICATIONS";
+
+window.firebaseReady = true;
+
+function setFirebaseStatus(message, type){
+    const box = document.getElementById("firebaseStatus");
+    if(!box) return;
+    box.textContent = message || "";
+    box.className = "firebase-status" + (type ? " " + type : "");
+    box.style.display = message ? "block" : "none";
+}
+
+async function firebasePut(application){
+    const appNo = String(application.applicationNumber || '').trim();
+
+    if(!appNo){
+        throw new Error("Application Number missing.");
+    }
+
+    const url =
+        FIREBASE_DATABASE_URL +
+        "/" +
+        FIREBASE_APPLICATION_PATH +
+        "/" +
+        encodeURIComponent(appNo) +
+        ".json";
+
+    let lastError = null;
+
+    for(let attempt = 1; attempt <= 3; attempt++){
+
+        const controller = new AbortController();
+
+        const timeoutId =
+            setTimeout(
+                function(){
+                    controller.abort();
+                },
+                45000
+            );
+
+        try{
+
+            const response =
+                await fetch(
+                    url,
+                    {
+                        method:"PUT",
+                        headers:{
+                            "Content-Type":"application/json"
+                        },
+                        body:JSON.stringify(application),
+                        cache:"no-store",
+                        signal:controller.signal
+                    }
+                );
+
+            const raw =
+                await response.text();
+
+            let data = null;
+
+            try{
+                data =
+                    raw
+                    ? JSON.parse(raw)
+                    : null;
+            }catch(_e){
+                data = raw;
+            }
+
+            if(!response.ok){
+
+                const msg =
+                    data && data.error
+                    ? data.error
+                    : (raw || response.statusText);
+
+                const err =
+                    new Error(
+                        "Firebase HTTP " +
+                        response.status +
+                        ": " +
+                        msg
+                    );
+
+                err.status =
+                    response.status;
+
+                if(
+                    response.status === 401 ||
+                    response.status === 403
+                ){
+                    throw err;
+                }
+
+                lastError = err;
+
+            }else{
+
+                return data;
+
+            }
+
+        }catch(error){
+
+            if(
+                error &&
+                error.name === "AbortError"
+            ){
+                lastError =
+                    new Error(
+                        "Firebase request timed out."
+                    );
+            }else{
+                lastError = error;
+            }
+
+            if(
+                lastError &&
+                (
+                    lastError.status === 401 ||
+                    lastError.status === 403
+                )
+            ){
+                throw lastError;
+            }
+
+        }finally{
+
+            clearTimeout(timeoutId);
+
+        }
+
+        if(attempt < 3){
+
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        1200 * attempt
+                    )
+            );
+
+        }
+
+    }
+
+    throw (
+        lastError ||
+        new Error(
+            "Firebase request failed."
+        )
+    );
+}
+
+async function saveApplicationToFirebase(application){
+    return await firebasePut(application);
+}
+
+window.saveApplicationToFirebase = saveApplicationToFirebase;
+
+// =====================================================
+// APPLICATION NUMBER
+// =====================================================
+
+function generateApplicationNumber(){
+
+    const year =
+        new Date().getFullYear();
+
+
+    const random =
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        );
+
+
+    return (
+        "KBI-APP-" +
+        year +
+        "-" +
+        random
+    );
+
+}
+
+
+// =====================================================
+// CONDITIONAL PAN REQUIREMENT
+// =====================================================
+
+function calculateCustomerAge(dobValue){
+    if(!dobValue) return null;
+
+    const dob = new Date(dobValue + "T00:00:00");
+    if(Number.isNaN(dob.getTime())) return null;
+
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDifference = today.getMonth() - dob.getMonth();
+
+    if(monthDifference < 0 ||
+       (monthDifference === 0 && today.getDate() < dob.getDate())){
+        age--;
+    }
+
+    return age;
+}
+
+function isPanRequired(){
+    const dobValue = document.getElementById("dob").value;
+    const account = document.querySelector('input[name="accountType"]:checked');
+    const age = calculateCustomerAge(dobValue);
+
+    if(account && account.value === "Student") return false;
+    if(age !== null && age < 18) return false;
+
+    return true;
+}
+
+function updatePanRequirement(){
+    const panInput = document.getElementById("pan");
+    const requiredMark = document.getElementById("panRequiredMark");
+    const required = isPanRequired();
+
+    if(panInput) panInput.required = required;
+    if(requiredMark) requiredMark.style.display = required ? "inline" : "none";
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    const dobInput = document.getElementById("dob");
+    const accountInputs = document.querySelectorAll('input[name="accountType"]');
+
+    if(dobInput) dobInput.addEventListener("change", updatePanRequirement);
+    accountInputs.forEach(function(input){
+        input.addEventListener("change", updatePanRequirement);
+    });
+
+    updatePanRequirement();
+});
+
+// =====================================================
+// FORM SUBMIT
+// =====================================================
+
+document
+.getElementById("accountForm")
+.addEventListener(
+    "submit",
+    async function(e){
+
+        e.preventDefault();
+
+
+        if(!validateSelectedBranch()){
+            return;
+        }
+
+        if(!capturedDocuments.photo){
+
+            alert(
+                "Please capture the customer's Live Photo."
+            );
+
+            return;
+
+        }
+
+
+        if(isPanRequired() && !document.getElementById("pan").value.trim()){
+
+            alert(
+                "Please enter the PAN Number."
+            );
+
+            document.getElementById("pan").focus();
+            return;
+
+        }
+
+
+        if(isPanRequired() && !capturedDocuments.pan){
+
+            alert(
+                "Please capture the PAN Card."
+            );
+
+            return;
+
+        }
+
+
+        if(!capturedDocuments.aadhaarFront){
+
+            alert(
+                "Please capture Aadhaar Front."
+            );
+
+            return;
+
+        }
+
+
+        if(!capturedDocuments.aadhaarBack){
+
+            alert(
+                "Please capture Aadhaar Back."
+            );
+
+            return;
+
+        }
+
+
+        const selectedAccount =
+            document.querySelector(
+                'input[name="accountType"]:checked'
+            );
+
+
+        if(!selectedAccount){
+
+            alert(
+                "Please select an Account Type."
+            );
+
+            return;
+
+        }
+
+
+        const application = {
+
+            applicationNumber:
+                generateApplicationNumber(),
+
+            branchKey:
+                selectedBranchData ? (selectedBranchData.__firebaseKey || "") : "",
+
+            branchName:
+                selectedBranchData ? getBranchName(selectedBranchData) : "",
+
+            branchCode:
+                selectedBranchData ? getBranchCode(selectedBranchData) : "",
+
+            branchId:
+                selectedBranchData ? getBranchId(selectedBranchData) : "",
+
+            branchDistrict:
+                selectedBranchData ? getBranchDistrict(selectedBranchData) : "",
+
+            branchState:
+                selectedBranchData ? getBranchState(selectedBranchData) : "",
+
+            accountType:
+                selectedAccount.value,
+
+            fullName:
+                document
+                .getElementById("fullName")
+                .value.trim(),
+
+            fatherName:
+                document
+                .getElementById("fatherName")
+                .value.trim(),
+
+            motherName:
+                document
+                .getElementById("motherName")
+                .value.trim(),
+
+            dob:
+                document
+                .getElementById("dob")
+                .value,
+
+            gender:
+                document
+                .getElementById("gender")
+                .value,
+
+            mobile:
+                document
+                .getElementById("mobile")
+                .value.trim(),
+
+            email:
+                document
+                .getElementById("email")
+                .value.trim(),
+
+            pan:
+                document
+                .getElementById("pan")
+                .value
+                .trim()
+                .toUpperCase(),
+
+            aadhaar:
+                document
+                .getElementById("aadhaar")
+                .value.trim(),
+
+            annualIncome:
+                document
+                .getElementById("annualIncome")
+                .value,
+
+            address:
+                document
+                .getElementById("address")
+                .value.trim(),
+
+            village:
+                document
+                .getElementById("village")
+                .value.trim(),
+
+            district:
+                document
+                .getElementById("district")
+                .value.trim(),
+
+            state:
+                document
+                .getElementById("state")
+                .value,
+
+            pincode:
+                document
+                .getElementById("pincode")
+                .value.trim(),
+
+            nominee:
+                document
+                .getElementById("nominee")
+                .value.trim(),
+
+            nomineeRelation:
+                document
+                .getElementById("nomineeRelation")
+                .value,
+
+            debitCard:
+                document
+                .getElementById("debitCard")
+                .checked,
+
+            internetBanking:
+                document
+                .getElementById("internetBanking")
+                .checked,
+
+            mobileBanking:
+                document
+                .getElementById("mobileBanking")
+                .checked,
+
+
+            photo:
+                capturedDocuments.photo,
+
+
+            panCardImage:
+                capturedDocuments.pan,
+
+            aadhaarFrontImage:
+                capturedDocuments.aadhaarFront,
+
+            aadhaarBackImage:
+                capturedDocuments.aadhaarBack,
+
+
+            status:
+                "Pending",
+
+            customerId:
+                "",
+
+            accountNumber:
+                "",
+
+            date:
+                new Date()
+                .toLocaleString("en-IN"),
+
+            approvedDate:
+                ""
+
+        };
+
+
+        const submitBtn = document.getElementById("submitBtn");
+        const originalButtonText = submitBtn ? submitBtn.textContent : "Submit Account Application";
+
+        if(submitBtn){
+            submitBtn.disabled = true;
+            submitBtn.textContent = originalButtonText;
+        }
+
+        const payloadSizeKB =
+            Math.round(
+                JSON.stringify(application).length / 1024
+            );
+
+        setFirebaseStatus(
+            "Saving application to Firebase... (" +
+            payloadSizeKB +
+            " KB)",
+            "saving"
+        );
+
+        try{
+            await saveApplicationToFirebase(application);
+            setFirebaseStatus("✅ Application saved successfully in Firebase.", "success");
+        }catch(error){
+            console.error("Firebase save error:", error);
+
+            if(submitBtn){
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalButtonText;
+            }
+
+            let message =
+                error && error.message
+                ? error.message
+                : "Unknown Firebase error.";
+
+            if(error && (error.status === 401 || error.status === 403)){
+
+                message =
+                    "Firebase ने write request reject की (HTTP " +
+                    error.status +
+                    "). Firebase Console → Realtime Database → Rules में accountApplications के लिए write permission check करें।";
+
+            }else if(
+                message.toLowerCase().includes("timed out")
+            ){
+
+                message =
+                    "Firebase request 45 seconds में complete नहीं हुआ. 3 बार retry किया गया. Internet/Firebase Database availability check करें.";
+
+            }
+
+            setFirebaseStatus("❌ Application save नहीं हो सका. " + message, "error");
+            alert("Application save नहीं हो सका.\n\nError: " + message + "\n\nअगर यह समस्या 3 प्रयासों के बाद भी रहे, Firebase Rules और Database URL check करें.");
+            return;
+        }
+
+        window.lastSubmittedApplication =
+            application;
+
+
+        document
+        .getElementById("applicationNumber")
+        .textContent =
+            application.applicationNumber;
+
+
+        document
+        .getElementById("successBox")
+        .style.display =
+            "block";
+
+
+        document
+        .getElementById("submitBtn")
+        .disabled =
+            true;
+
+
+        window.scrollTo({
+
+            top:
+                document
+                .getElementById("successBox")
+                .offsetTop - 50,
+
+            behavior:"smooth"
+
+        });
+
+    }
+);
+
+
+// =====================================================
+// PRINT HELPER
+// =====================================================
+
+function setPrintValue(
+    id,
+    value
+){
+
+    const element =
+        document.getElementById(id);
+
+
+    if(element){
+
+        element.textContent =
+            value === undefined ||
+            value === null ||
+            value === ""
+            ? "-"
+            : value;
+
+    }
+
+}
+
+
+function yesNo(value){
+
+    return value
+        ? "Yes"
+        : "No";
+
+}
+
+
+// =====================================================
+// PRINT APPLICATION
+// =====================================================
+
+function printApplication(){
+
+    const application =
+        window.lastSubmittedApplication;
+
+
+    if(!application){
+
+        alert(
+            "Application data is not available."
+        );
+
+        return;
+
+    }
+
+
+    setPrintValue(
+        "printApplicationNumber",
+        application.applicationNumber
+    );
+
+
+    setPrintValue(
+        "printApplicationDate",
+        application.date
+    );
+
+
+    const photo =
+        document.getElementById(
+            "printCustomerPhoto"
+        );
+
+
+    if(application.photo){
+
+        photo.src =
+            application.photo;
+
+        photo.style.display =
+            "block";
+
+    }else{
+
+        photo.removeAttribute("src");
+
+        photo.style.display =
+            "none";
+
+    }
+
+
+    setPrintValue(
+        "pAccountType",
+        application.accountType
+    );
+
+
+    setPrintValue(
+        "pFullName",
+        application.fullName
+    );
+
+    setPrintValue(
+        "pFatherName",
+        application.fatherName
+    );
+
+    setPrintValue(
+        "pMotherName",
+        application.motherName
+    );
+
+    setPrintValue(
+        "pDob",
+        application.dob
+    );
+
+    setPrintValue(
+        "pGender",
+        application.gender
+    );
+
+    setPrintValue(
+        "pMobile",
+        application.mobile
+    );
+
+    setPrintValue(
+        "pEmail",
+        application.email
+    );
+
+    setPrintValue(
+        "pPan",
+        application.pan
+    );
+
+    setPrintValue(
+        "pAadhaar",
+        application.aadhaar
+    );
+
+    setPrintValue(
+        "pAnnualIncome",
+        application.annualIncome
+    );
+
+
+    setPrintValue(
+        "pBranchName",
+        application.branchName
+    );
+
+    setPrintValue(
+        "pBranchCode",
+        application.branchCode
+    );
+
+    setPrintValue(
+        "pBranchDistrict",
+        application.branchDistrict
+    );
+
+    setPrintValue(
+        "pBranchState",
+        application.branchState
+    );
+
+
+    setPrintValue(
+        "pAddress",
+        application.address
+    );
+
+    setPrintValue(
+        "pVillage",
+        application.village
+    );
+
+    setPrintValue(
+        "pDistrict",
+        application.district
+    );
+
+    setPrintValue(
+        "pState",
+        application.state
+    );
+
+    setPrintValue(
+        "pPincode",
+        application.pincode
+    );
+
+
+    setPrintValue(
+        "pNominee",
+        application.nominee
+    );
+
+    setPrintValue(
+        "pNomineeRelation",
+        application.nomineeRelation
+    );
+
+
+    setPrintValue(
+        "pDebitCard",
+        yesNo(application.debitCard)
+    );
+
+    setPrintValue(
+        "pInternetBanking",
+        yesNo(application.internetBanking)
+    );
+
+    setPrintValue(
+        "pMobileBanking",
+        yesNo(application.mobileBanking)
+    );
+
+
+    if(application.photo){
+
+        photo.onload = function(){
+
+            setTimeout(
+                function(){
+                    window.print();
+                },
+                250
+            );
+
+        };
+
+
+        if(photo.complete){
+
+            setTimeout(
+                function(){
+                    window.print();
+                },
+                250
+            );
+
+        }
+
+    }else{
+
+        setTimeout(
+            function(){
+                window.print();
+            },
+            250
+        );
+
+    }
+
+}
+
+
+// =====================================================
+// CAMERA OUTSIDE CLICK
+// =====================================================
+
+document
+.getElementById("cameraModal")
+.addEventListener(
+    "click",
+    function(e){
+
+        if(e.target === this){
+
+            closeCamera();
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// CLEAN CAMERA
+// =====================================================
+
+window.addEventListener(
+    "beforeunload",
+    function(){
+
+        stopCamera();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
